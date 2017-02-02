@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		1A7BC4A33ABB91FFC3D9BDF3 /* libPods-Pour-微博.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB3A1B24E18186E2D2C9C0F /* libPods-Pour-微博.a */; };
+		1D74D35A1E436D2D00F808AB /* LJOAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D74D3591E436D2D00F808AB /* LJOAuthViewController.m */; };
+		1D74D35C1E436D3C00F808AB /* LJOAuthViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D74D35B1E436D3C00F808AB /* LJOAuthViewController.storyboard */; };
+		1D74D35F1E437B9A00F808AB /* LJNetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D74D35E1E437B9A00F808AB /* LJNetworkTools.m */; };
 		521509341DED5C64000C71E7 /* LJMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 521509331DED5C64000C71E7 /* LJMainViewController.m */; };
 		525662251DF15AB000B4C25B /* UIBarButtonItem+LJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 525662241DF15AB000B4C25B /* UIBarButtonItem+LJ.m */; };
 		525662281DF165E100B4C25B /* LJButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 525662271DF165E100B4C25B /* LJButton.m */; };
@@ -49,6 +52,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1D74D3581E436D2D00F808AB /* LJOAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJOAuthViewController.h; sourceTree = "<group>"; };
+		1D74D3591E436D2D00F808AB /* LJOAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJOAuthViewController.m; sourceTree = "<group>"; };
+		1D74D35B1E436D3C00F808AB /* LJOAuthViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LJOAuthViewController.storyboard; sourceTree = "<group>"; };
+		1D74D35D1E437B9A00F808AB /* LJNetworkTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJNetworkTools.h; sourceTree = "<group>"; };
+		1D74D35E1E437B9A00F808AB /* LJNetworkTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJNetworkTools.m; sourceTree = "<group>"; };
 		521509321DED5C64000C71E7 /* LJMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJMainViewController.h; sourceTree = "<group>"; };
 		521509331DED5C64000C71E7 /* LJMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJMainViewController.m; sourceTree = "<group>"; };
 		525662231DF15AB000B4C25B /* UIBarButtonItem+LJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+LJ.h"; sourceTree = "<group>"; };
@@ -123,9 +131,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D74D3571E436CFA00F808AB /* OAuth */ = {
+			isa = PBXGroup;
+			children = (
+				1D74D3581E436D2D00F808AB /* LJOAuthViewController.h */,
+				1D74D3591E436D2D00F808AB /* LJOAuthViewController.m */,
+				1D74D35B1E436D3C00F808AB /* LJOAuthViewController.storyboard */,
+			);
+			path = OAuth;
+			sourceTree = "<group>";
+		};
 		5215092A1DED5ABB000C71E7 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1D74D3571E436CFA00F808AB /* OAuth */,
 				5215092B1DED5ABB000C71E7 /* Compose */,
 				5215092C1DED5ABB000C71E7 /* Discover */,
 				5215092D1DED5ABB000C71E7 /* Home */,
@@ -196,6 +215,8 @@
 				525662241DF15AB000B4C25B /* UIBarButtonItem+LJ.m */,
 				525662261DF165E100B4C25B /* LJButton.h */,
 				525662271DF165E100B4C25B /* LJButton.m */,
+				1D74D35D1E437B9A00F808AB /* LJNetworkTools.h */,
+				1D74D35E1E437B9A00F808AB /* LJNetworkTools.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -448,6 +469,7 @@
 			files = (
 				5281FA031E3781BC00710DA1 /* LJQRCode.storyboard in Resources */,
 				527325531DED591400E6D755 /* Assets.xcassets in Resources */,
+				1D74D35C1E436D3C00F808AB /* LJOAuthViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,7 +555,9 @@
 				525662251DF15AB000B4C25B /* UIBarButtonItem+LJ.m in Sources */,
 				525EAEE41DEEA756002BDD5D /* LJVisitorView.m in Sources */,
 				5288B62F1DEDB50C0096AC58 /* LJNullTableViewController.m in Sources */,
+				1D74D35F1E437B9A00F808AB /* LJNetworkTools.m in Sources */,
 				52BF37921DFEA5170031035D /* LJPresentationManager.m in Sources */,
+				1D74D35A1E436D2D00F808AB /* LJOAuthViewController.m in Sources */,
 				5281FA361E40CC2B00710DA1 /* LJQRCodeCreatViewController.m in Sources */,
 				525662281DF165E100B4C25B /* LJButton.m in Sources */,
 				527325481DED591400E6D755 /* main.m in Sources */,

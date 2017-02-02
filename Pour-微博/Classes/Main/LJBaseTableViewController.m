@@ -8,6 +8,8 @@
 
 #import "LJBaseTableViewController.h"
 
+#import "LJOAuthViewController.h"
+
 @interface LJBaseTableViewController ()
 
 @end
@@ -18,7 +20,7 @@
 //根据登录状态加载不同页面
 - (void)loadView
 {
-    self.isLogin = true;
+    self.isLogin = false;
     
     if (self.isLogin)
         [super loadView];
@@ -45,7 +47,10 @@
 
 - (void)loginButtonClicked
 {
-    NSLog(@"1");
+    
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"LJOAuthViewController" bundle:nil];
+    LJOAuthViewController *vc = [sb instantiateInitialViewController];
+    [self presentViewController:vc animated:true completion:nil];
 }
 
 - (void)registerButtonClicked
