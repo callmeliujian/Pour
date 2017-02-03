@@ -9,6 +9,7 @@
 #import "LJBaseTableViewController.h"
 
 #import "LJOAuthViewController.h"
+#import "LJUserAccount.h"
 
 @interface LJBaseTableViewController ()
 
@@ -20,7 +21,7 @@
 //根据登录状态加载不同页面
 - (void)loadView
 {
-    self.isLogin = false;
+    self.isLogin = [LJUserAccount isLogin];
     
     if (self.isLogin)
         [super loadView];

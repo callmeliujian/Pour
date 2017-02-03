@@ -8,6 +8,7 @@
 
 #import "LJOAuthViewController.h"
 #import "LJNetworkTools.h"
+#import "LJUserAccount.h"
 
 @interface LJOAuthViewController () <UIWebViewDelegate>
 
@@ -42,10 +43,11 @@
         return true;
     }
     NSString *key = @"code=";
-    if ([urlStr containsString:key]) {
+    if ([request.URL.query hasPrefix:key]) {
         NSString *code = [request.URL.query substringFromIndex:5];
        // NSLog(@"%@",code);
         [self loadAccessToken:code];
+        [self dismissViewControllerAnimated:true completion:nil];
         return false;
     }
     NSLog(@"授权失败");
@@ -61,7 +63,11 @@
                                  @"redirect_uri": @"http://www.baidu.com"};
     LJNetworkTools *networkTools = [LJNetworkTools shareInstance];
     [networkTools POST:path parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"%@",responseObject);
+        
+        LJUserAccount *userAccount = [[LJUserAccount alloc] initWithDict:responseObject];
+        //[userAccount saveAccout];
+        NSLog(@"%d",[userAccount saveAccout]);
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
     }];

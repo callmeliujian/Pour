@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "LJMainViewController.h"
+#import "LJUserAccount.h"
 
 @interface AppDelegate ()
 
@@ -31,6 +32,7 @@
     
     [self.window makeKeyAndVisible];
     
+    NSLog(@"%@", [LJUserAccount loadUserAccout]);
     
     return YES;
 }
