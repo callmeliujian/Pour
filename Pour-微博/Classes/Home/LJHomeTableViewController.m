@@ -12,6 +12,7 @@
 #import "LJMenuViewController.h"
 #import "LJPresentationController.h"
 #import "LJPresentationManager.h"
+#import "LJUserAccount.h"
 
 @interface LJHomeTableViewController () 
 
@@ -57,7 +58,8 @@
     
     //添加home导航条中间的按钮
     self.titleButton = [[LJButton alloc] init];
-    [self.titleButton setTitle:@"首页 " forState:UIControlStateNormal];
+    LJUserAccount *userAccout = [LJUserAccount loadUserAccout];
+    [self.titleButton setTitle:userAccout.screen_name forState:UIControlStateNormal];
     
     
     [self.titleButton addTarget:self action:@selector(titleButtonClicked) forControlEvents:UIControlEventTouchUpInside];

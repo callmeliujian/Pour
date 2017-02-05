@@ -18,6 +18,11 @@
 @property (nonatomic, strong) NSString *remind_in;
 
 @property (nonatomic, strong) NSString *uid;
+// 用户昵称
+@property (nonatomic, strong) NSString *screen_name;
+
+// 用户头像地址（高清），高清头像原图
+@property (nonatomic, strong) NSString *avatar_hd;
 
 - (LJUserAccount* )initWithDict:(NSDictionary *)dict;
 
@@ -28,5 +33,7 @@
 + (LJUserAccount *) loadUserAccout;
 
 + (BOOL)isLogin;
+
+- (void)loadUserInfo:(void(^)())block;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "LJUserAccount.h"
+#import "LJNetworkTools.h"
 
 @interface LJUserAccount() <NSCoding>
 
@@ -33,6 +34,7 @@ static NSDate *expireDate;
 }
 
 + (LJUserAccount *)loadUserAccout {
+    // 1.判断是否加载过了
     if (account != nil) {
         // 已经有过登陆数据
         return account;
@@ -45,7 +47,7 @@ static NSDate *expireDate;
     LJUserAccount *userAccout = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
     
     if (userAccout == nil) {
-        return account;
+        return nil;
     }
     
    // NSComparisonResult
@@ -84,6 +86,8 @@ static NSDate *expireDate;
     [aCoder encodeObject:self.uid forKey:@"uid"];
     [aCoder encodeObject:self.expires_in forKey:@"expires_in"];
     [aCoder encodeObject:expireDate forKey:@"expireDate"];
+    [aCoder encodeObject:self.avatar_hd forKey:@"avatar_hd"];
+    [aCoder encodeObject:self.screen_name forKey:@"screen_name"];
 }
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
     self.access_token = [aDecoder decodeObjectForKey:@"access_token"];
@@ -91,6 +95,8 @@ static NSDate *expireDate;
     self.uid = [aDecoder decodeObjectForKey:@"uid"];
     self.expires_in = [aDecoder decodeObjectForKey:@"expires_in"];
     expireDate = [aDecoder decodeObjectForKey:@"expireDate"];
+    self.avatar_hd = [aDecoder decodeObjectForKey:@"avatar_hd"];
+    self.screen_name = [aDecoder decodeObjectForKey:@"screen_name"];
     return self;
     
 }
@@ -99,5 +105,57 @@ static NSDate *expireDate;
     // 生成过期时间
     expireDate = [NSDate dateWithTimeIntervalSinceNow:[expires_in doubleValue]];
 }
+
+- (void)loadUserInfo:(void (^)())block {
+    
+    NSAssert(self.access_token != nil, @"使用该方法必须授权");
+    
+    NSString *path = @"2/users/show.json";
+    
+    NSDictionary *parameters = @{@"access_token": self.access_token,
+                                 @"uid": self.uid};
+    LJNetworkTools *networkTools = [LJNetworkTools shareInstance];
+    
+    [networkTools GET:path parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        //NSLog(@"%@",responseObject);
+        
+        // 1. 取出用户信息
+        self.avatar_hd = responseObject[@"avatar_hd"];
+        self.screen_name = responseObject[@"screen_name"];
+        
+        block();
+        
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+    
+}
+
+//- (void)loadUserInfo {
+//    
+//    NSAssert(self.access_token != nil, @"使用该方法必须授权");
+//    
+//    NSString *path = @"2/users/show.json";
+//    
+//    NSDictionary *parameters = @{@"access_token": self.access_token,
+//                                 @"uid": self.uid};
+//    LJNetworkTools *networkTools = [LJNetworkTools shareInstance];
+//    
+//    [networkTools GET:path parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//        //NSLog(@"%@",responseObject);
+//        
+//        // 1. 取出用户信息
+//        self.avatar_hd = responseObject[@"avatar_hd"];
+//        self.screen_name = responseObject[@"screen_name"];
+//        
+//        [self saveAccout];
+//        
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        NSLog(@"%@",error);
+//    }];
+//    
+//}
 
 @end

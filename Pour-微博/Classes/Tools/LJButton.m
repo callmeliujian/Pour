@@ -38,7 +38,7 @@
     //交换imageView和titleLabel的位置（左右 ➡️ 右左）
     CGRect titleLabelRect = CGRectMake(0, self.titleLabel.frame.origin.y, self.titleLabel.frame.size.width, self.titleLabel.frame.size.height);
     
-    CGRect imageViewRect = CGRectMake(self.titleLabel.frame.size.width, self.imageView.frame.origin.y, self.imageView.frame.size.width, self.imageView.frame.size.height);
+    CGRect imageViewRect = CGRectMake(self.titleLabel.frame.size.width + 2, self.imageView.frame.origin.y, self.imageView.frame.size.width, self.imageView.frame.size.height);
     
     self.titleLabel.frame= titleLabelRect;
     self.imageView.frame = imageViewRect;

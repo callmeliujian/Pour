@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="q32-lS-Q5z">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--New Feature View Controller-->
+        <scene sceneID="8I4-cf-giE">
+            <objects>
+                <viewController id="q32-lS-Q5z" customClass="LJNewFeatureViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2MA-du-O8Q"/>
+                        <viewControllerLayoutGuide type="bottom" id="YxF-qC-C61"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YQi-qz-9Eg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="y6G-8l-7Cd">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewLayout key="collectionViewLayout" id="A3T-mZ-1UA" customClass="LJNewfeatuereLayout"/>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="newFeatureCell" id="qzJ-JV-gHd" customClass="LJNewfeatuereCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="q32-lS-Q5z" id="djl-By-1yI"/>
+                                    <outlet property="delegate" destination="q32-lS-Q5z" id="xpH-EM-S3G"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="y6G-8l-7Cd" firstAttribute="top" secondItem="YQi-qz-9Eg" secondAttribute="top" id="DzD-HL-V4a"/>
+                            <constraint firstItem="YxF-qC-C61" firstAttribute="top" secondItem="y6G-8l-7Cd" secondAttribute="bottom" id="GpK-GQ-PXy"/>
+                            <constraint firstItem="y6G-8l-7Cd" firstAttribute="leading" secondItem="YQi-qz-9Eg" secondAttribute="leading" id="rHV-Eh-PXi"/>
+                            <constraint firstAttribute="trailing" secondItem="y6G-8l-7Cd" secondAttribute="trailing" id="vPA-1r-7KV"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nbN-2t-GoQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-63" y="193"/>
+        </scene>
+    </scenes>
+</document>

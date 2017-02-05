@@ -10,7 +10,12 @@
 #import "LJMainViewController.h"
 #import "LJUserAccount.h"
 
+#import "LJWelcomeViewController.h"
+#import "LJNewFeatureViewController.h"
+
 @interface AppDelegate ()
+
+- (BOOL)isNewVersion;
 
 @end
 
@@ -19,10 +24,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen]bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
-    self.window.rootViewController = [[LJMainViewController alloc] init];
+    self.window.rootViewController = [self defaultViewController];
     
     //设置全局UINavigationBar／UITabBar为黄色
     UINavigationBar *item = [UINavigationBar appearance];
@@ -33,6 +40,8 @@
     [self.window makeKeyAndVisible];
     
     NSLog(@"%@", [LJUserAccount loadUserAccout]);
+    
+    [self isNewVersion];
     
     return YES;
 }
@@ -64,5 +73,46 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (UIViewController *)defaultViewController {
+    // 1.判断是否登陆
+    if ([LJUserAccount isLogin]) {
+        // 2.判断是否有新版本
+        if ([self isNewVersion]) {
+            UIStoryboard *sb = [UIStoryboard storyboardWithName:@"LJNewFeatureViewController" bundle:nil];
+            LJNewFeatureViewController *vc = [sb instantiateInitialViewController];
+            return vc;
+        }
+        // 没有新版本
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"LJWelcomeViewController" bundle:nil];
+        LJWelcomeViewController *vc = [sb instantiateInitialViewController];
+        return vc;
+    }
+    // 没有登陆
+    return [[LJMainViewController alloc] init];
+    
+}
+
+- (BOOL)isNewVersion {
+    // 1.加载info.plist
+    // 2.获取当前软件的版本号
+    NSString *currentVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
+    // 3.获取以前的软件版本号
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *sandboxVersion;
+    if ([defaults objectForKey:@"version"] == nil)
+        sandboxVersion = @"0.0";
+    sandboxVersion = [defaults objectForKey:@"version"];
+    
+    // 4.用当前的版本号和以前的版本号进行比较4.用当前的版本号和以前的版本号进行比较
+    if ([currentVersion compare:sandboxVersion] == NSOrderedDescending) {
+        // 如果当前的大于以前的, 有新版本
+        NSLog(@"有新版本");
+        // 更新本地版本号
+        [defaults setObject:currentVersion forKey:@"version"];
+        return true;
+    }
+    NSLog(@"没有新版本");
+    return false;
+}
 
 @end

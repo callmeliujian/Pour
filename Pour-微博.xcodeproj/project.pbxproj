@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		1A7BC4A33ABB91FFC3D9BDF3 /* libPods-Pour-微博.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB3A1B24E18186E2D2C9C0F /* libPods-Pour-微博.a */; };
+		1D25F4201E45AAA500656E43 /* LJWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D25F41F1E45AAA500656E43 /* LJWelcomeViewController.m */; };
+		1D25F4221E45AAB100656E43 /* LJWelcomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D25F4211E45AAB100656E43 /* LJWelcomeViewController.storyboard */; };
+		1D25F4251E45B79800656E43 /* LJNewFeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D25F4241E45B79800656E43 /* LJNewFeatureViewController.m */; };
+		1D25F4271E45B7A400656E43 /* LJNewFeatureViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D25F4261E45B7A400656E43 /* LJNewFeatureViewController.storyboard */; };
+		1D25F42A1E45CC2D00656E43 /* LJNewfeatuereCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D25F4291E45CC2D00656E43 /* LJNewfeatuereCell.m */; };
 		1D74D35A1E436D2D00F808AB /* LJOAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D74D3591E436D2D00F808AB /* LJOAuthViewController.m */; };
 		1D74D35C1E436D3C00F808AB /* LJOAuthViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D74D35B1E436D3C00F808AB /* LJOAuthViewController.storyboard */; };
 		1D74D35F1E437B9A00F808AB /* LJNetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D74D35E1E437B9A00F808AB /* LJNetworkTools.m */; };
@@ -53,6 +58,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1D25F41E1E45AAA500656E43 /* LJWelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJWelcomeViewController.h; sourceTree = "<group>"; };
+		1D25F41F1E45AAA500656E43 /* LJWelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJWelcomeViewController.m; sourceTree = "<group>"; };
+		1D25F4211E45AAB100656E43 /* LJWelcomeViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LJWelcomeViewController.storyboard; sourceTree = "<group>"; };
+		1D25F4231E45B79800656E43 /* LJNewFeatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJNewFeatureViewController.h; sourceTree = "<group>"; };
+		1D25F4241E45B79800656E43 /* LJNewFeatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJNewFeatureViewController.m; sourceTree = "<group>"; };
+		1D25F4261E45B7A400656E43 /* LJNewFeatureViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LJNewFeatureViewController.storyboard; sourceTree = "<group>"; };
+		1D25F4281E45CC2D00656E43 /* LJNewfeatuereCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJNewfeatuereCell.h; sourceTree = "<group>"; };
+		1D25F4291E45CC2D00656E43 /* LJNewfeatuereCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJNewfeatuereCell.m; sourceTree = "<group>"; };
 		1D74D3581E436D2D00F808AB /* LJOAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJOAuthViewController.h; sourceTree = "<group>"; };
 		1D74D3591E436D2D00F808AB /* LJOAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJOAuthViewController.m; sourceTree = "<group>"; };
 		1D74D35B1E436D3C00F808AB /* LJOAuthViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LJOAuthViewController.storyboard; sourceTree = "<group>"; };
@@ -134,6 +147,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D25F41D1E45AA8000656E43 /* NewFeature */ = {
+			isa = PBXGroup;
+			children = (
+				1D25F41E1E45AAA500656E43 /* LJWelcomeViewController.h */,
+				1D25F41F1E45AAA500656E43 /* LJWelcomeViewController.m */,
+				1D25F4211E45AAB100656E43 /* LJWelcomeViewController.storyboard */,
+				1D25F4231E45B79800656E43 /* LJNewFeatureViewController.h */,
+				1D25F4241E45B79800656E43 /* LJNewFeatureViewController.m */,
+				1D25F4261E45B7A400656E43 /* LJNewFeatureViewController.storyboard */,
+				1D25F4281E45CC2D00656E43 /* LJNewfeatuereCell.h */,
+				1D25F4291E45CC2D00656E43 /* LJNewfeatuereCell.m */,
+			);
+			path = NewFeature;
+			sourceTree = "<group>";
+		};
 		1D74D3571E436CFA00F808AB /* OAuth */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +177,7 @@
 		5215092A1DED5ABB000C71E7 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1D25F41D1E45AA8000656E43 /* NewFeature */,
 				1D74D3571E436CFA00F808AB /* OAuth */,
 				5215092B1DED5ABB000C71E7 /* Compose */,
 				5215092C1DED5ABB000C71E7 /* Discover */,
@@ -474,6 +503,8 @@
 			files = (
 				5281FA031E3781BC00710DA1 /* LJQRCode.storyboard in Resources */,
 				527325531DED591400E6D755 /* Assets.xcassets in Resources */,
+				1D25F4221E45AAB100656E43 /* LJWelcomeViewController.storyboard in Resources */,
+				1D25F4271E45B7A400656E43 /* LJNewFeatureViewController.storyboard in Resources */,
 				1D74D35C1E436D3C00F808AB /* LJOAuthViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -550,17 +581,20 @@
 				5288B6291DED75250096AC58 /* LJDiscoverTableViewController.m in Sources */,
 				525EAEDF1DEEA391002BDD5D /* LJBaseTableViewController.m in Sources */,
 				5288B6231DED624C0096AC58 /* LJHomeTableViewController.m in Sources */,
+				1D25F4201E45AAA500656E43 /* LJWelcomeViewController.m in Sources */,
 				52BF378C1DFE70250031035D /* LJPresentationController.m in Sources */,
 				52EFF02D1DFE53EB00474BAB /* LJMenuViewController.m in Sources */,
 				5288B6261DED6D9C0096AC58 /* LJMessageTableViewController.m in Sources */,
 				5281FA061E37841C00710DA1 /* LJQRCodeViewController.m in Sources */,
 				5288B62C1DED75F40096AC58 /* LJProfileTableViewController.m in Sources */,
 				1D74D3621E448ED600F808AB /* LJUserAccount.m in Sources */,
+				1D25F4251E45B79800656E43 /* LJNewFeatureViewController.m in Sources */,
 				5273254B1DED591400E6D755 /* AppDelegate.m in Sources */,
 				521509341DED5C64000C71E7 /* LJMainViewController.m in Sources */,
 				525662251DF15AB000B4C25B /* UIBarButtonItem+LJ.m in Sources */,
 				525EAEE41DEEA756002BDD5D /* LJVisitorView.m in Sources */,
 				5288B62F1DEDB50C0096AC58 /* LJNullTableViewController.m in Sources */,
+				1D25F42A1E45CC2D00656E43 /* LJNewfeatuereCell.m in Sources */,
 				1D74D35F1E437B9A00F808AB /* LJNetworkTools.m in Sources */,
 				52BF37921DFEA5170031035D /* LJPresentationManager.m in Sources */,
 				1D74D35A1E436D2D00F808AB /* LJOAuthViewController.m in Sources */,
