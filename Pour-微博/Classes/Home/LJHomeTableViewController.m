@@ -13,6 +13,12 @@
 #import "LJPresentationController.h"
 #import "LJPresentationManager.h"
 #import "LJUserAccount.h"
+#import "LJNetworkTools.h"
+#import "LJStatus.h"
+#import "LJHomeTableViewCell.h"
+#import "LJStatus.h"
+
+#import "SVProgressHUD.h"
 
 @interface LJHomeTableViewController () 
 
@@ -25,6 +31,10 @@
  菜单控制器
  */
 @property (nonatomic, strong)LJMenuViewController *menuVC;
+/**
+ 保存所有的微博数据
+ */
+@property (nonatomic, strong)NSMutableArray *statuses;
 
 @property BOOL isPresent;
 
@@ -34,16 +44,61 @@
 @implementation LJHomeTableViewController
 
 
-
+#pragma mark - Life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+//    self.statuses = [[NSMutableArray alloc] init];
+    
+    // 1.判断用户是否登陆
     if (!self.isLogin) {
         [self.visitorView setSubView:@"visitordiscover_feed_image_house" with:@"登录后，最新、最热微博尽在掌握，不再会与实事潮流擦肩而过" withIson:NO];
         return;
     }
     
+    // 2.初始化导航条
     [self setupNav];
+    
+    // 3.获取微博数据
+    [self loadData];
+    
+    
+    
+}
+
+/**
+ 调用LJNetworkTools的loadStatuses获取主页微博数据
+ */
+- (void)loadData {
+    
+    [[LJNetworkTools shareInstance] loadStatuses:^(NSArray *array, NSError *error) {
+       
+        if (error != nil) {
+            [SVProgressHUD showErrorWithStatus:@"获取微博数据失败"];
+            
+            NSLog(@"----%@",error);
+            return;
+        }
+        
+
+        
+        
+        NSMutableArray *mutableArray = [[NSMutableArray alloc] init];
+        self.statuses = [[NSMutableArray alloc] init];
+        for (id dic in array) {
+            LJStatus *model = [[LJStatus alloc] init];
+            id status = [model initWithDic:dic];
+     //       NSLog(@"%@",status);
+            [mutableArray addObject:status];
+        }
+        
+        
+        self.statuses = mutableArray;
+        
+
+        
+    }];
+    
 }
 
 /**
@@ -152,6 +207,26 @@
     return self;
 }
 
+#pragma mark - Delegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.statuses.count;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    // 1.获得cell
+    NSString *cellID = @"ID";
+    LJHomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    if (!cell) {
+        cell = [[LJHomeTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID];
+    }
+    cell.status = self.statuses[indexPath.row];
+    return cell;
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 300;
+}
+
 #pragma mark - UIViewControllerAnimatedTransitioning代理方法
 
 /**
@@ -192,6 +267,12 @@
         }];
     }
     
+}
+
+#pragma mark - lazy
+- (void)setStatuses:(NSMutableArray *)statuses {
+    _statuses = statuses;
+    [self.tableView reloadData];
 }
 
 @end

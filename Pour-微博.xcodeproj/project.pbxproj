@@ -13,6 +13,9 @@
 		1D25F4251E45B79800656E43 /* LJNewFeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D25F4241E45B79800656E43 /* LJNewFeatureViewController.m */; };
 		1D25F4271E45B7A400656E43 /* LJNewFeatureViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D25F4261E45B7A400656E43 /* LJNewFeatureViewController.storyboard */; };
 		1D25F42A1E45CC2D00656E43 /* LJNewfeatuereCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D25F4291E45CC2D00656E43 /* LJNewfeatuereCell.m */; };
+		1D25F4311E47591D00656E43 /* LJStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D25F4301E47591D00656E43 /* LJStatus.m */; };
+		1D25F4341E47643D00656E43 /* LJUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D25F4331E47643D00656E43 /* LJUser.m */; };
+		1D25F4371E4867D900656E43 /* LJHomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D25F4361E4867D900656E43 /* LJHomeTableViewCell.m */; };
 		1D74D35A1E436D2D00F808AB /* LJOAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D74D3591E436D2D00F808AB /* LJOAuthViewController.m */; };
 		1D74D35C1E436D3C00F808AB /* LJOAuthViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D74D35B1E436D3C00F808AB /* LJOAuthViewController.storyboard */; };
 		1D74D35F1E437B9A00F808AB /* LJNetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D74D35E1E437B9A00F808AB /* LJNetworkTools.m */; };
@@ -66,6 +69,12 @@
 		1D25F4261E45B7A400656E43 /* LJNewFeatureViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LJNewFeatureViewController.storyboard; sourceTree = "<group>"; };
 		1D25F4281E45CC2D00656E43 /* LJNewfeatuereCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJNewfeatuereCell.h; sourceTree = "<group>"; };
 		1D25F4291E45CC2D00656E43 /* LJNewfeatuereCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJNewfeatuereCell.m; sourceTree = "<group>"; };
+		1D25F42F1E47591D00656E43 /* LJStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJStatus.h; sourceTree = "<group>"; };
+		1D25F4301E47591D00656E43 /* LJStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJStatus.m; sourceTree = "<group>"; };
+		1D25F4321E47643D00656E43 /* LJUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJUser.h; sourceTree = "<group>"; };
+		1D25F4331E47643D00656E43 /* LJUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJUser.m; sourceTree = "<group>"; };
+		1D25F4351E4867D900656E43 /* LJHomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJHomeTableViewCell.h; sourceTree = "<group>"; };
+		1D25F4361E4867D900656E43 /* LJHomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJHomeTableViewCell.m; sourceTree = "<group>"; };
 		1D74D3581E436D2D00F808AB /* LJOAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJOAuthViewController.h; sourceTree = "<group>"; };
 		1D74D3591E436D2D00F808AB /* LJOAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJOAuthViewController.m; sourceTree = "<group>"; };
 		1D74D35B1E436D3C00F808AB /* LJOAuthViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LJOAuthViewController.storyboard; sourceTree = "<group>"; };
@@ -162,6 +171,26 @@
 			path = NewFeature;
 			sourceTree = "<group>";
 		};
+		1D25F42E1E47590200656E43 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1D25F42F1E47591D00656E43 /* LJStatus.h */,
+				1D25F4301E47591D00656E43 /* LJStatus.m */,
+				1D25F4321E47643D00656E43 /* LJUser.h */,
+				1D25F4331E47643D00656E43 /* LJUser.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		1D25F4381E486D1600656E43 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				1D25F4351E4867D900656E43 /* LJHomeTableViewCell.h */,
+				1D25F4361E4867D900656E43 /* LJHomeTableViewCell.m */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
 		1D74D3571E436CFA00F808AB /* OAuth */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,6 +238,7 @@
 		5215092D1DED5ABB000C71E7 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				1D25F42E1E47590200656E43 /* Model */,
 				5281FA011E37815C00710DA1 /* QRCode */,
 				52EFF02A1DFE53CC00474BAB /* Popover */,
 			);
@@ -368,6 +398,7 @@
 		52EFF02A1DFE53CC00474BAB /* Popover */ = {
 			isa = PBXGroup;
 			children = (
+				1D25F4381E486D1600656E43 /* view */,
 				52BF37891DFE6DF80031035D /* Controller */,
 			);
 			name = Popover;
@@ -578,6 +609,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D25F4371E4867D900656E43 /* LJHomeTableViewCell.m in Sources */,
 				5288B6291DED75250096AC58 /* LJDiscoverTableViewController.m in Sources */,
 				525EAEDF1DEEA391002BDD5D /* LJBaseTableViewController.m in Sources */,
 				5288B6231DED624C0096AC58 /* LJHomeTableViewController.m in Sources */,
@@ -593,9 +625,11 @@
 				521509341DED5C64000C71E7 /* LJMainViewController.m in Sources */,
 				525662251DF15AB000B4C25B /* UIBarButtonItem+LJ.m in Sources */,
 				525EAEE41DEEA756002BDD5D /* LJVisitorView.m in Sources */,
+				1D25F4311E47591D00656E43 /* LJStatus.m in Sources */,
 				5288B62F1DEDB50C0096AC58 /* LJNullTableViewController.m in Sources */,
 				1D25F42A1E45CC2D00656E43 /* LJNewfeatuereCell.m in Sources */,
 				1D74D35F1E437B9A00F808AB /* LJNetworkTools.m in Sources */,
+				1D25F4341E47643D00656E43 /* LJUser.m in Sources */,
 				52BF37921DFEA5170031035D /* LJPresentationManager.m in Sources */,
 				1D74D35A1E436D2D00F808AB /* LJOAuthViewController.m in Sources */,
 				5281FA361E40CC2B00710DA1 /* LJQRCodeCreatViewController.m in Sources */,
