@@ -34,6 +34,15 @@
  */
 @property (nonatomic, strong) LJUser *user;
 
+/**
+ 配图数组
+ */
+@property (nonatomic, strong) NSArray *pic_urls;
+/**
+ 转发微博
+ */
+@property (nonatomic, strong) LJStatus *retweeted_status;
+
 - (instancetype)initWithDic:(NSDictionary *)dic;
 
 @end

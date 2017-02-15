@@ -21,10 +21,15 @@
 
 - (void)setValue:(id)value forKey:(NSString *)key {
     if ([key  isEqual: @"user"]) {
-        LJUser *user = [[LJUser alloc] initWithDic:value];
-        self.user = user;
+        self.user = [[LJUser alloc] initWithDic:value];
         return;
     }
+    
+    if ([key isEqual:@"retweeted_status"]) {
+        self.retweeted_status = [[LJStatus alloc] initWithDic:value];
+        return;
+    }
+    
     [super setValue:value forKey:key];
 }
 

@@ -1,36 +1,39 @@
 //
-//  LJHomeTableViewCell.m
+//  LJHomeForwardTableViewCell.m
 //  Pour-微博
 //
-//  Created by 刘健 on 2017/2/6.
+//  Created by 刘健 on 2017/2/15.
 //  Copyright © 2017年 😄. All rights reserved.
 //
 
-#import "LJHomeTableViewCell.h"
+#import "LJHomeForwardTableViewCell.h"
 #import "Masonry.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "LJSize.h"
 #import "LJHomeTableViewCell.h"
 #import "LJHomePictureCollectionViewCell.h"
 
+@interface LJHomeForwardTableViewCell()<UICollectionViewDataSource>
 
-@interface LJHomeTableViewCell()<UICollectionViewDataSource>
 /**
  转发按钮
  */
 @property (nonatomic, strong) UIButton *forardBtn;
+
 /**
  评论按钮
  */
 @property (nonatomic, strong) UIButton *criticismBtn;
+
 /**
  赞按钮
  */
 @property (nonatomic, strong) UIButton *fabulousBtn;
+
 /**
- 容器视图
+ 底部容器视图
  */
-@property (nonatomic, strong) UIView *containerView;
+@property (nonatomic, strong) UIView *footerView;
 
 @property (nonatomic, strong) LJSize *cellAndCollSize;
 
@@ -40,10 +43,15 @@
 @property (nonatomic, strong) LJHomePictureCollectionViewCell *cell;
 @property (nonatomic, strong) UICollectionViewFlowLayout *layout;
 
+@property (nonatomic, strong) UIView *fowardAndPictureContentView;
+/**
+ 显示转发内容
+ */
+@property (nonatomic, strong) UILabel *forwardLabel;
+
 @end
 
-
-@implementation LJHomeTableViewCell
+@implementation LJHomeForwardTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -58,7 +66,7 @@
 - (CGFloat)calculateRowHeight:(LJStatusViewModel *)viewModel {
     self.viewModel = viewModel;
     [self layoutIfNeeded];
-    return CGRectGetMaxY(self.containerView.frame);
+    return CGRectGetMaxY(self.footerView.frame);
 }
 
 #pragma mark - 内部控制方法
@@ -73,8 +81,10 @@
     [self buildtimeLabel];
     [self buildsourceLabel];
     [self buildcontentLabel];
+    [self buildfowardAndPictureContentView];
+    [self buildforwardLabel];
     [self buildpictureCollectionnView];
-    [self buildcontainerView];
+    [self buildfooterView];
 }
 
 - (void)buildIconImageView {
@@ -153,24 +163,61 @@
     }];
 }
 
-- (void)buildcontainerView {
-    [self.contentView addSubview:self.containerView];
-    [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
+- (void)buildfowardAndPictureContentView {
+    [self.contentView addSubview:self.fowardAndPictureContentView];
+    [self.fowardAndPictureContentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.contentView);
+        make.top.mas_equalTo(self.contentLabel.mas_bottom).mas_equalTo(10);
+    }];
+    
+}
+
+- (void)buildforwardLabel {
+    [self.fowardAndPictureContentView addSubview:self.forwardLabel];
+    [self.contentView addSubview:self.pictureCollectionnView];
+    [self.forwardLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+       // make.left.mas_equalTo(self.contentLabel);
+        make.left.mas_equalTo(self.fowardAndPictureContentView.mas_left).mas_equalTo(10);
+       // make.top.mas_equalTo(self.contentLabel.mas_bottom).mas_offset(10);
+        make.top.mas_equalTo(self.fowardAndPictureContentView.mas_top).mas_equalTo(10);
+        make.bottom.mas_equalTo(self.pictureCollectionnView.mas_top).mas_offset(-10);
+    }];
+}
+
+- (void)buildpictureCollectionnView {
+    [self.fowardAndPictureContentView addSubview:self.pictureCollectionnView];
+    [self.pictureCollectionnView registerClass:[LJHomePictureCollectionViewCell class] forCellWithReuseIdentifier:@"pictureCell"];
+    self.pictureCollectionnView.dataSource = self;
+    [self.pictureCollectionnView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(290, 90));
+        //make.left.mas_equalTo(self.contentLabel);
+        make.left.mas_equalTo(self.fowardAndPictureContentView.mas_left).mas_equalTo(10);
+        //make.top.mas_equalTo(self.forwardLabel.mas_bottom).mas_equalTo(100);
+        //make.top.mas_equalTo(self.forwardLabel.mas_bottom).mas_equalTo(500);
+        
+        make.bottom.mas_equalTo(self.fowardAndPictureContentView.mas_bottom).mas_offset(-10);
+    }];
+}
+
+- (void)buildfooterView {
+    [self.contentView addSubview:self.footerView];
+    [self.footerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake([UIScreen mainScreen].bounds.size.width, 50));
         make.left.right.mas_equalTo(self.contentView);
         make.bottom.mas_equalTo(self.contentView);
-        make.top.mas_equalTo(self.pictureCollectionnView.mas_bottom).mas_offset(10);
+        //make.top.mas_equalTo(self.pictureCollectionnView.mas_bottom).mas_offset(10);
+        make.top.mas_equalTo(self.fowardAndPictureContentView.mas_bottom);
     }];
     [self buildForardBtnAndCriticismBtnAndFabulousBtn];
 }
 
 - (void)buildForardBtnAndCriticismBtnAndFabulousBtn {
-    [self.containerView addSubview:self.forardBtn];
-    [self.containerView addSubview:self.criticismBtn];
-    [self.containerView addSubview:self.fabulousBtn];
+    [self.footerView addSubview:self.forardBtn];
+    [self.footerView addSubview:self.criticismBtn];
+    [self.footerView addSubview:self.fabulousBtn];
     
     [self.forardBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.mas_equalTo(self.containerView);
+        make.top.left.bottom.mas_equalTo(self.footerView);
     }];
     [self.criticismBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.forardBtn.mas_right);
@@ -178,23 +225,9 @@
     }];
     [self.fabulousBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.criticismBtn.mas_right);
-        make.right.mas_equalTo(self.containerView);
+        make.right.mas_equalTo(self.footerView);
         make.top.width.height.mas_equalTo(self.criticismBtn);
     }];
-    
-    
-}
-
-- (void)buildpictureCollectionnView {
-    [self.contentView addSubview:self.pictureCollectionnView];
-    [self.pictureCollectionnView registerClass:[LJHomePictureCollectionViewCell class] forCellWithReuseIdentifier:@"pictureCell"];
-    self.pictureCollectionnView.dataSource = self;
-    [self.pictureCollectionnView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(290, 90));
-        make.left.mas_equalTo(self.contentLabel);
-        make.top.mas_equalTo(self.contentLabel.mas_bottom).mas_equalTo(10);
-    }];
-    
     
     
 }
@@ -267,12 +300,12 @@
     return _forardBtn;
 }
 
-- (UIView *)containerView {
-    if (_containerView == nil) {
-        _containerView = [[UIView alloc] init];
-        _containerView.backgroundColor = [UIColor blueColor];
+- (UIView *)footerView {
+    if (_footerView == nil) {
+        _footerView = [[UIView alloc] init];
+        _footerView.backgroundColor = [UIColor blueColor];
     }
-    return _containerView;
+    return _footerView;
 }
 
 - (UIImageView *)iconImageView {
@@ -364,10 +397,30 @@
         [self setNeedsUpdateConstraints];
     }
     
-    
-    
-    
-    
+    // 10.转发微博
+    if (self.viewModel.forwardText) {
+        self.forwardLabel.text = self.viewModel.forwardText;
+        self.forwardLabel.preferredMaxLayoutWidth = [UIScreen mainScreen].bounds.size.width - 2* 10;
+    }
+}
+
+- (UIView *)fowardAndPictureContentView {
+    if (_fowardAndPictureContentView == nil) {
+        _fowardAndPictureContentView = [[UIView alloc] init];
+    }
+    return _fowardAndPictureContentView;
+}
+
+- (UILabel *)forwardLabel {
+    if (_forwardLabel == nil) {
+        _forwardLabel = [[UILabel alloc] init];
+        _forwardLabel.text = @"我是刘健";
+        _forwardLabel.textColor = [UIColor blackColor];
+        _forwardLabel.backgroundColor = [UIColor redColor];
+        [_forwardLabel sizeToFit];
+        _forwardLabel.numberOfLines = 0;
+    }
+    return _forwardLabel;
 }
 
 - (void)updateConstraints {
@@ -387,7 +440,7 @@
  一张配图: cell = image.size, collectionview = image.size
  四张配图: cell = {90, 90}, collectionview = {2*w+m, 2*h+m}
  其他张配图: cell = {90, 90}, collectionview =
-
+ 
  @return LJSize包含cell和collecionview尺寸
  */
 - (LJSize *)calculateSize {
@@ -438,138 +491,7 @@
     self.cellAndCollSize.cellSize = CGSizeMake(imageWidth, imageHeigh);
     self.cellAndCollSize.collectionviewSize = CGSizeMake(width, height);
     return self.cellAndCollSize;
-
+    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//- (void)setStatus:(LJStatus *)status {
-//    if (_status == nil) {
-//        _status = [[LJStatus alloc] init];
-//        _status = status;
-//    }
-////    // 1.设置头像
-////    NSURL *url = [NSURL URLWithString:self.status.user.profile_image_url];
-////    [_iconImageView sd_setImageWithURL:url];
-//    // 2.设置认证图标
-////    int type = _status.user.verified_type;
-////    NSString *name = @"";
-////    switch (type) {
-////        case 0:
-////            name = @"avatar_vip";
-////            break;
-////        case 2:
-////        case 3:
-////        case 5:
-////            name = @"avatar_enterprise_vip";
-////            break;
-////        case 220:
-////            name = @"avatar_grassroot";
-////        default:
-////            break;
-////    }
-////    _verifiedImageView.image = [UIImage imageNamed:name];
-//    // 3.设置昵称
-//    _nameLabel.text = _status.user.screen_name;
-//    
-//    
-//    // 4.设置会员图标
-//    if (_status.user.mbrank >=1 && _status.user.mbrank <=6) {
-//        NSString *string = @"common_icon_membership_level";
-//        NSString *stringInt = [NSString stringWithFormat:@"%d",_status.user.mbrank];
-//        NSString *string2 = [string stringByAppendingString:stringInt];
-//        _vipImageView.image = [UIImage imageNamed:string2];
-//        _nameLabel.textColor = [UIColor orangeColor];
-//    }else {
-//        // cell会重用，需要恢复到原来的文字颜色
-//        _nameLabel.textColor = [UIColor blackColor];
-//    }
-//    
-//    // 5.设置时间
-//    /**
-//     刚刚(一分钟内)
-//     X分钟前(一小时内)
-//     X小时前(当天)
-//     
-//     昨天 HH:mm(昨天)
-//     
-//     MM-dd HH:mm(一年内)
-//     yyyy-MM-dd HH:mm(更早期)
-//     */
-//    // "Sun Dec 06 11:10:41 +0800 2015"
-//    _timeLabel.text = @"刚刚";
-////    if (_status.created_at != nil) {
-////        // 1.将服务器返回的时间转换为NSDate
-////        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-////        formatter.dateFormat = @"EE MM dd HH:mm:ss Z yyyy";
-////        // 不指定以下代码在真机中可能无法转换
-////        formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en"];
-////        NSDate *createDate = [formatter dateFromString:_status.created_at];
-////        
-////        // 创建一个日历类
-////        NSCalendar *calendar = [NSCalendar currentCalendar];
-////        NSString *result = @"";
-////        NSString *formatterStr = @"HH:mm";
-////        if ([calendar isDateInToday:createDate]) {
-////            //今天
-////            // 3.比较两个时间之间的差值
-////            NSTimeInterval interval = [createDate timeIntervalSinceNow];
-////            if ((-interval) < 60 ) {
-////                result = @"刚刚";
-////            }else if((-interval) < 60 *60){
-////                NSString *stringInterbal = [NSString stringWithFormat:@"%d",(int)(-interval) / 60 ];
-////                result = [stringInterbal stringByAppendingString:@"分钟前"];
-////            }else if ([calendar isDateInYesterday:createDate]){
-////                formatterStr = [@"昨天" stringByAppendingString:formatterStr];
-////                formatter.dateFormat = formatterStr;
-////                result = [formatter stringFromDate:createDate];
-////            }else{
-////                NSDateComponents *comps = [calendar components:NSCalendarUnitYear fromDate:createDate toDate:[NSDate init] options:NSCalendarWrapComponents];
-////                if (comps.year >= 1) {
-////                    formatterStr = [@"yyyy-MM-dd" stringByAppendingString:formatterStr];
-////                }else{
-////                    formatterStr = [@"MM-dd" stringByAppendingString:formatterStr];
-////                }
-////                formatter.dateFormat = formatterStr;
-////                result = [formatter stringFromDate:createDate];
-////            }
-////            
-////
-//             _timeLabel.text = result;
-//            
-//            
-//            
-//            
-//            
-//        }
-//    }
-//
-//    // 6.设置来源
-//    if (![_status.source isEqualToString:@""] || _status.source != nil) {
-//        NSString *sourceStr = _status.source;
-//        NSUInteger startIndex = [sourceStr rangeOfString:@">"].location + 1;
-//        NSUInteger length = [sourceStr rangeOfString:@"<" options:NSBackwardsSearch].location - startIndex;
-//        NSString *string3 = @"来自: ";
-//        _sourceLabel.text = [string3 stringByAppendingString:[sourceStr substringWithRange:NSMakeRange(startIndex, length)]];
-//    }
-//
-//    // 7.设置正文
-//    _contentLabel.text = _status.text;
-//    
-//}
 
 @end

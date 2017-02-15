@@ -16,9 +16,11 @@
 #import "LJNetworkTools.h"
 #import "LJStatus.h"
 #import "LJHomeTableViewCell.h"
+#import "LJHomeForwardTableViewCell.h"
 #import "LJStatus.h"
 
 #import "SVProgressHUD.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface LJHomeTableViewController () 
 
@@ -47,23 +49,18 @@
 #pragma mark - Life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-//    self.statuses = [[NSMutableArray alloc] init];
-    
     // 1.判断用户是否登陆
     if (!self.isLogin) {
         [self.visitorView setSubView:@"visitordiscover_feed_image_house" with:@"登录后，最新、最热微博尽在掌握，不再会与实事潮流擦肩而过" withIson:NO];
         return;
     }
-    
     // 2.初始化导航条
     [self setupNav];
-    
     // 3.获取微博数据
     [self loadData];
     
-    
-    
+    self.tableView.estimatedRowHeight = 400;
+    //self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
 /**
@@ -72,33 +69,61 @@
 - (void)loadData {
     
     [[LJNetworkTools shareInstance] loadStatuses:^(NSArray *array, NSError *error) {
-       
+        // 1.安全校验
         if (error != nil) {
             [SVProgressHUD showErrorWithStatus:@"获取微博数据失败"];
-            
             NSLog(@"----%@",error);
             return;
         }
-        
-
-        
-        
+        // 2.字典数组转化为模型数组
         NSMutableArray *mutableArray = [[NSMutableArray alloc] init];
         self.statuses = [[NSMutableArray alloc] init];
         for (id dic in array) {
             LJStatus *model = [[LJStatus alloc] init];
             id status = [model initWithDic:dic];
-     //       NSLog(@"%@",status);
-            [mutableArray addObject:status];
+            LJStatusViewModel *viewModel = [[LJStatusViewModel alloc] initWithStatus:status];
+            [mutableArray addObject:viewModel];
         }
-        
-        
-        self.statuses = mutableArray;
-        
-
+        // 3.保存微博数据
+        //self.statuses = mutableArray;
+        // 4.缓存微博所有配图
+        [self cachesImages:mutableArray];
         
     }];
     
+}
+
+/**
+ 缓存配图
+
+ @param viewModels <#viewModels description#>
+ */
+- (void)cachesImages:(NSArray *)viewModels {
+    // 0.创建一个组
+    dispatch_group_t group = dispatch_group_create();
+    for (LJStatusViewModel *viewModel in viewModels) {
+        
+        // 1.从模型中取出数组配图
+        if (viewModel.thumbnail_pic) {
+            // 2.遍历数组配图下载图片
+            for (NSURL*url in viewModel.thumbnail_pic) {
+                // 将当前的下载操作加入到组中
+                dispatch_group_enter(group);
+                
+                [[SDWebImageManager sharedManager] downloadImageWithURL:url options:SDWebImageRetryFailed progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                    NSLog(@"success");
+                    dispatch_group_leave(group);
+                }];
+                
+            }
+        }
+        
+        dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+            NSLog(@"all");
+            // 保存微博数据
+            self.statuses = viewModels;
+        });
+}
 }
 
 /**
@@ -210,21 +235,30 @@
 #pragma mark - Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.statuses.count;
+    //return 1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // 1.获得cell
-    NSString *cellID = @"ID";
-    LJHomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    if (!cell) {
-        cell = [[LJHomeTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID];
+    LJStatusViewModel *viewModel = self.statuses[indexPath.row];
+    NSString *cellID = (viewModel.status.retweeted_status != NULL)? @"forwardCell" : @"homeCell";
+    
+    if ([cellID isEqualToString:@"homeCell"]) {
+        LJHomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+        if (!cell) {
+            cell = [[LJHomeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        }
+        cell.viewModel = viewModel;
+        
+        return cell;
     }
-    cell.status = self.statuses[indexPath.row];
+    LJHomeForwardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    if (!cell) {
+        cell = [[LJHomeForwardTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+    }
+    cell.viewModel = viewModel;
+    
     return cell;
     
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 300;
 }
 
 #pragma mark - UIViewControllerAnimatedTransitioning代理方法
@@ -271,7 +305,9 @@
 
 #pragma mark - lazy
 - (void)setStatuses:(NSMutableArray *)statuses {
-    _statuses = statuses;
+    if (_statuses != statuses) {
+        _statuses = statuses;
+    }
     [self.tableView reloadData];
 }
 

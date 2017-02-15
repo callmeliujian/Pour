@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1A7BC4A33ABB91FFC3D9BDF3 /* libPods-Pour-微博.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB3A1B24E18186E2D2C9C0F /* libPods-Pour-微博.a */; };
+		1D2378921E4B126800ED45F6 /* LJSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D2378911E4B126800ED45F6 /* LJSize.m */; };
 		1D25F4201E45AAA500656E43 /* LJWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D25F41F1E45AAA500656E43 /* LJWelcomeViewController.m */; };
 		1D25F4221E45AAB100656E43 /* LJWelcomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D25F4211E45AAB100656E43 /* LJWelcomeViewController.storyboard */; };
 		1D25F4251E45B79800656E43 /* LJNewFeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D25F4241E45B79800656E43 /* LJNewFeatureViewController.m */; };
@@ -16,10 +17,13 @@
 		1D25F4311E47591D00656E43 /* LJStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D25F4301E47591D00656E43 /* LJStatus.m */; };
 		1D25F4341E47643D00656E43 /* LJUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D25F4331E47643D00656E43 /* LJUser.m */; };
 		1D25F4371E4867D900656E43 /* LJHomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D25F4361E4867D900656E43 /* LJHomeTableViewCell.m */; };
+		1D25F43B1E4A067200656E43 /* LJStatusViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D25F43A1E4A067200656E43 /* LJStatusViewModel.m */; };
 		1D74D35A1E436D2D00F808AB /* LJOAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D74D3591E436D2D00F808AB /* LJOAuthViewController.m */; };
 		1D74D35C1E436D3C00F808AB /* LJOAuthViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D74D35B1E436D3C00F808AB /* LJOAuthViewController.storyboard */; };
 		1D74D35F1E437B9A00F808AB /* LJNetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D74D35E1E437B9A00F808AB /* LJNetworkTools.m */; };
 		1D74D3621E448ED600F808AB /* LJUserAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D74D3611E448ED600F808AB /* LJUserAccount.m */; };
+		1DE1FAA41E54075900F3397F /* LJHomeForwardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE1FAA31E54075900F3397F /* LJHomeForwardTableViewCell.m */; };
+		1DE656901E4E13A1002EE9DC /* LJHomePictureCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE6568F1E4E13A1002EE9DC /* LJHomePictureCollectionViewCell.m */; };
 		521509341DED5C64000C71E7 /* LJMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 521509331DED5C64000C71E7 /* LJMainViewController.m */; };
 		525662251DF15AB000B4C25B /* UIBarButtonItem+LJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 525662241DF15AB000B4C25B /* UIBarButtonItem+LJ.m */; };
 		525662281DF165E100B4C25B /* LJButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 525662271DF165E100B4C25B /* LJButton.m */; };
@@ -61,6 +65,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1D2378901E4B126800ED45F6 /* LJSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJSize.h; sourceTree = "<group>"; };
+		1D2378911E4B126800ED45F6 /* LJSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJSize.m; sourceTree = "<group>"; };
 		1D25F41E1E45AAA500656E43 /* LJWelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJWelcomeViewController.h; sourceTree = "<group>"; };
 		1D25F41F1E45AAA500656E43 /* LJWelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJWelcomeViewController.m; sourceTree = "<group>"; };
 		1D25F4211E45AAB100656E43 /* LJWelcomeViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LJWelcomeViewController.storyboard; sourceTree = "<group>"; };
@@ -75,6 +81,8 @@
 		1D25F4331E47643D00656E43 /* LJUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJUser.m; sourceTree = "<group>"; };
 		1D25F4351E4867D900656E43 /* LJHomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJHomeTableViewCell.h; sourceTree = "<group>"; };
 		1D25F4361E4867D900656E43 /* LJHomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJHomeTableViewCell.m; sourceTree = "<group>"; };
+		1D25F4391E4A067200656E43 /* LJStatusViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJStatusViewModel.h; sourceTree = "<group>"; };
+		1D25F43A1E4A067200656E43 /* LJStatusViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJStatusViewModel.m; sourceTree = "<group>"; };
 		1D74D3581E436D2D00F808AB /* LJOAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJOAuthViewController.h; sourceTree = "<group>"; };
 		1D74D3591E436D2D00F808AB /* LJOAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJOAuthViewController.m; sourceTree = "<group>"; };
 		1D74D35B1E436D3C00F808AB /* LJOAuthViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LJOAuthViewController.storyboard; sourceTree = "<group>"; };
@@ -82,6 +90,10 @@
 		1D74D35E1E437B9A00F808AB /* LJNetworkTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJNetworkTools.m; sourceTree = "<group>"; };
 		1D74D3601E448ED600F808AB /* LJUserAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJUserAccount.h; sourceTree = "<group>"; };
 		1D74D3611E448ED600F808AB /* LJUserAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJUserAccount.m; sourceTree = "<group>"; };
+		1DE1FAA21E54075900F3397F /* LJHomeForwardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJHomeForwardTableViewCell.h; sourceTree = "<group>"; };
+		1DE1FAA31E54075900F3397F /* LJHomeForwardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJHomeForwardTableViewCell.m; sourceTree = "<group>"; };
+		1DE6568E1E4E13A1002EE9DC /* LJHomePictureCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJHomePictureCollectionViewCell.h; sourceTree = "<group>"; };
+		1DE6568F1E4E13A1002EE9DC /* LJHomePictureCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJHomePictureCollectionViewCell.m; sourceTree = "<group>"; };
 		521509321DED5C64000C71E7 /* LJMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJMainViewController.h; sourceTree = "<group>"; };
 		521509331DED5C64000C71E7 /* LJMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJMainViewController.m; sourceTree = "<group>"; };
 		525662231DF15AB000B4C25B /* UIBarButtonItem+LJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+LJ.h"; sourceTree = "<group>"; };
@@ -187,6 +199,12 @@
 			children = (
 				1D25F4351E4867D900656E43 /* LJHomeTableViewCell.h */,
 				1D25F4361E4867D900656E43 /* LJHomeTableViewCell.m */,
+				1DE1FAA21E54075900F3397F /* LJHomeForwardTableViewCell.h */,
+				1DE1FAA31E54075900F3397F /* LJHomeForwardTableViewCell.m */,
+				1DE6568E1E4E13A1002EE9DC /* LJHomePictureCollectionViewCell.h */,
+				1DE6568F1E4E13A1002EE9DC /* LJHomePictureCollectionViewCell.m */,
+				1D2378901E4B126800ED45F6 /* LJSize.h */,
+				1D2378911E4B126800ED45F6 /* LJSize.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -241,6 +259,8 @@
 				1D25F42E1E47590200656E43 /* Model */,
 				5281FA011E37815C00710DA1 /* QRCode */,
 				52EFF02A1DFE53CC00474BAB /* Popover */,
+				1D25F4391E4A067200656E43 /* LJStatusViewModel.h */,
+				1D25F43A1E4A067200656E43 /* LJStatusViewModel.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -609,6 +629,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DE1FAA41E54075900F3397F /* LJHomeForwardTableViewCell.m in Sources */,
+				1D2378921E4B126800ED45F6 /* LJSize.m in Sources */,
 				1D25F4371E4867D900656E43 /* LJHomeTableViewCell.m in Sources */,
 				5288B6291DED75250096AC58 /* LJDiscoverTableViewController.m in Sources */,
 				525EAEDF1DEEA391002BDD5D /* LJBaseTableViewController.m in Sources */,
@@ -619,6 +641,8 @@
 				5288B6261DED6D9C0096AC58 /* LJMessageTableViewController.m in Sources */,
 				5281FA061E37841C00710DA1 /* LJQRCodeViewController.m in Sources */,
 				5288B62C1DED75F40096AC58 /* LJProfileTableViewController.m in Sources */,
+				1D25F43B1E4A067200656E43 /* LJStatusViewModel.m in Sources */,
+				1DE656901E4E13A1002EE9DC /* LJHomePictureCollectionViewCell.m in Sources */,
 				1D74D3621E448ED600F808AB /* LJUserAccount.m in Sources */,
 				1D25F4251E45B79800656E43 /* LJNewFeatureViewController.m in Sources */,
 				5273254B1DED591400E6D755 /* AppDelegate.m in Sources */,
@@ -764,6 +788,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = SYNJQ6CWNM;
 				INFOPLIST_FILE = "Pour-微博/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -779,6 +804,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = SYNJQ6CWNM;
 				INFOPLIST_FILE = "Pour-微博/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

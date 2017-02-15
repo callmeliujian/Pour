@@ -1,8 +1,8 @@
 //
-//  LJHomeTableViewCell.h
+//  LJHomeForwardTableViewCell.h
 //  Pour-微博
 //
-//  Created by 刘健 on 2017/2/6.
+//  Created by 刘健 on 2017/2/15.
 //  Copyright © 2017年 😄. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 #import "LJStatus.h"
 #import "LJStatusViewModel.h"
 
-@interface LJHomeTableViewCell : UITableViewCell
+@interface LJHomeForwardTableViewCell : UITableViewCell
 
 /**
  头像
@@ -54,9 +54,10 @@
 
 /**
  返回每个cell最大的y值
-
+ 
  @param viewModel <#viewModel description#>
  @return <#return value description#>
  */
 - (CGFloat)calculateRowHeight:(LJStatusViewModel *)viewModel;
+
 @end
