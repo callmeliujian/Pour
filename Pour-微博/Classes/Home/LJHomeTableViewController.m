@@ -18,12 +18,12 @@
 #import "LJHomeTableViewCell.h"
 #import "LJHomeForwardTableViewCell.h"
 #import "LJStatus.h"
+#import "LJRefreshControl.h"
 
 #import "SVProgressHUD.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-@interface LJHomeTableViewController () 
-
+@interface LJHomeTableViewController ()
 
 /**
  标题按钮
@@ -59,8 +59,13 @@
     // 3.获取微博数据
     [self loadData];
     
+    // 4.设置tableView
     self.tableView.estimatedRowHeight = 400;
     //self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.refreshControl = [[LJRefreshControl alloc] init];
+   // self.tableView.refreshControl = [[LJRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(loadData) forControlEvents:UIControlEventValueChanged];
+    [self.refreshControl beginRefreshing];
 }
 
 /**
@@ -68,7 +73,21 @@
  */
 - (void)loadData {
     
-    [[LJNetworkTools shareInstance] loadStatuses:^(NSArray *array, NSError *error) {
+    /*
+     since_id false	int64 若指定此参数，则返回ID比since_id大的微博（即比since_id时间晚的微博），默认为0。
+     max_id false int64 若指定此参数，则返回ID小于或等于max_id的微博，默认为0。
+     默认情况下, 新浪返回的数据是按照微博ID从大到小得返回给我们的
+     也就意味着微博ID越大, 这条微博发布时间就越晚
+     经过分析, 如果要实现下拉刷新需要, 指定since_id为第一条微博的id
+     如果要实现上拉加载更多, 需要指定max_id为最后一条微博id-1.
+     */
+    
+    LJStatusViewModel *statusViewModel = [self.statuses firstObject];
+    NSString *since_id = statusViewModel.status.idstr;
+    if (since_id == nil) {
+        since_id = @"0";
+    }
+    [[LJNetworkTools shareInstance] loadStatuses:since_id withBlock:^(NSString *since_id, NSArray *array, NSError *error) {
         // 1.安全校验
         if (error != nil) {
             [SVProgressHUD showErrorWithStatus:@"获取微博数据失败"];
@@ -84,10 +103,25 @@
             LJStatusViewModel *viewModel = [[LJStatusViewModel alloc] initWithStatus:status];
             [mutableArray addObject:viewModel];
         }
-        // 3.保存微博数据
-        //self.statuses = mutableArray;
+        // 3.处理微博数据
+        if (![since_id isEqualToString:@"0"]) {
+            for (id temp in self.statuses) {
+                [mutableArray addObject:temp];
+                if (mutableArray.count != 0) {
+                    self.statuses = mutableArray;
+                }
+                
+            }
+            
+        }else{
+            self.statuses = mutableArray;
+        }
+        
         // 4.缓存微博所有配图
         [self cachesImages:mutableArray];
+        
+        // 5.关闭菊花
+        [self.refreshControl endRefreshing];
         
     }];
     
@@ -121,7 +155,8 @@
         dispatch_group_notify(group, dispatch_get_main_queue(), ^{
             NSLog(@"all");
             // 保存微博数据
-            self.statuses = viewModels;
+            //self.statuses = viewModels;
+            [self.tableView reloadData];
         });
 }
 }
@@ -237,6 +272,7 @@
     return self.statuses.count;
     //return 1;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // 1.获得cell
     LJStatusViewModel *viewModel = self.statuses[indexPath.row];
@@ -305,10 +341,10 @@
 
 #pragma mark - lazy
 - (void)setStatuses:(NSMutableArray *)statuses {
-    if (_statuses != statuses) {
+    if (_statuses != statuses && statuses.count != 0) {
         _statuses = statuses;
     }
-    [self.tableView reloadData];
+    //[self.tableView reloadData];
 }
 
 @end

@@ -12,6 +12,6 @@
 
 + (LJNetworkTools *)shareInstance;
 
-- (void)loadStatuses:(void(^)(NSArray *arry,NSError *error))block;
-
+//- (void)loadStatuses:(void(^)(NSString *, NSArray *arry,NSError *error))block;
+- (void)loadStatuses:(NSString *)since_id withBlock:(void (^)(NSString *, NSArray *, NSError *))block;
 @end

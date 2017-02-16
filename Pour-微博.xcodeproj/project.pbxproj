@@ -23,6 +23,8 @@
 		1D74D35F1E437B9A00F808AB /* LJNetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D74D35E1E437B9A00F808AB /* LJNetworkTools.m */; };
 		1D74D3621E448ED600F808AB /* LJUserAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D74D3611E448ED600F808AB /* LJUserAccount.m */; };
 		1DE1FAA41E54075900F3397F /* LJHomeForwardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE1FAA31E54075900F3397F /* LJHomeForwardTableViewCell.m */; };
+		1DE1FAA81E557E5300F3397F /* LJRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE1FAA71E557E5300F3397F /* LJRefreshView.m */; };
+		1DE1FAAB1E557EA700F3397F /* LJRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE1FAAA1E557EA700F3397F /* LJRefreshControl.m */; };
 		1DE656901E4E13A1002EE9DC /* LJHomePictureCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE6568F1E4E13A1002EE9DC /* LJHomePictureCollectionViewCell.m */; };
 		521509341DED5C64000C71E7 /* LJMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 521509331DED5C64000C71E7 /* LJMainViewController.m */; };
 		525662251DF15AB000B4C25B /* UIBarButtonItem+LJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 525662241DF15AB000B4C25B /* UIBarButtonItem+LJ.m */; };
@@ -92,6 +94,10 @@
 		1D74D3611E448ED600F808AB /* LJUserAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJUserAccount.m; sourceTree = "<group>"; };
 		1DE1FAA21E54075900F3397F /* LJHomeForwardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJHomeForwardTableViewCell.h; sourceTree = "<group>"; };
 		1DE1FAA31E54075900F3397F /* LJHomeForwardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJHomeForwardTableViewCell.m; sourceTree = "<group>"; };
+		1DE1FAA61E557E5300F3397F /* LJRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJRefreshView.h; sourceTree = "<group>"; };
+		1DE1FAA71E557E5300F3397F /* LJRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJRefreshView.m; sourceTree = "<group>"; };
+		1DE1FAA91E557EA700F3397F /* LJRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJRefreshControl.h; sourceTree = "<group>"; };
+		1DE1FAAA1E557EA700F3397F /* LJRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJRefreshControl.m; sourceTree = "<group>"; };
 		1DE6568E1E4E13A1002EE9DC /* LJHomePictureCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJHomePictureCollectionViewCell.h; sourceTree = "<group>"; };
 		1DE6568F1E4E13A1002EE9DC /* LJHomePictureCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJHomePictureCollectionViewCell.m; sourceTree = "<group>"; };
 		521509321DED5C64000C71E7 /* LJMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJMainViewController.h; sourceTree = "<group>"; };
@@ -221,6 +227,17 @@
 			path = OAuth;
 			sourceTree = "<group>";
 		};
+		1DE1FAA51E557E2600F3397F /* Refresh */ = {
+			isa = PBXGroup;
+			children = (
+				1DE1FAA61E557E5300F3397F /* LJRefreshView.h */,
+				1DE1FAA71E557E5300F3397F /* LJRefreshView.m */,
+				1DE1FAA91E557EA700F3397F /* LJRefreshControl.h */,
+				1DE1FAAA1E557EA700F3397F /* LJRefreshControl.m */,
+			);
+			name = Refresh;
+			sourceTree = "<group>";
+		};
 		5215092A1DED5ABB000C71E7 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,6 +273,7 @@
 		5215092D1DED5ABB000C71E7 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				1DE1FAA51E557E2600F3397F /* Refresh */,
 				1D25F42E1E47590200656E43 /* Model */,
 				5281FA011E37815C00710DA1 /* QRCode */,
 				52EFF02A1DFE53CC00474BAB /* Popover */,
@@ -636,6 +654,7 @@
 				525EAEDF1DEEA391002BDD5D /* LJBaseTableViewController.m in Sources */,
 				5288B6231DED624C0096AC58 /* LJHomeTableViewController.m in Sources */,
 				1D25F4201E45AAA500656E43 /* LJWelcomeViewController.m in Sources */,
+				1DE1FAA81E557E5300F3397F /* LJRefreshView.m in Sources */,
 				52BF378C1DFE70250031035D /* LJPresentationController.m in Sources */,
 				52EFF02D1DFE53EB00474BAB /* LJMenuViewController.m in Sources */,
 				5288B6261DED6D9C0096AC58 /* LJMessageTableViewController.m in Sources */,
@@ -647,6 +666,7 @@
 				1D25F4251E45B79800656E43 /* LJNewFeatureViewController.m in Sources */,
 				5273254B1DED591400E6D755 /* AppDelegate.m in Sources */,
 				521509341DED5C64000C71E7 /* LJMainViewController.m in Sources */,
+				1DE1FAAB1E557EA700F3397F /* LJRefreshControl.m in Sources */,
 				525662251DF15AB000B4C25B /* UIBarButtonItem+LJ.m in Sources */,
 				525EAEE41DEEA756002BDD5D /* LJVisitorView.m in Sources */,
 				1D25F4311E47591D00656E43 /* LJStatus.m in Sources */,
