@@ -176,9 +176,7 @@
     [self.fowardAndPictureContentView addSubview:self.forwardLabel];
     [self.contentView addSubview:self.pictureCollectionnView];
     [self.forwardLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-       // make.left.mas_equalTo(self.contentLabel);
         make.left.mas_equalTo(self.fowardAndPictureContentView.mas_left).mas_equalTo(10);
-       // make.top.mas_equalTo(self.contentLabel.mas_bottom).mas_offset(10);
         make.top.mas_equalTo(self.fowardAndPictureContentView.mas_top).mas_equalTo(10);
         make.bottom.mas_equalTo(self.pictureCollectionnView.mas_top).mas_offset(-10);
     }];
@@ -417,7 +415,7 @@
         _forwardLabel.text = @"我是刘健";
         _forwardLabel.textColor = [UIColor blackColor];
         _forwardLabel.backgroundColor = [UIColor redColor];
-        [_forwardLabel sizeToFit];
+        //[_forwardLabel sizeToFit];
         _forwardLabel.numberOfLines = 0;
     }
     return _forwardLabel;

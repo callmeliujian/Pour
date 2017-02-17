@@ -23,6 +23,8 @@
 #import "SVProgressHUD.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
+#define iOS10 ([[UIDevice currentDevice].systemVersion intValue]>=10?YES:NO)
+
 @interface LJHomeTableViewController ()
 
 /**
@@ -39,6 +41,10 @@
 @property (nonatomic, strong)NSMutableArray *statuses;
 
 @property BOOL isPresent;
+/**
+ 刷新提醒视图
+ */
+@property (nonatomic, strong) UILabel *tipLabel;
 
 
 @end
@@ -61,13 +67,39 @@
     
     // 4.设置tableView
     self.tableView.estimatedRowHeight = 400;
-    //self.tableView.rowHeight = UITableViewAutomaticDimension;
+    // 5.下拉刷新
     self.refreshControl = [[LJRefreshControl alloc] init];
-   // self.tableView.refreshControl = [[LJRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(loadData) forControlEvents:UIControlEventValueChanged];
     [self.refreshControl beginRefreshing];
+    
+    // 6.添加刷新视图
+    
+    [self addRefreshView];
+    
 }
 
+
+#pragma mark - 内部控制方法
+
+/**
+ 刷新视图
+ */
+- (void)addRefreshView {
+    NSArray *subviews=self.navigationController.navigationBar.subviews;
+    for (UIView *view in subviews) {
+        if (iOS10) {
+            //iOS10,改变了状态栏的类为_UIBarBackground
+            //iOS9以及iOS9之前使用的是_UINavigationBarBackground
+            if ([view isKindOfClass:NSClassFromString(@"_UIBarBackground")]) {
+                view.hidden = YES;
+                UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -20, [UIScreen mainScreen].bounds.size.width, 64)];
+                imageView.backgroundColor = [UIColor whiteColor];
+                [self.navigationController.navigationBar insertSubview:imageView atIndex:0];
+            }
+        }
+    }
+    [self.navigationController.navigationBar insertSubview:self.tipLabel atIndex:0];
+}
 /**
  调用LJNetworkTools的loadStatuses获取主页微博数据
  */
@@ -104,18 +136,29 @@
             [mutableArray addObject:viewModel];
         }
         // 3.处理微博数据
+        
+        
         if (![since_id isEqualToString:@"0"]) {
-            for (id temp in self.statuses) {
-                [mutableArray addObject:temp];
-                if (mutableArray.count != 0) {
-                    self.statuses = mutableArray;
-                }
-                
-            }
+            NSArray *array = [NSArray arrayWithArray:mutableArray];
+            self.statuses = [mutableArray arrayByAddingObjectsFromArray:array];
             
         }else{
             self.statuses = mutableArray;
         }
+        
+        
+//        if (![since_id isEqualToString:@"0"]) {
+//            for (id temp in self.statuses) {
+//                [mutableArray addObject:temp];
+//                if (mutableArray.count != 0) {
+//                    self.statuses = mutableArray;
+//                }
+//                
+//            }
+//            
+//        }else{
+//            self.statuses = mutableArray;
+//        }
         
         // 4.缓存微博所有配图
         [self cachesImages:mutableArray];
@@ -123,8 +166,37 @@
         // 5.关闭菊花
         [self.refreshControl endRefreshing];
         
+        // 6.显示刷新提醒
+        [self showRefreshStatus:mutableArray.count];
+        
     }];
     
+}
+
+- (void)showRefreshStatus:(NSInteger)count {
+    // 1.设置提醒文本
+    if (count == 0) {
+        self.tipLabel.text = @"没有更多数据";
+    }else {
+        
+        NSString *str = [@"刷新到" stringByAppendingString:[NSString stringWithFormat:@"%ld",(long)count]];
+        str = [str stringByAppendingString:@"条数据"];
+        self.tipLabel.text = str;
+    }
+    self.tipLabel.hidden = NO;
+    // 2.执行动画
+    [UIView animateWithDuration:1.0 animations:^{
+        self.tipLabel.transform = CGAffineTransformMakeTranslation(0, 44);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:1.0 delay:2.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.tipLabel.transform = CGAffineTransformIdentity;
+        } completion:^(BOOL finished) {
+            self.tipLabel.hidden = YES;
+        }];
+    }];
+
+
+
 }
 
 /**
@@ -345,6 +417,18 @@
         _statuses = statuses;
     }
     //[self.tableView reloadData];
+}
+
+- (UILabel *)tipLabel {
+    if (_tipLabel == nil) {
+        _tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
+        _tipLabel.backgroundColor = [UIColor orangeColor];
+        _tipLabel.text = @"没有更多数据";
+        _tipLabel.textColor = [UIColor whiteColor];
+        _tipLabel.textAlignment = NSTextAlignmentCenter;
+        _tipLabel.hidden = YES;
+    }
+    return _tipLabel;
 }
 
 @end
