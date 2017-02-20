@@ -10,6 +10,8 @@
 #import "LJStatus.h"
 #import "LJStatusViewModel.h"
 
+#import "LJBaseTableViewCell.h"
+
 @interface LJHomeForwardTableViewCell : UITableViewCell
 
 /**

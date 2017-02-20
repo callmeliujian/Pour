@@ -19,6 +19,7 @@
 #import "LJHomeForwardTableViewCell.h"
 #import "LJStatus.h"
 #import "LJRefreshControl.h"
+#import "LJBaseTableViewCell.h"
 
 #import "SVProgressHUD.h"
 #import <SDWebImage/UIImageView+WebCache.h>
@@ -45,7 +46,10 @@
  刷新提醒视图
  */
 @property (nonatomic, strong) UILabel *tipLabel;
-
+/**
+ 最后一条微博标记
+ */
+@property (nonatomic, assign) BOOL lastStatus;
 
 @end
 
@@ -75,6 +79,8 @@
     // 6.添加刷新视图
     
     [self addRefreshView];
+    
+    self.lastStatus = false;
     
 }
 
@@ -119,7 +125,18 @@
     if (since_id == nil) {
         since_id = @"0";
     }
-    [[LJNetworkTools shareInstance] loadStatuses:since_id withBlock:^(NSString *since_id, NSArray *array, NSError *error) {
+    NSString *max_id = @"0";
+    if (self.lastStatus) {
+        since_id = @"0";
+        LJStatusViewModel *max_id_statusViewModel = [self.statuses lastObject];
+        if (max_id_statusViewModel.status.idstr) {
+            max_id = max_id_statusViewModel.status.idstr;
+        }
+    }
+    
+    
+    
+    [[LJNetworkTools shareInstance] loadStatuses:since_id withMax_id:max_id withBlock:^(NSString *since_id, NSArray *array, NSError *error) {
         // 1.安全校验
         if (error != nil) {
             [SVProgressHUD showErrorWithStatus:@"获取微博数据失败"];
@@ -142,23 +159,14 @@
             NSArray *array = [NSArray arrayWithArray:mutableArray];
             self.statuses = [mutableArray arrayByAddingObjectsFromArray:array];
             
-        }else{
+        }else if (![max_id isEqualToString:@"0"]){
+            NSArray *array = [NSArray arrayWithArray:mutableArray];
+            self.statuses = [array arrayByAddingObjectsFromArray:mutableArray];
+        }
+        else {
             self.statuses = mutableArray;
         }
         
-        
-//        if (![since_id isEqualToString:@"0"]) {
-//            for (id temp in self.statuses) {
-//                [mutableArray addObject:temp];
-//                if (mutableArray.count != 0) {
-//                    self.statuses = mutableArray;
-//                }
-//                
-//            }
-//            
-//        }else{
-//            self.statuses = mutableArray;
-//        }
         
         // 4.缓存微博所有配图
         [self cachesImages:mutableArray];
@@ -349,21 +357,31 @@
     // 1.获得cell
     LJStatusViewModel *viewModel = self.statuses[indexPath.row];
     NSString *cellID = (viewModel.status.retweeted_status != NULL)? @"forwardCell" : @"homeCell";
+    UITableViewCell *cell;
     
     if ([cellID isEqualToString:@"homeCell"]) {
-        LJHomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+        cell = [tableView dequeueReusableCellWithIdentifier:cellID];
         if (!cell) {
             cell = [[LJHomeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
         }
-        cell.viewModel = viewModel;
+        ((LJHomeTableViewCell*)cell).viewModel = viewModel;
         
-        return cell;
+    }else {
+        cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+        if (!cell) {
+            cell = [[LJHomeForwardTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        }
+        ((LJHomeForwardTableViewCell*)cell).viewModel = viewModel;
     }
-    LJHomeForwardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    if (!cell) {
-        cell = [[LJHomeForwardTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+
+    
+    if (indexPath.row == self.statuses.count - 1) {
+        NSLog(@"刷新数据");
+        self.lastStatus = YES;
+        [self loadData];
     }
-    cell.viewModel = viewModel;
+    
+    NSLog(@"%ld",(long)indexPath.row);
     
     return cell;
     

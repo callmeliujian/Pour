@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "LJStatus.h"
 #import "LJStatusViewModel.h"
+#import "LJBaseTableViewCell.h"
 
-@interface LJHomeTableViewCell : UITableViewCell
+@interface LJHomeTableViewCell :UITableViewCell
 
 /**
  头像

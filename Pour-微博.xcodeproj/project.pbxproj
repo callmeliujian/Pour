@@ -22,6 +22,7 @@
 		1D74D35C1E436D3C00F808AB /* LJOAuthViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D74D35B1E436D3C00F808AB /* LJOAuthViewController.storyboard */; };
 		1D74D35F1E437B9A00F808AB /* LJNetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D74D35E1E437B9A00F808AB /* LJNetworkTools.m */; };
 		1D74D3621E448ED600F808AB /* LJUserAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D74D3611E448ED600F808AB /* LJUserAccount.m */; };
+		1D9FD89B1E5B131200877612 /* LJBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D9FD89A1E5B131200877612 /* LJBaseTableViewCell.m */; };
 		1DE1FAA41E54075900F3397F /* LJHomeForwardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE1FAA31E54075900F3397F /* LJHomeForwardTableViewCell.m */; };
 		1DE1FAA81E557E5300F3397F /* LJRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE1FAA71E557E5300F3397F /* LJRefreshView.m */; };
 		1DE1FAAB1E557EA700F3397F /* LJRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE1FAAA1E557EA700F3397F /* LJRefreshControl.m */; };
@@ -92,6 +93,8 @@
 		1D74D35E1E437B9A00F808AB /* LJNetworkTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJNetworkTools.m; sourceTree = "<group>"; };
 		1D74D3601E448ED600F808AB /* LJUserAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJUserAccount.h; sourceTree = "<group>"; };
 		1D74D3611E448ED600F808AB /* LJUserAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJUserAccount.m; sourceTree = "<group>"; };
+		1D9FD8991E5B131200877612 /* LJBaseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJBaseTableViewCell.h; sourceTree = "<group>"; };
+		1D9FD89A1E5B131200877612 /* LJBaseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJBaseTableViewCell.m; sourceTree = "<group>"; };
 		1DE1FAA21E54075900F3397F /* LJHomeForwardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJHomeForwardTableViewCell.h; sourceTree = "<group>"; };
 		1DE1FAA31E54075900F3397F /* LJHomeForwardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJHomeForwardTableViewCell.m; sourceTree = "<group>"; };
 		1DE1FAA61E557E5300F3397F /* LJRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJRefreshView.h; sourceTree = "<group>"; };
@@ -203,6 +206,8 @@
 		1D25F4381E486D1600656E43 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				1D9FD8991E5B131200877612 /* LJBaseTableViewCell.h */,
+				1D9FD89A1E5B131200877612 /* LJBaseTableViewCell.m */,
 				1D25F4351E4867D900656E43 /* LJHomeTableViewCell.h */,
 				1D25F4361E4867D900656E43 /* LJHomeTableViewCell.m */,
 				1DE1FAA21E54075900F3397F /* LJHomeForwardTableViewCell.h */,
@@ -647,6 +652,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D9FD89B1E5B131200877612 /* LJBaseTableViewCell.m in Sources */,
 				1DE1FAA41E54075900F3397F /* LJHomeForwardTableViewCell.m in Sources */,
 				1D2378921E4B126800ED45F6 /* LJSize.m in Sources */,
 				1D25F4371E4867D900656E43 /* LJHomeTableViewCell.m in Sources */,

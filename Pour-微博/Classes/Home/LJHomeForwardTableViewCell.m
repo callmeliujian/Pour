@@ -227,7 +227,6 @@
         make.top.width.height.mas_equalTo(self.criticismBtn);
     }];
     
-    
 }
 
 #pragma mark - delegate
@@ -380,11 +379,11 @@
     // 7.设置正文
     self.contentLabel.text = _viewModel.status.text;
     
-    if (self.viewModel.thumbnail_pic.count <= 9 && self.viewModel.thumbnail_pic.count > 0) {
-        NSLog(@"cou--%lu",(unsigned long)self.viewModel.thumbnail_pic.count);
-        NSLog(@"hei--%f",[self calculateSize].collectionviewSize.height);
-        NSLog(@"wid--%f",[self calculateSize].collectionviewSize.width);
-    }
+//    if (self.viewModel.thumbnail_pic.count <= 9 && self.viewModel.thumbnail_pic.count > 0) {
+//        NSLog(@"cou--%lu",(unsigned long)self.viewModel.thumbnail_pic.count);
+//        NSLog(@"hei--%f",[self calculateSize].collectionviewSize.height);
+//        NSLog(@"wid--%f",[self calculateSize].collectionviewSize.width);
+//    }
     
     // 8.更新配图
     [self.pictureCollectionnView reloadData];

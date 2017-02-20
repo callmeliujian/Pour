@@ -25,14 +25,17 @@
     return shareNetworkToolsInstance;
 }
 
-- (void)loadStatuses:(NSString *)since_id withBlock:(void (^)(NSString *, NSArray *, NSError *))block {
+- (void)loadStatuses:(NSString *)since_id withMax_id:(NSString *)max_id withBlock:(void (^)(NSString *, NSArray *, NSError *))block {
     
     NSAssert([LJUserAccount loadUserAccout] != nil, @"必须授权之后才能获取数据");
     
     // 1.准备路径
     NSString *path = @"2/statuses/home_timeline.json";
     // 2.准备参数
-    NSDictionary *parameters = @{@"access_token": [LJUserAccount loadUserAccout].access_token,@"since_id":since_id};
+    
+    NSString *temp = ([max_id isEqualToString:@"0"])?  max_id:[NSString stringWithFormat:@"%ld", [max_id integerValue] -1 ];
+    
+    NSDictionary *parameters = @{@"access_token": [LJUserAccount loadUserAccout].access_token,@"since_id":since_id,@"max_id":temp};
     // 3.发送GET请求
     [self GET:path parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
