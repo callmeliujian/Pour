@@ -102,6 +102,7 @@
             NSString *urlStr = dict[@"thumbnail_pic"];
             NSURL *url = [NSURL URLWithString:urlStr];
             [self.thumbnail_pic addObject:url];
+            [self.bmiddle_pic addObject:[urlStr stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"]];
         }
         
     }else{
@@ -109,6 +110,7 @@
             NSString *urlStr = dict[@"thumbnail_pic"];
             NSURL *url = [NSURL URLWithString:urlStr];
             [self.thumbnail_pic addObject:url];
+            [self.bmiddle_pic addObject:[urlStr stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"]];
         }
     }
     
@@ -127,11 +129,12 @@
     }
     return _thumbnail_pic;
 }
-//- (void)setThumbnail_pic:(NSMutableArray *)thumbnail_pic {
-//    if (_thumbnail_pic == nil) {
-//        _thumbnail_pic = [[NSMutableArray alloc] init];
-//    }
-//    _thumbnail_pic = thumbnail_pic;
-//}
+
+- (NSMutableArray *)bmiddle_pic {
+    if (_bmiddle_pic == nil) {
+        _bmiddle_pic = [[NSMutableArray alloc] init];
+    }
+    return _bmiddle_pic;
+}
 
 @end

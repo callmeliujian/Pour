@@ -19,8 +19,8 @@
 #import "LJHomeForwardTableViewCell.h"
 #import "LJStatus.h"
 #import "LJRefreshControl.h"
-
 #import "LJStatusListModel.h"
+#import "LJBrowserViewController.h"
 
 #import "SVProgressHUD.h"
 
@@ -83,10 +83,40 @@
     
     self.lastStatus = false;
     
+    // 7.注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showBrowser:) name:@"LJShowPhotoBrowserController" object:nil];
+    
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
 #pragma mark - 内部控制方法
+
+/**
+ 监听图片点击通知
+
+ @param notice 收到的通知
+ */
+- (void)showBrowser:(NSNotification *)notice {
+    // 凡是通过网络或者通知收到的数据，都需要进行安全校验
+    if (!notice.userInfo[@"bmiddle_pic"]) {
+        [SVProgressHUD showErrorWithStatus:@"没有图片"];
+        return;
+    }
+    
+    if (!notice.userInfo[@"indexPath"]) {
+        [SVProgressHUD showErrorWithStatus:@"没有索引"];
+        return;
+    }
+    
+    // 弹出图片浏览器，将所有图片和当前点击的索引传递给浏览器
+    LJBrowserViewController *browserVC = [[LJBrowserViewController alloc] initWithArray:notice.userInfo[@"bmiddle_pic"] withIndexPath:notice.userInfo[@"indexPath"]];
+    [self presentViewController:browserVC animated:true completion:nil];
+    
+}
 
 - (void)loadData {
 

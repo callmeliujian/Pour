@@ -39,6 +39,8 @@
  */
 @property (nonatomic, strong)NSMutableArray *thumbnail_pic;
 
+@property (nonatomic, strong)NSMutableArray *bmiddle_pic;
+
 @property (nonatomic, strong)LJStatus *status;
 
 /**
