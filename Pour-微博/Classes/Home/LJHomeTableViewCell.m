@@ -14,7 +14,7 @@
 #import "LJHomePictureCollectionViewCell.h"
 
 
-@interface LJHomeTableViewCell()<UICollectionViewDataSource>
+@interface LJHomeTableViewCell()
 /**
  转发按钮
  */
@@ -31,14 +31,6 @@
  容器视图
  */
 @property (nonatomic, strong) UIView *containerView;
-
-@property (nonatomic, strong) LJSize *cellAndCollSize;
-
-/**
- 显示配图
- */
-@property (nonatomic, strong) LJHomePictureCollectionViewCell *cell;
-@property (nonatomic, strong) UICollectionViewFlowLayout *layout;
 
 @end
 
@@ -188,48 +180,21 @@
 - (void)buildpictureCollectionnView {
     [self.contentView addSubview:self.pictureCollectionnView];
     [self.pictureCollectionnView registerClass:[LJHomePictureCollectionViewCell class] forCellWithReuseIdentifier:@"pictureCell"];
-    self.pictureCollectionnView.dataSource = self;
+    //self.pictureCollectionnView.dataSource = self;
     [self.pictureCollectionnView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(290, 90));
         make.left.mas_equalTo(self.contentLabel);
         make.top.mas_equalTo(self.contentLabel.mas_bottom).mas_equalTo(10);
     }];
-    
-    
-    
 }
 
-#pragma mark - delegate
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    
-    if (self.viewModel.thumbnail_pic.count) {
-        return self.viewModel.thumbnail_pic.count;
-    }
-    return 0;
-    
-}
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    self.cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"pictureCell" forIndexPath:indexPath];
-    //cell.backgroundColor = [UIColor redColor];
-    self.cell.url = self.viewModel.thumbnail_pic[indexPath.item];
-    return self.cell;
-    
-}
 
 #pragma mark - lazy
 
-- (UICollectionViewFlowLayout *)layout {
-    if (_layout == nil) {
-        _layout = [[UICollectionViewFlowLayout alloc] init];
-    }
-    return _layout;
-}
-
-- (UICollectionView *)pictureCollectionnView {
+- (LJPictureCollectionView *)pictureCollectionnView {
     if (_pictureCollectionnView == nil) {
-        _pictureCollectionnView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.layout];
+        _pictureCollectionnView = [[LJPictureCollectionView alloc] init];
     }
     return _pictureCollectionnView;
 }
@@ -349,99 +314,11 @@
     // 7.设置正文
     self.contentLabel.text = _viewModel.status.text;
     
-//    if (self.viewModel.thumbnail_pic.count <= 9 && self.viewModel.thumbnail_pic.count > 0) {
-//        NSLog(@"cou--%lu",(unsigned long)self.viewModel.thumbnail_pic.count);
-//        NSLog(@"hei--%f",[self calculateSize].collectionviewSize.height);
-//        NSLog(@"wid--%f",[self calculateSize].collectionviewSize.width);
-//    }
-    
     // 8.更新配图
-    [self.pictureCollectionnView reloadData];
-    
-    // 9.更新配图尺寸
-    if (!CGSizeEqualToSize([self calculateSize].cellSize, CGSizeZero)) {
-        self.layout.itemSize = [self calculateSize].cellSize;
-        [self setNeedsUpdateConstraints];
-    }
-    
-    
-    
-    
+    //[self.pictureCollectionnView reloadData];
+    self.pictureCollectionnView.viewModel = self.viewModel;
     
 }
-
-- (void)updateConstraints {
-    
-    [self.pictureCollectionnView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo([self calculateSize].collectionviewSize.height);
-        make.width.mas_equalTo([self calculateSize].collectionviewSize.width);
-    }];
-    
-    [super updateConstraints];
-}
-
-/**
- 计算cell和collectionview的尺寸
- 
- 没有配图: cell = zero, collectionview = zero
- 一张配图: cell = image.size, collectionview = image.size
- 四张配图: cell = {90, 90}, collectionview = {2*w+m, 2*h+m}
- 其他张配图: cell = {90, 90}, collectionview =
-
- @return LJSize包含cell和collecionview尺寸
- */
-- (LJSize *)calculateSize {
-    if (_cellAndCollSize == nil) {
-        _cellAndCollSize = [[LJSize alloc] init];
-    }
-    NSUInteger count = self.viewModel.thumbnail_pic.count;
-    
-    // 没有配图
-    if (count == 0) {
-        self.cellAndCollSize.cellSize = CGSizeZero;
-        self.cellAndCollSize.collectionviewSize = CGSizeZero;
-        return self.cellAndCollSize;
-    }
-    
-    // 一张配图
-    if (count == 1) {
-        NSString *key = [self.viewModel.thumbnail_pic.firstObject absoluteString];
-        UIImage *image = [[[SDWebImageManager sharedManager] imageCache] imageFromDiskCacheForKey:key];
-        self.cellAndCollSize.cellSize = image.size;
-        self.cellAndCollSize.collectionviewSize = image.size;
-        return self.cellAndCollSize;
-    }
-    
-    // 四张配图
-    CGFloat imageWidth = 90;
-    CGFloat imageHeigh = 90;
-    CGFloat imageMargin = 10;
-    if (count == 4) {
-        int col = 2;
-        int row = col;
-        // 宽度 = 图片的宽度 * 列数 + (列数 - 1) * 间隙
-        CGFloat width = imageWidth * col + (col - 1) * imageMargin;
-        // 高度 = 图片的高度 * 行数 + (行数 - 1) * 间隙
-        CGFloat height = imageHeigh * row + (row - 1) * imageMargin;
-        self.cellAndCollSize.cellSize = CGSizeMake(imageWidth, imageHeigh);
-        self.cellAndCollSize.collectionviewSize = CGSizeMake(width, height);
-        return self.cellAndCollSize;
-    }
-    
-    // 其他张配图
-    int col = 3;
-    float row = (count - 1) / 3 + 1;
-    // 宽度 = 图片的宽度 * 列数 + (列数 - 1) * 间隙
-    CGFloat width = imageWidth * col + (col - 1) * imageMargin;
-    // 宽度 = 图片的高度 * 行数 + (行数 - 1) * 间隙
-    CGFloat height = imageHeigh * row + (row - 1) * imageMargin;
-    self.cellAndCollSize.cellSize = CGSizeMake(imageWidth, imageHeigh);
-    self.cellAndCollSize.collectionviewSize = CGSizeMake(width, height);
-    return self.cellAndCollSize;
-
-}
-
-
 
 
 

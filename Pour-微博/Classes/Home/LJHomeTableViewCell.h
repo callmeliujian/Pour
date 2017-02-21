@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LJStatus.h"
 #import "LJStatusViewModel.h"
-#import "LJBaseTableViewCell.h"
+#import "LJPictureCollectionView.h"
 
 @interface LJHomeTableViewCell :UITableViewCell
 
@@ -49,7 +49,7 @@
 /**
  显示图片
  */
-@property (nonatomic, strong) UICollectionView *pictureCollectionnView;
+@property (nonatomic, strong) LJPictureCollectionView *pictureCollectionnView;
 
 @property (nonatomic, strong) LJStatusViewModel *viewModel;
 

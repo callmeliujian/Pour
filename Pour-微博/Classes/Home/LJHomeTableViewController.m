@@ -19,10 +19,10 @@
 #import "LJHomeForwardTableViewCell.h"
 #import "LJStatus.h"
 #import "LJRefreshControl.h"
-#import "LJBaseTableViewCell.h"
+
+#import "LJStatusListModel.h"
 
 #import "SVProgressHUD.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 
 #define iOS10 ([[UIDevice currentDevice].systemVersion intValue]>=10?YES:NO)
 
@@ -36,10 +36,6 @@
  菜单控制器
  */
 @property (nonatomic, strong)LJMenuViewController *menuVC;
-/**
- 保存所有的微博数据
- */
-@property (nonatomic, strong)NSMutableArray *statuses;
 
 @property BOOL isPresent;
 /**
@@ -50,6 +46,11 @@
  最后一条微博标记
  */
 @property (nonatomic, assign) BOOL lastStatus;
+
+/**
+ 微博数据
+ */
+@property (nonatomic, strong) LJStatusListModel *statusListModel;
 
 @end
 
@@ -87,6 +88,30 @@
 
 #pragma mark - 内部控制方法
 
+- (void)loadData {
+
+    [self.statusListModel loadData:self.lastStatus finished:^(NSMutableArray *models, NSError *error) {
+        
+        // 1.安全校验
+        if (error != nil) {
+            [SVProgressHUD showErrorWithStatus:@"获取微博数据失败"];
+            NSLog(@"----%@",error);
+            return;
+        }
+        
+        // 2.关闭菊花
+        [self.refreshControl endRefreshing];
+        
+        // 3.显示刷新提醒
+        [self showRefreshStatus:models.count];
+        
+        // 4.刷新表格
+        [self.tableView reloadData];
+        
+    }];
+    
+}
+
 /**
  刷新视图
  */
@@ -106,80 +131,7 @@
     }
     [self.navigationController.navigationBar insertSubview:self.tipLabel atIndex:0];
 }
-/**
- 调用LJNetworkTools的loadStatuses获取主页微博数据
- */
-- (void)loadData {
-    
-    /*
-     since_id false	int64 若指定此参数，则返回ID比since_id大的微博（即比since_id时间晚的微博），默认为0。
-     max_id false int64 若指定此参数，则返回ID小于或等于max_id的微博，默认为0。
-     默认情况下, 新浪返回的数据是按照微博ID从大到小得返回给我们的
-     也就意味着微博ID越大, 这条微博发布时间就越晚
-     经过分析, 如果要实现下拉刷新需要, 指定since_id为第一条微博的id
-     如果要实现上拉加载更多, 需要指定max_id为最后一条微博id-1.
-     */
-    
-    LJStatusViewModel *statusViewModel = [self.statuses firstObject];
-    NSString *since_id = statusViewModel.status.idstr;
-    if (since_id == nil) {
-        since_id = @"0";
-    }
-    NSString *max_id = @"0";
-    if (self.lastStatus) {
-        since_id = @"0";
-        LJStatusViewModel *max_id_statusViewModel = [self.statuses lastObject];
-        if (max_id_statusViewModel.status.idstr) {
-            max_id = max_id_statusViewModel.status.idstr;
-        }
-    }
-    
-    
-    
-    [[LJNetworkTools shareInstance] loadStatuses:since_id withMax_id:max_id withBlock:^(NSString *since_id, NSArray *array, NSError *error) {
-        // 1.安全校验
-        if (error != nil) {
-            [SVProgressHUD showErrorWithStatus:@"获取微博数据失败"];
-            NSLog(@"----%@",error);
-            return;
-        }
-        // 2.字典数组转化为模型数组
-        NSMutableArray *mutableArray = [[NSMutableArray alloc] init];
-        self.statuses = [[NSMutableArray alloc] init];
-        for (id dic in array) {
-            LJStatus *model = [[LJStatus alloc] init];
-            id status = [model initWithDic:dic];
-            LJStatusViewModel *viewModel = [[LJStatusViewModel alloc] initWithStatus:status];
-            [mutableArray addObject:viewModel];
-        }
-        // 3.处理微博数据
-        
-        
-        if (![since_id isEqualToString:@"0"]) {
-            NSArray *array = [NSArray arrayWithArray:mutableArray];
-            self.statuses = [mutableArray arrayByAddingObjectsFromArray:array];
-            
-        }else if (![max_id isEqualToString:@"0"]){
-            NSArray *array = [NSArray arrayWithArray:mutableArray];
-            self.statuses = [array arrayByAddingObjectsFromArray:mutableArray];
-        }
-        else {
-            self.statuses = mutableArray;
-        }
-        
-        
-        // 4.缓存微博所有配图
-        [self cachesImages:mutableArray];
-        
-        // 5.关闭菊花
-        [self.refreshControl endRefreshing];
-        
-        // 6.显示刷新提醒
-        [self showRefreshStatus:mutableArray.count];
-        
-    }];
-    
-}
+
 
 - (void)showRefreshStatus:(NSInteger)count {
     // 1.设置提醒文本
@@ -207,39 +159,7 @@
 
 }
 
-/**
- 缓存配图
 
- @param viewModels <#viewModels description#>
- */
-- (void)cachesImages:(NSArray *)viewModels {
-    // 0.创建一个组
-    dispatch_group_t group = dispatch_group_create();
-    for (LJStatusViewModel *viewModel in viewModels) {
-        
-        // 1.从模型中取出数组配图
-        if (viewModel.thumbnail_pic) {
-            // 2.遍历数组配图下载图片
-            for (NSURL*url in viewModel.thumbnail_pic) {
-                // 将当前的下载操作加入到组中
-                dispatch_group_enter(group);
-                
-                [[SDWebImageManager sharedManager] downloadImageWithURL:url options:SDWebImageRetryFailed progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-                    NSLog(@"success");
-                    dispatch_group_leave(group);
-                }];
-                
-            }
-        }
-        
-        dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-            NSLog(@"all");
-            // 保存微博数据
-            //self.statuses = viewModels;
-            [self.tableView reloadData];
-        });
-}
-}
 
 /**
  初始化导航控制器
@@ -349,13 +269,13 @@
 
 #pragma mark - Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.statuses.count;
+    return self.statusListModel.statuses.count;
     //return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // 1.获得cell
-    LJStatusViewModel *viewModel = self.statuses[indexPath.row];
+    LJStatusViewModel *viewModel = self.statusListModel.statuses[indexPath.row];
     NSString *cellID = (viewModel.status.retweeted_status != NULL)? @"forwardCell" : @"homeCell";
     UITableViewCell *cell;
     
@@ -375,7 +295,7 @@
     }
 
     
-    if (indexPath.row == self.statuses.count - 1) {
+    if (indexPath.row == self.statusListModel.statuses.count - 1) {
         NSLog(@"刷新数据");
         self.lastStatus = YES;
         [self loadData];
@@ -429,14 +349,6 @@
     
 }
 
-#pragma mark - lazy
-- (void)setStatuses:(NSMutableArray *)statuses {
-    if (_statuses != statuses && statuses.count != 0) {
-        _statuses = statuses;
-    }
-    //[self.tableView reloadData];
-}
-
 - (UILabel *)tipLabel {
     if (_tipLabel == nil) {
         _tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
@@ -447,6 +359,13 @@
         _tipLabel.hidden = YES;
     }
     return _tipLabel;
+}
+
+- (LJStatusListModel *)statusListModel {
+    if (_statusListModel == nil) {
+        _statusListModel = [[LJStatusListModel alloc] init];
+    }
+    return _statusListModel;
 }
 
 @end
