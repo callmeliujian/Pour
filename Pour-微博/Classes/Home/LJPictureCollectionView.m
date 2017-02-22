@@ -46,7 +46,7 @@
 #pragma mark - delegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     // 弹出一个控制器(图片浏览器), 告诉控制器哪些图片需要展示, 告诉控制器当前展示哪一张
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"LJShowPhotoBrowserController" object:self userInfo:@{@"bmiddle_pic":self.viewModel, @"indexPath":indexPath}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"LJShowPhotoBrowserController" object:self userInfo:@{@"bmiddle_pic":self.viewModel.bmiddle_pic, @"indexPath":indexPath}];
 }
 
 #pragma mark - dataSource

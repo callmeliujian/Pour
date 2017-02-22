@@ -22,6 +22,8 @@
 		1D74D35C1E436D3C00F808AB /* LJOAuthViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D74D35B1E436D3C00F808AB /* LJOAuthViewController.storyboard */; };
 		1D74D35F1E437B9A00F808AB /* LJNetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D74D35E1E437B9A00F808AB /* LJNetworkTools.m */; };
 		1D74D3621E448ED600F808AB /* LJUserAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D74D3611E448ED600F808AB /* LJUserAccount.m */; };
+		1D89A8031E5D8F9A0054F538 /* LJBrowserLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D89A8021E5D8F9A0054F538 /* LJBrowserLayout.m */; };
+		1D89A8061E5D9F210054F538 /* LJBrowserCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D89A8051E5D9F210054F538 /* LJBrowserCollectionViewCell.m */; };
 		1DE1FAA41E54075900F3397F /* LJHomeForwardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE1FAA31E54075900F3397F /* LJHomeForwardTableViewCell.m */; };
 		1DE1FAA81E557E5300F3397F /* LJRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE1FAA71E557E5300F3397F /* LJRefreshView.m */; };
 		1DE1FAAB1E557EA700F3397F /* LJRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE1FAAA1E557EA700F3397F /* LJRefreshControl.m */; };
@@ -95,6 +97,10 @@
 		1D74D35E1E437B9A00F808AB /* LJNetworkTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJNetworkTools.m; sourceTree = "<group>"; };
 		1D74D3601E448ED600F808AB /* LJUserAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJUserAccount.h; sourceTree = "<group>"; };
 		1D74D3611E448ED600F808AB /* LJUserAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJUserAccount.m; sourceTree = "<group>"; };
+		1D89A8011E5D8F9A0054F538 /* LJBrowserLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJBrowserLayout.h; sourceTree = "<group>"; };
+		1D89A8021E5D8F9A0054F538 /* LJBrowserLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJBrowserLayout.m; sourceTree = "<group>"; };
+		1D89A8041E5D9F210054F538 /* LJBrowserCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJBrowserCollectionViewCell.h; sourceTree = "<group>"; };
+		1D89A8051E5D9F210054F538 /* LJBrowserCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJBrowserCollectionViewCell.m; sourceTree = "<group>"; };
 		1DE1FAA21E54075900F3397F /* LJHomeForwardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJHomeForwardTableViewCell.h; sourceTree = "<group>"; };
 		1DE1FAA31E54075900F3397F /* LJHomeForwardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJHomeForwardTableViewCell.m; sourceTree = "<group>"; };
 		1DE1FAA61E557E5300F3397F /* LJRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJRefreshView.h; sourceTree = "<group>"; };
@@ -254,6 +260,10 @@
 			children = (
 				1DF14D7D1E5C5259006E3108 /* LJBrowserViewController.h */,
 				1DF14D7E1E5C5259006E3108 /* LJBrowserViewController.m */,
+				1D89A8011E5D8F9A0054F538 /* LJBrowserLayout.h */,
+				1D89A8021E5D8F9A0054F538 /* LJBrowserLayout.m */,
+				1D89A8041E5D9F210054F538 /* LJBrowserCollectionViewCell.h */,
+				1D89A8051E5D9F210054F538 /* LJBrowserCollectionViewCell.m */,
 			);
 			name = Browser;
 			sourceTree = "<group>";
@@ -674,6 +684,7 @@
 				1D2378921E4B126800ED45F6 /* LJSize.m in Sources */,
 				1DF14D7F1E5C5259006E3108 /* LJBrowserViewController.m in Sources */,
 				1D25F4371E4867D900656E43 /* LJHomeTableViewCell.m in Sources */,
+				1D89A8031E5D8F9A0054F538 /* LJBrowserLayout.m in Sources */,
 				5288B6291DED75250096AC58 /* LJDiscoverTableViewController.m in Sources */,
 				525EAEDF1DEEA391002BDD5D /* LJBaseTableViewController.m in Sources */,
 				5288B6231DED624C0096AC58 /* LJHomeTableViewController.m in Sources */,
@@ -700,6 +711,7 @@
 				1D74D35F1E437B9A00F808AB /* LJNetworkTools.m in Sources */,
 				1D25F4341E47643D00656E43 /* LJUser.m in Sources */,
 				52BF37921DFEA5170031035D /* LJPresentationManager.m in Sources */,
+				1D89A8061E5D9F210054F538 /* LJBrowserCollectionViewCell.m in Sources */,
 				1DF14D7B1E5C2E66006E3108 /* LJPictureCollectionView.m in Sources */,
 				1D74D35A1E436D2D00F808AB /* LJOAuthViewController.m in Sources */,
 				5281FA361E40CC2B00710DA1 /* LJQRCodeCreatViewController.m in Sources */,
