@@ -10,7 +10,7 @@
 
 #import <SDWebImage/UIImageView+WebCache.h>
 
-@interface LJBrowserCollectionViewCell ()
+@interface LJBrowserCollectionViewCell () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIImageView *imageView;
@@ -40,10 +40,60 @@
     
 }
 
+/**
+ 重新设置scrollView的属性
+ */
+- (void)resetView {
+    
+    self.scrollView.contentSize = CGSizeZero;
+    self.scrollView.contentInset = UIEdgeInsetsZero;
+    self.scrollView.contentOffset = CGPointZero;
+    
+    self.imageView.transform = CGAffineTransformIdentity;
+    
+}
+
+#pragma mark - scrollViewDelegate
+
+/**
+ 告诉系统缩放哪一个控件
+
+ @param scrollView <#scrollView description#>
+ @return <#return value description#>
+ */
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    return self.imageView;
+}
+
+/**
+ 缩放过程中不断调用
+
+ @param scrollView <#scrollView description#>
+ */
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+    
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat height = [UIScreen mainScreen].bounds.size.height;
+    
+    // 计算上下内边距
+    CGFloat offsetY = (height - self.imageView.frame.size.height) * 0.5;
+    // 计算左右内边距
+    CGFloat offsetX = (width - self.imageView.frame.size.width) * 0.5;
+    
+    offsetY = (offsetY < 0) ? 0 : offsetY;
+    offsetX = (offsetX < 0) ? 0 : offsetX;
+#warning 因为cell是复用的所以加载新图片的时候要重新设置scrollView 这里调用resetView函数
+    self.scrollView.contentInset = UIEdgeInsetsMake(offsetY, offsetX, offsetY, offsetX);
+    
+}
+
 #pragma mark - Lazy
 - (UIScrollView *)scrollView {
     if (_scrollView == nil) {
         _scrollView = [[UIScrollView alloc] init];
+        _scrollView.maximumZoomScale = 2.0;
+        _scrollView.minimumZoomScale = 0.5;
+        _scrollView.delegate = self;
     }
     return _scrollView;
 }
@@ -60,6 +110,9 @@
     if (_imageURL != imageURL) {
         _imageURL = imageURL;
     }
+    // 重置容器所有数据
+    [self resetView];
+    // 设置图片
     [self.imageView sd_setImageWithURL:_imageURL placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         // 图片显示不完整
         //[self.imageView sizeToFit];
