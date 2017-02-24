@@ -14,4 +14,6 @@
 @property (nonatomic, strong) LJProgressImageView *customIconImageView;
 @property (nonatomic, strong) NSURL *url;
 
+@property (nonatomic, strong) UIImageView *gifImageView;
+
 @end
