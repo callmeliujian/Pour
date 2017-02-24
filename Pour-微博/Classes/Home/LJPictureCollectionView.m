@@ -45,8 +45,22 @@
 
 #pragma mark - delegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    // 弹出一个控制器(图片浏览器), 告诉控制器哪些图片需要展示, 告诉控制器当前展示哪一张
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"LJShowPhotoBrowserController" object:self userInfo:@{@"bmiddle_pic":self.viewModel.bmiddle_pic, @"indexPath":indexPath}];
+    
+    // 1.获取当前点击图片的url
+    NSURL *url = self.viewModel.bmiddle_pic[indexPath.item];
+    // 2.取出被点击的cell
+    LJHomePictureCollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+    // 3.下载图片 设置进度
+    [[SDWebImageManager sharedManager] downloadImageWithURL:url options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+        cell.customIconImageView.progress = (CGFloat)receivedSize / (CGFloat)expectedSize;
+    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+        
+        // 弹出一个控制器(图片浏览器), 告诉控制器哪些图片需要展示, 告诉控制器当前展示哪一张
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"LJShowPhotoBrowserController" object:self userInfo:@{@"bmiddle_pic":self.viewModel.bmiddle_pic, @"indexPath":indexPath}];
+        
+    }];
+    
+    
 }
 
 #pragma mark - dataSource

@@ -26,7 +26,7 @@
 
 - (UIImageView *)customIconImageView {
     if (_customIconImageView == nil) {
-        _customIconImageView = [[UIImageView alloc] init];
+        _customIconImageView = [[LJProgressImageView alloc] init];
         _customIconImageView.contentMode = UIViewContentModeScaleAspectFit;
         _customIconImageView.clipsToBounds = YES;
     }

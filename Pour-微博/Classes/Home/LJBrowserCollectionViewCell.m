@@ -15,6 +15,11 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIImageView *imageView;
 
+/**
+ 图片下载提示视图
+ */
+@property (nonatomic, strong) UIActivityIndicatorView *indicatorView;
+
 @end
 
 @implementation LJBrowserCollectionViewCell
@@ -33,10 +38,12 @@
     // 1.添加子控件
     [self.contentView addSubview:self.scrollView];
     [self.scrollView addSubview:self.imageView];
+    [self.contentView addSubview:self.indicatorView];
     
     // 2.布局子控件
     self.scrollView.frame = [UIScreen mainScreen].bounds;
     self.scrollView.backgroundColor = [UIColor darkGrayColor];
+    self.indicatorView.center = self.contentView.center;
     
 }
 
@@ -105,17 +112,30 @@
     return _imageView;
 }
 
+- (UIActivityIndicatorView *)indicatorView {
+    if (_indicatorView == nil) {
+        _indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    }
+    return _indicatorView;
+}
+
 #pragma mark - set
 - (void)setImageURL:(NSURL *)imageURL {
     if (_imageURL != imageURL) {
         _imageURL = imageURL;
     }
+    // 显示菊花提醒
+    [self.indicatorView startAnimating];
+    
     // 重置容器所有数据
     [self resetView];
     // 设置图片
     [self.imageView sd_setImageWithURL:_imageURL placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         // 图片显示不完整
         //[self.imageView sizeToFit];
+        
+        // 关闭菊花提醒
+        [self.indicatorView stopAnimating];
         
         // 1.计算当前图片的宽高比
         CGFloat scale = image.size.height / image.size.width;

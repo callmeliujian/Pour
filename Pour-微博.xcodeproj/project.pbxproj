@@ -18,6 +18,8 @@
 		1D25F4341E47643D00656E43 /* LJUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D25F4331E47643D00656E43 /* LJUser.m */; };
 		1D25F4371E4867D900656E43 /* LJHomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D25F4361E4867D900656E43 /* LJHomeTableViewCell.m */; };
 		1D25F43B1E4A067200656E43 /* LJStatusViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D25F43A1E4A067200656E43 /* LJStatusViewModel.m */; };
+		1D66EC141E5FDCDA009F4F10 /* LJProgressImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D66EC111E5FDCDA009F4F10 /* LJProgressImageView.m */; };
+		1D66EC151E5FDCDA009F4F10 /* LJProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D66EC131E5FDCDA009F4F10 /* LJProgressView.m */; };
 		1D74D35A1E436D2D00F808AB /* LJOAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D74D3591E436D2D00F808AB /* LJOAuthViewController.m */; };
 		1D74D35C1E436D3C00F808AB /* LJOAuthViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D74D35B1E436D3C00F808AB /* LJOAuthViewController.storyboard */; };
 		1D74D35F1E437B9A00F808AB /* LJNetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D74D35E1E437B9A00F808AB /* LJNetworkTools.m */; };
@@ -90,6 +92,10 @@
 		1D25F4361E4867D900656E43 /* LJHomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJHomeTableViewCell.m; sourceTree = "<group>"; };
 		1D25F4391E4A067200656E43 /* LJStatusViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJStatusViewModel.h; sourceTree = "<group>"; };
 		1D25F43A1E4A067200656E43 /* LJStatusViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJStatusViewModel.m; sourceTree = "<group>"; };
+		1D66EC101E5FDCDA009F4F10 /* LJProgressImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJProgressImageView.h; sourceTree = "<group>"; };
+		1D66EC111E5FDCDA009F4F10 /* LJProgressImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJProgressImageView.m; sourceTree = "<group>"; };
+		1D66EC121E5FDCDA009F4F10 /* LJProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJProgressView.h; sourceTree = "<group>"; };
+		1D66EC131E5FDCDA009F4F10 /* LJProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJProgressView.m; sourceTree = "<group>"; };
 		1D74D3581E436D2D00F808AB /* LJOAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJOAuthViewController.h; sourceTree = "<group>"; };
 		1D74D3591E436D2D00F808AB /* LJOAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJOAuthViewController.m; sourceTree = "<group>"; };
 		1D74D35B1E436D3C00F808AB /* LJOAuthViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LJOAuthViewController.storyboard; sourceTree = "<group>"; };
@@ -232,6 +238,28 @@
 			name = view;
 			sourceTree = "<group>";
 		};
+		1D66EC0F1E5FDCAC009F4F10 /* ProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				1D66EC101E5FDCDA009F4F10 /* LJProgressImageView.h */,
+				1D66EC111E5FDCDA009F4F10 /* LJProgressImageView.m */,
+				1D66EC121E5FDCDA009F4F10 /* LJProgressView.h */,
+				1D66EC131E5FDCDA009F4F10 /* LJProgressView.m */,
+			);
+			name = ProgressView;
+			sourceTree = "<group>";
+		};
+		1D66EC161E5FDFD7009F4F10 /* viewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1D25F4391E4A067200656E43 /* LJStatusViewModel.h */,
+				1D25F43A1E4A067200656E43 /* LJStatusViewModel.m */,
+				1DF14D761E5C2464006E3108 /* LJStatusListModel.h */,
+				1DF14D771E5C2464006E3108 /* LJStatusListModel.m */,
+			);
+			name = viewModel;
+			sourceTree = "<group>";
+		};
 		1D74D3571E436CFA00F808AB /* OAuth */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,10 +335,6 @@
 				1D25F42E1E47590200656E43 /* Model */,
 				5281FA011E37815C00710DA1 /* QRCode */,
 				52EFF02A1DFE53CC00474BAB /* Popover */,
-				1D25F4391E4A067200656E43 /* LJStatusViewModel.h */,
-				1D25F43A1E4A067200656E43 /* LJStatusViewModel.m */,
-				1DF14D761E5C2464006E3108 /* LJStatusListModel.h */,
-				1DF14D771E5C2464006E3108 /* LJStatusListModel.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -345,6 +369,7 @@
 		521509311DED5ABB000C71E7 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				1D66EC0F1E5FDCAC009F4F10 /* ProgressView */,
 				525662231DF15AB000B4C25B /* UIBarButtonItem+LJ.h */,
 				525662241DF15AB000B4C25B /* UIBarButtonItem+LJ.m */,
 				525662261DF165E100B4C25B /* LJButton.h */,
@@ -468,6 +493,7 @@
 		52EFF02A1DFE53CC00474BAB /* Popover */ = {
 			isa = PBXGroup;
 			children = (
+				1D66EC161E5FDFD7009F4F10 /* viewModel */,
 				1DF14D7C1E5C5233006E3108 /* Browser */,
 				1D25F4381E486D1600656E43 /* view */,
 				52BF37891DFE6DF80031035D /* Controller */,
@@ -701,6 +727,7 @@
 				1D25F4251E45B79800656E43 /* LJNewFeatureViewController.m in Sources */,
 				5273254B1DED591400E6D755 /* AppDelegate.m in Sources */,
 				521509341DED5C64000C71E7 /* LJMainViewController.m in Sources */,
+				1D66EC151E5FDCDA009F4F10 /* LJProgressView.m in Sources */,
 				1DE1FAAB1E557EA700F3397F /* LJRefreshControl.m in Sources */,
 				525662251DF15AB000B4C25B /* UIBarButtonItem+LJ.m in Sources */,
 				525EAEE41DEEA756002BDD5D /* LJVisitorView.m in Sources */,
@@ -715,6 +742,7 @@
 				1DF14D7B1E5C2E66006E3108 /* LJPictureCollectionView.m in Sources */,
 				1D74D35A1E436D2D00F808AB /* LJOAuthViewController.m in Sources */,
 				5281FA361E40CC2B00710DA1 /* LJQRCodeCreatViewController.m in Sources */,
+				1D66EC141E5FDCDA009F4F10 /* LJProgressImageView.m in Sources */,
 				525662281DF165E100B4C25B /* LJButton.m in Sources */,
 				527325481DED591400E6D755 /* main.m in Sources */,
 			);

@@ -23,6 +23,7 @@
  */
 @property (nonatomic, strong) NSIndexPath *indexPath;
 
+
 @property (nonatomic, strong) UICollectionView *collectView;
 /**
  关闭按钮

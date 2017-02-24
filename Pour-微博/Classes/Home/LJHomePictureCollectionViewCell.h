@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LJProgressImageView.h"
 
 @interface LJHomePictureCollectionViewCell : UICollectionViewCell
 
-@property (nonatomic, strong) UIImageView *customIconImageView;
+@property (nonatomic, strong) LJProgressImageView *customIconImageView;
 @property (nonatomic, strong) NSURL *url;
 
 @end
