@@ -11,6 +11,7 @@
 #import "LJBrowserCollectionViewCell.h"
 
 #import <Masonry.h>
+#import "SVProgressHUD.h"
 
 @interface LJBrowserViewController () <UICollectionViewDataSource>
 
@@ -95,6 +96,30 @@
 }
 
 - (void)saveBtnClicked {
+    // 1.获取当前显示图片的索引
+    NSIndexPath *indexPath = [[self.collectView indexPathsForVisibleItems] lastObject];
+    // 2.获取当前显示的cell
+    LJBrowserCollectionViewCell *cell = [self.collectView cellForItemAtIndexPath:indexPath];
+    // 3.获取当前显示的图片
+    UIImage *image = cell.imageView.image;
+    // 4.保存图片
+    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    
+}
+
+/**
+ 保存图片之后的函数回调
+
+ @param image <#image description#>
+ @param error <#error description#>
+ @param contextInfo <#contextInfo description#>
+ */
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    if (error != nil) {
+        [SVProgressHUD showErrorWithStatus:@"保存图片失败"];
+        return;
+    }
+    [SVProgressHUD showSuccessWithStatus:@"保存图片成功"];
     
 }
 

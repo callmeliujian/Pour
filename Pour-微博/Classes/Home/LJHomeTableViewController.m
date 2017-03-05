@@ -21,6 +21,7 @@
 #import "LJRefreshControl.h"
 #import "LJStatusListModel.h"
 #import "LJBrowserViewController.h"
+#import "LJBrowserPresentationController.h"
 
 #import "SVProgressHUD.h"
 
@@ -51,6 +52,8 @@
  微博数据
  */
 @property (nonatomic, strong) LJStatusListModel *statusListModel;
+
+@property (nonatomic, strong) LJBrowserPresentationController *browserPresentionManager;
 
 @end
 
@@ -112,8 +115,15 @@
         return;
     }
     
+#warning todo
+    
     // 弹出图片浏览器，将所有图片和当前点击的索引传递给浏览器
     LJBrowserViewController *browserVC = [[LJBrowserViewController alloc] initWithArray:notice.userInfo[@"bmiddle_pic"] withIndexPath:notice.userInfo[@"indexPath"]];
+    // 设置转场动画代理
+    browserVC.transitioningDelegate = self.browserPresentionManager;
+    // 设置转场动画样式
+    browserVC.modalPresentationStyle = UIModalPresentationCustom;
+    [self.browserPresentionManager setDefaultInfo:notice.userInfo[@"indexPath"] withDelegate:notice.object];
     [self presentViewController:browserVC animated:true completion:nil];
     
 }
@@ -396,6 +406,13 @@
         _statusListModel = [[LJStatusListModel alloc] init];
     }
     return _statusListModel;
+}
+
+- (LJBrowserPresentationController *)browserPresentionManager {
+    if (_browserPresentionManager == nil) {
+        _browserPresentionManager = [[LJBrowserPresentationController alloc] initWithPresentedViewController:nil presentingViewController:nil];
+    }
+    return _browserPresentionManager;
 }
 
 @end

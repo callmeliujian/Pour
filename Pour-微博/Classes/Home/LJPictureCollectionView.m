@@ -8,11 +8,12 @@
 
 #import "LJPictureCollectionView.h"
 #import "LJHomePictureCollectionViewCell.h"
+#import "LJBrowserPresentationController.h"
 
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "Masonry.h"
 
-@interface LJPictureCollectionView ()<UICollectionViewDataSource, UICollectionViewDelegate>
+@interface LJPictureCollectionView ()<UICollectionViewDataSource, UICollectionViewDelegate,LJBrowserPresentationDelegate>
 
 @property (nonatomic, strong) UICollectionViewFlowLayout *layout;
 /**
@@ -40,6 +41,71 @@
     self.delegate = self;
     
     return self;
+    
+}
+
+#pragma mark - LJBrowserPresentationDelegate
+- (UIImageView *)browserPresentationWillShowImageView:(LJBrowserPresentationController *)browserPresenationController withIndexPath:(NSIndexPath *)indexPath {
+    // 1.创建一个新的UIImageView
+    UIImageView *imageView = [[UIImageView alloc] init];
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    imageView.clipsToBounds = true;
+    
+    // 2.设置UIImageView的图片为点击图片
+    LJHomePictureCollectionViewCell *cell = [self cellForItemAtIndexPath:indexPath];
+    imageView.image = cell.customIconImageView.image;
+#warning todo
+//    NSString *key = [self.viewModel.bmiddle_pic[indexPath.item] absoluteString];
+//    UIImage *image = [[[SDWebImageManager sharedManager] imageCache] imageFromDiskCacheForKey:key];
+//    imageView.image = image;
+    
+    [imageView sizeToFit];
+    // 3.返回图片
+    return imageView;
+}
+
+/**
+ 用于获取点击图片相对于windows的frame
+
+ @param browserPresenationController <#browserPresenationController description#>
+ @param indexpath <#indexpath description#>
+ @return <#return value description#>
+ */
+- (CGRect)browserPresentationWillFromFrame:(LJBrowserPresentationController *)browserPresenationController withIndexPath:(NSIndexPath *)indexpath {
+    // 1.拿到被点击的cell
+    LJHomePictureCollectionViewCell *cell = [self cellForItemAtIndexPath:indexpath];
+    // 2.将被点击的cell的坐标系从collectionview转换到keywindow
+    CGRect frame = [self convertRect:cell.frame toCoordinateSpace:[UIApplication sharedApplication].keyWindow];
+    return frame;
+}
+
+/**
+ 获取点击图片最终的frame
+
+ @param browserPresenationController <#browserPresenationController description#>
+ @param indexpath <#indexpath description#>
+ @return <#return value description#>
+ */
+- (CGRect)browserPresentationWillToFrame:(LJBrowserPresentationController *)browserPresenationController withIndexPath:(NSIndexPath *)indexpath {
+    
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat height = [UIScreen mainScreen].bounds.size.width;
+    
+    // 1.拿到被点击的cell
+    LJHomePictureCollectionViewCell *cell = [self cellForItemAtIndexPath:indexpath];
+    // 2.拿到被点击的图片
+    UIImage *image = cell.customIconImageView.image;
+    // 3.计算图片宽高比
+    CGFloat scale = image.size.height / image.size.width;
+    // 4.利用宽高比乘以屏幕宽度，等比缩放图片
+    CGFloat imageHeight = scale * width;
+    
+    CGFloat offsetY = 0;
+    
+    if (imageHeight < height)
+        offsetY = (height - imageHeight) * 0.5;
+    
+    return CGRectMake(0, offsetY, width, imageHeight);
     
 }
 

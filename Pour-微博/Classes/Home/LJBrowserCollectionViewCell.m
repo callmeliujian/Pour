@@ -13,7 +13,7 @@
 @interface LJBrowserCollectionViewCell () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
-@property (nonatomic, strong) UIImageView *imageView;
+
 
 /**
  图片下载提示视图

@@ -18,6 +18,7 @@
 		1D25F4341E47643D00656E43 /* LJUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D25F4331E47643D00656E43 /* LJUser.m */; };
 		1D25F4371E4867D900656E43 /* LJHomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D25F4361E4867D900656E43 /* LJHomeTableViewCell.m */; };
 		1D25F43B1E4A067200656E43 /* LJStatusViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D25F43A1E4A067200656E43 /* LJStatusViewModel.m */; };
+		1D5038A81E643E770064EB1B /* LJBrowserPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5038A71E643E770064EB1B /* LJBrowserPresentationController.m */; };
 		1D66EC141E5FDCDA009F4F10 /* LJProgressImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D66EC111E5FDCDA009F4F10 /* LJProgressImageView.m */; };
 		1D66EC151E5FDCDA009F4F10 /* LJProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D66EC131E5FDCDA009F4F10 /* LJProgressView.m */; };
 		1D74D35A1E436D2D00F808AB /* LJOAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D74D3591E436D2D00F808AB /* LJOAuthViewController.m */; };
@@ -92,6 +93,8 @@
 		1D25F4361E4867D900656E43 /* LJHomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJHomeTableViewCell.m; sourceTree = "<group>"; };
 		1D25F4391E4A067200656E43 /* LJStatusViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJStatusViewModel.h; sourceTree = "<group>"; };
 		1D25F43A1E4A067200656E43 /* LJStatusViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJStatusViewModel.m; sourceTree = "<group>"; };
+		1D5038A61E643E770064EB1B /* LJBrowserPresentationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJBrowserPresentationController.h; sourceTree = "<group>"; };
+		1D5038A71E643E770064EB1B /* LJBrowserPresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJBrowserPresentationController.m; sourceTree = "<group>"; };
 		1D66EC101E5FDCDA009F4F10 /* LJProgressImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJProgressImageView.h; sourceTree = "<group>"; };
 		1D66EC111E5FDCDA009F4F10 /* LJProgressImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJProgressImageView.m; sourceTree = "<group>"; };
 		1D66EC121E5FDCDA009F4F10 /* LJProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJProgressView.h; sourceTree = "<group>"; };
@@ -292,6 +295,8 @@
 				1D89A8021E5D8F9A0054F538 /* LJBrowserLayout.m */,
 				1D89A8041E5D9F210054F538 /* LJBrowserCollectionViewCell.h */,
 				1D89A8051E5D9F210054F538 /* LJBrowserCollectionViewCell.m */,
+				1D5038A61E643E770064EB1B /* LJBrowserPresentationController.h */,
+				1D5038A71E643E770064EB1B /* LJBrowserPresentationController.m */,
 			);
 			name = Browser;
 			sourceTree = "<group>";
@@ -708,6 +713,7 @@
 			files = (
 				1DE1FAA41E54075900F3397F /* LJHomeForwardTableViewCell.m in Sources */,
 				1D2378921E4B126800ED45F6 /* LJSize.m in Sources */,
+				1D5038A81E643E770064EB1B /* LJBrowserPresentationController.m in Sources */,
 				1DF14D7F1E5C5259006E3108 /* LJBrowserViewController.m in Sources */,
 				1D25F4371E4867D900656E43 /* LJHomeTableViewCell.m in Sources */,
 				1D89A8031E5D8F9A0054F538 /* LJBrowserLayout.m in Sources */,

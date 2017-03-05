@@ -11,5 +11,6 @@
 @interface LJBrowserCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, strong) NSURL *imageURL;
+@property (nonatomic, strong) UIImageView *imageView;
 
 @end
