@@ -34,6 +34,10 @@
 		1DF14D781E5C2464006E3108 /* LJStatusListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF14D771E5C2464006E3108 /* LJStatusListModel.m */; };
 		1DF14D7B1E5C2E66006E3108 /* LJPictureCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF14D7A1E5C2E66006E3108 /* LJPictureCollectionView.m */; };
 		1DF14D7F1E5C5259006E3108 /* LJBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF14D7E1E5C5259006E3108 /* LJBrowserViewController.m */; };
+		1DF431B01E6C09E00054D50F /* Compose.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DF431AF1E6C09E00054D50F /* Compose.storyboard */; };
+		1DF431B31E6C0BA70054D50F /* LJComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF431B21E6C0BA70054D50F /* LJComposeViewController.m */; };
+		1DF431B61E6C13620054D50F /* LJTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF431B51E6C13620054D50F /* LJTitleView.m */; };
+		1DF431B91E6C1C4E0054D50F /* LJTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF431B81E6C1C4E0054D50F /* LJTextView.m */; };
 		521509341DED5C64000C71E7 /* LJMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 521509331DED5C64000C71E7 /* LJMainViewController.m */; };
 		525662251DF15AB000B4C25B /* UIBarButtonItem+LJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 525662241DF15AB000B4C25B /* UIBarButtonItem+LJ.m */; };
 		525662281DF165E100B4C25B /* LJButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 525662271DF165E100B4C25B /* LJButton.m */; };
@@ -124,6 +128,13 @@
 		1DF14D7A1E5C2E66006E3108 /* LJPictureCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJPictureCollectionView.m; sourceTree = "<group>"; };
 		1DF14D7D1E5C5259006E3108 /* LJBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJBrowserViewController.h; sourceTree = "<group>"; };
 		1DF14D7E1E5C5259006E3108 /* LJBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJBrowserViewController.m; sourceTree = "<group>"; };
+		1DF431AF1E6C09E00054D50F /* Compose.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Compose.storyboard; sourceTree = "<group>"; };
+		1DF431B11E6C0BA70054D50F /* LJComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJComposeViewController.h; sourceTree = "<group>"; };
+		1DF431B21E6C0BA70054D50F /* LJComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJComposeViewController.m; sourceTree = "<group>"; };
+		1DF431B41E6C13620054D50F /* LJTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJTitleView.h; sourceTree = "<group>"; };
+		1DF431B51E6C13620054D50F /* LJTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJTitleView.m; sourceTree = "<group>"; };
+		1DF431B71E6C1C4E0054D50F /* LJTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJTextView.h; sourceTree = "<group>"; };
+		1DF431B81E6C1C4E0054D50F /* LJTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJTextView.m; sourceTree = "<group>"; };
 		521509321DED5C64000C71E7 /* LJMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJMainViewController.h; sourceTree = "<group>"; };
 		521509331DED5C64000C71E7 /* LJMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJMainViewController.m; sourceTree = "<group>"; };
 		525662231DF15AB000B4C25B /* UIBarButtonItem+LJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+LJ.h"; sourceTree = "<group>"; };
@@ -320,6 +331,13 @@
 		5215092B1DED5ABB000C71E7 /* Compose */ = {
 			isa = PBXGroup;
 			children = (
+				1DF431AF1E6C09E00054D50F /* Compose.storyboard */,
+				1DF431B11E6C0BA70054D50F /* LJComposeViewController.h */,
+				1DF431B21E6C0BA70054D50F /* LJComposeViewController.m */,
+				1DF431B41E6C13620054D50F /* LJTitleView.h */,
+				1DF431B51E6C13620054D50F /* LJTitleView.m */,
+				1DF431B71E6C1C4E0054D50F /* LJTextView.h */,
+				1DF431B81E6C1C4E0054D50F /* LJTextView.m */,
 			);
 			path = Compose;
 			sourceTree = "<group>";
@@ -635,6 +653,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5281FA031E3781BC00710DA1 /* LJQRCode.storyboard in Resources */,
+				1DF431B01E6C09E00054D50F /* Compose.storyboard in Resources */,
 				527325531DED591400E6D755 /* Assets.xcassets in Resources */,
 				1D25F4221E45AAB100656E43 /* LJWelcomeViewController.storyboard in Resources */,
 				1D25F4271E45B7A400656E43 /* LJNewFeatureViewController.storyboard in Resources */,
@@ -720,6 +739,7 @@
 				5288B6291DED75250096AC58 /* LJDiscoverTableViewController.m in Sources */,
 				525EAEDF1DEEA391002BDD5D /* LJBaseTableViewController.m in Sources */,
 				5288B6231DED624C0096AC58 /* LJHomeTableViewController.m in Sources */,
+				1DF431B31E6C0BA70054D50F /* LJComposeViewController.m in Sources */,
 				1D25F4201E45AAA500656E43 /* LJWelcomeViewController.m in Sources */,
 				1DE1FAA81E557E5300F3397F /* LJRefreshView.m in Sources */,
 				52BF378C1DFE70250031035D /* LJPresentationController.m in Sources */,
@@ -739,6 +759,7 @@
 				525EAEE41DEEA756002BDD5D /* LJVisitorView.m in Sources */,
 				1D25F4311E47591D00656E43 /* LJStatus.m in Sources */,
 				5288B62F1DEDB50C0096AC58 /* LJNullTableViewController.m in Sources */,
+				1DF431B91E6C1C4E0054D50F /* LJTextView.m in Sources */,
 				1D25F42A1E45CC2D00656E43 /* LJNewfeatuereCell.m in Sources */,
 				1DF14D781E5C2464006E3108 /* LJStatusListModel.m in Sources */,
 				1D74D35F1E437B9A00F808AB /* LJNetworkTools.m in Sources */,
@@ -749,6 +770,7 @@
 				1D74D35A1E436D2D00F808AB /* LJOAuthViewController.m in Sources */,
 				5281FA361E40CC2B00710DA1 /* LJQRCodeCreatViewController.m in Sources */,
 				1D66EC141E5FDCDA009F4F10 /* LJProgressImageView.m in Sources */,
+				1DF431B61E6C13620054D50F /* LJTitleView.m in Sources */,
 				525662281DF165E100B4C25B /* LJButton.m in Sources */,
 				527325481DED591400E6D755 /* main.m in Sources */,
 			);

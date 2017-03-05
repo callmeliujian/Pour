@@ -12,6 +12,7 @@
 #import "LJDiscoverTableViewController.h"
 #import "LJProfileTableViewController.h"
 #import "LJNullTableViewController.h"
+#import "LJComposeViewController.h"
 
 @interface LJMainViewController ()
 
@@ -99,7 +100,9 @@
 //微博发送按钮被点击时调用的函数
 - (void)composeBtnClicked
 {
-    NSLog(@"---------");
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Compose" bundle:nil];
+    LJComposeViewController *vc = [sb instantiateInitialViewController];
+    [self presentViewController:vc animated:true completion:nil];
 }
 
 @end

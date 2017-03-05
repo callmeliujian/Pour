@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="SaA-D9-1E7">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="rw6-r2-TD5">
+            <objects>
+                <navigationController id="SaA-D9-1E7" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="g3S-cU-IUo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="qkJ-fh-Mtk" kind="relationship" relationship="rootViewController" id="jbF-uH-Ryi"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eYW-xm-6iz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1461" y="-142"/>
+        </scene>
+        <!--Compose View Controller-->
+        <scene sceneID="RNN-Qu-Eg6">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="qkJ-fh-Mtk" customClass="LJComposeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7vP-RZ-crw"/>
+                        <viewControllerLayoutGuide type="bottom" id="CfE-0k-eaN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ELn-C1-iuq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Wkn-YQ-Rd3" customClass="LJTextView">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Wkn-YQ-Rd3" firstAttribute="top" secondItem="7vP-RZ-crw" secondAttribute="bottom" id="5ZX-Z8-rxB"/>
+                            <constraint firstAttribute="trailing" secondItem="Wkn-YQ-Rd3" secondAttribute="trailing" id="Cbw-8E-BCE"/>
+                            <constraint firstItem="CfE-0k-eaN" firstAttribute="top" secondItem="Wkn-YQ-Rd3" secondAttribute="bottom" id="oU4-pi-gtr"/>
+                            <constraint firstItem="Wkn-YQ-Rd3" firstAttribute="leading" secondItem="ELn-C1-iuq" secondAttribute="leading" id="oZ6-rW-hvd"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="5lF-cg-DA6">
+                        <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" title="关闭" id="XSu-vD-Sc5">
+                            <connections>
+                                <action selector="closeBtnClicked:" destination="qkJ-fh-Mtk" id="Cxp-Yq-9E9"/>
+                            </connections>
+                        </barButtonItem>
+                        <view key="titleView" contentMode="scaleToFill" id="F93-CL-65d" customClass="LJTitleView">
+                            <rect key="frame" x="113" y="6" width="150" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.97636479139328003" green="0.97653168439865112" blue="0.97635418176651001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </view>
+                        <barButtonItem key="rightBarButtonItem" title="发送" id="NWv-Of-zdh">
+                            <connections>
+                                <action selector="sendBtnClicked:" destination="qkJ-fh-Mtk" id="IKf-gl-wHd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mio-HC-2AV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-649" y="-143"/>
+        </scene>
+    </scenes>
+</document>
