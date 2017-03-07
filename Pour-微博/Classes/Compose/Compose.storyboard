@@ -42,6 +42,9 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="qkJ-fh-Mtk" id="uq7-V4-r7k"/>
+                                </connections>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -60,16 +63,21 @@
                             </connections>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="F93-CL-65d" customClass="LJTitleView">
-                            <rect key="frame" x="113" y="6" width="150" height="33"/>
+                            <rect key="frame" x="112.5" y="5.5" width="150" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.97636479139328003" green="0.97653168439865112" blue="0.97635418176651001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
-                        <barButtonItem key="rightBarButtonItem" title="发送" id="NWv-Of-zdh">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="发送" id="NWv-Of-zdh">
                             <connections>
                                 <action selector="sendBtnClicked:" destination="qkJ-fh-Mtk" id="IKf-gl-wHd"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="closeItem" destination="XSu-vD-Sc5" id="3kf-bn-Mfc"/>
+                        <outlet property="customTextView" destination="Wkn-YQ-Rd3" id="CIs-nL-FIL"/>
+                        <outlet property="sendItem" destination="NWv-Of-zdh" id="b4p-Og-z9n"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mio-HC-2AV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

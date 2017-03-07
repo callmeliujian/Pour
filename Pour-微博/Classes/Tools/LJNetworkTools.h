@@ -15,4 +15,6 @@
 //- (void)loadStatuses:(void(^)(NSString *, NSArray *arry,NSError *error))block;
 //- (void)loadStatuses:(NSString *)since_id withBlock:(void (^)(NSString *, NSArray *, NSError *))block;
 - (void)loadStatuses:(NSString *)since_id withMax_id:(NSString *)max_id withBlock:(void (^)(NSString *, NSArray *, NSError *))block;
+
+- (void)sendStatuses:(NSString *)string withBlock:(void(^)(id, NSError *))block;
 @end

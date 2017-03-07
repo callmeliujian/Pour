@@ -47,4 +47,20 @@
     
 }
 
+/**
+ 发送微博调用函数
+
+ @param string <#string description#>
+ @param block <#block description#>
+ */
+- (void)sendStatuses:(NSString *)string withBlock:(void(^)(id, NSError *))block {
+    NSString *path = @"2/statuses/update.json";
+    NSDictionary *parameters = @{@"access_token": [LJUserAccount loadUserAccout].access_token, @"status": string};
+    [self POST:path parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        block(responseObject,nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(nil, error);
+    }];
+}
+
 @end
