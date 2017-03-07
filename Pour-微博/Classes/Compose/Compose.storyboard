@@ -46,11 +46,38 @@
                                     <outlet property="delegate" destination="qkJ-fh-Mtk" id="uq7-V4-r7k"/>
                                 </connections>
                             </textView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RBM-KL-QjW">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="r8M-0Z-H16"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Hsk-Fi-XPk"/>
+                                    <barButtonItem image="compose_toolbar_picture" id="Dbh-3b-QQM"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="oN7-15-Nh8"/>
+                                    <barButtonItem image="compose_mentionbutton_background" id="yn9-wh-hoS"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="wru-Dk-ToE"/>
+                                    <barButtonItem image="compose_trendbutton_background" id="rc0-1D-oLK"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="ofE-Nd-gs2"/>
+                                    <barButtonItem image="compose_emoticonbutton_background" id="c6t-ib-oYh">
+                                        <connections>
+                                            <action selector="emoticonBtnClick:" destination="qkJ-fh-Mtk" id="Um3-iY-mfe"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="QEX-se-gCG"/>
+                                    <barButtonItem image="compose_addbutton_background" id="tqF-Sq-tCe"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="sNR-Lw-kSa"/>
+                                </items>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="CfE-0k-eaN" firstAttribute="top" secondItem="RBM-KL-QjW" secondAttribute="bottom" id="2mK-uP-FE1"/>
                             <constraint firstItem="Wkn-YQ-Rd3" firstAttribute="top" secondItem="7vP-RZ-crw" secondAttribute="bottom" id="5ZX-Z8-rxB"/>
                             <constraint firstAttribute="trailing" secondItem="Wkn-YQ-Rd3" secondAttribute="trailing" id="Cbw-8E-BCE"/>
+                            <constraint firstItem="RBM-KL-QjW" firstAttribute="leading" secondItem="ELn-C1-iuq" secondAttribute="leading" id="OnP-3v-muf"/>
+                            <constraint firstAttribute="trailing" secondItem="RBM-KL-QjW" secondAttribute="trailing" id="U9s-P4-CHO"/>
                             <constraint firstItem="CfE-0k-eaN" firstAttribute="top" secondItem="Wkn-YQ-Rd3" secondAttribute="bottom" id="oU4-pi-gtr"/>
                             <constraint firstItem="Wkn-YQ-Rd3" firstAttribute="leading" secondItem="ELn-C1-iuq" secondAttribute="leading" id="oZ6-rW-hvd"/>
                         </constraints>
@@ -63,7 +90,7 @@
                             </connections>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="F93-CL-65d" customClass="LJTitleView">
-                            <rect key="frame" x="112.5" y="5.5" width="150" height="33"/>
+                            <rect key="frame" x="113" y="6" width="150" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.97636479139328003" green="0.97653168439865112" blue="0.97635418176651001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
@@ -77,6 +104,7 @@
                         <outlet property="closeItem" destination="XSu-vD-Sc5" id="3kf-bn-Mfc"/>
                         <outlet property="customTextView" destination="Wkn-YQ-Rd3" id="CIs-nL-FIL"/>
                         <outlet property="sendItem" destination="NWv-Of-zdh" id="b4p-Og-z9n"/>
+                        <outlet property="toolbarBottomCons" destination="2mK-uP-FE1" id="QDD-n9-fuO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mio-HC-2AV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -84,4 +112,11 @@
             <point key="canvasLocation" x="-649" y="-143"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="compose_addbutton_background" width="24" height="24"/>
+        <image name="compose_emoticonbutton_background" width="24" height="24"/>
+        <image name="compose_mentionbutton_background" width="24" height="24"/>
+        <image name="compose_toolbar_picture" width="24" height="24"/>
+        <image name="compose_trendbutton_background" width="24" height="24"/>
+    </resources>
 </document>

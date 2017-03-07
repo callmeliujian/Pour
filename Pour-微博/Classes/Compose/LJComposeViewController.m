@@ -27,6 +27,8 @@
  */
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sendItem;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomCons;
+- (IBAction)emoticonBtnClick:(id)sender;
 
 @end
 
@@ -36,10 +38,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // 发送键盘更改通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+//- (void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:animated];
+//    // 弹出键盘 弹出键盘有bug
+//    [self.customTextView becomeFirstResponder];
+//}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     // 弹出键盘
     [self.customTextView becomeFirstResponder];
 }
@@ -50,7 +61,42 @@
     [self.customTextView resignFirstResponder];
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - PrivateMethod
+
+/**
+ 更改键盘通知调用的函数
+ 
+  弹出: UIKeyboardFrameEndUserInfoKey = "NSRect: {{0, 409}, {375, 258}}";
+  关闭: UIKeyboardFrameEndUserInfoKey = "NSRect: {{0, 667}, {375, 258}}";
+ 
+  弹出: 250 关闭 0
+  屏幕的高度 - 键盘的y值
+  667 - 409 = 258
+  667 - 667 = 0
+
+ @param notice <#notice description#>
+ */
+- (void)keyboardWillChange:(NSNotification *)notice {
+    // 1.获取键盘frame
+    CGRect rect = [notice.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    // 2.获取屏幕高度
+    CGFloat height = [UIScreen mainScreen].bounds.size.height;
+    // 3.计算需要移动的距离
+    CGFloat offsetY = height - rect.origin.y;
+    // 4.修改底部工具条约束
+    self.toolbarBottomCons.constant = offsetY;
+    [UIView animateWithDuration:0.25 animations:^{
+        [self.view layoutIfNeeded];
+    }];
+    
+   // NSLog(@"%@",notice);
+    
+}
+
 - (IBAction)closeBtnClicked:(id)sender {
     [self dismissViewControllerAnimated:true completion:nil];
 }
@@ -73,9 +119,39 @@
     }];
 }
 
+/**
+ 切换键盘
+ 
+ 如果是系统默认的键盘inputView = nil
+ 如果不是系统自带的键盘, 那么inputView != nil
+ 注意点: 要想切换切换, 必须先关闭键盘, 切换之后再打开
+
+ @param sender <#sender description#>
+ */
+- (IBAction)emoticonBtnClick:(id)sender {
+    // 关闭键盘
+    [self.customTextView resignFirstResponder];
+    
+    // 1.判断inputView是否为nil
+    if (self.customTextView.inputView != nil) {
+        // 切换为系统键盘
+        self.customTextView.inputView = nil;
+    } else {
+        //  切换为自定义键盘
+        self.customTextView.inputView = [[UISwitch alloc] init];
+    }
+    
+    // 重新打开键盘
+    [self.customTextView becomeFirstResponder];
+}
+
 #pragma mark - UITextViewDelegate
 - (void)textViewDidChange:(UITextView *)textView {
     self.sendItem.enabled = textView.hasText;
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    // 滑动 customTextView 取消键盘显示
+    [self.customTextView resignFirstResponder];
+}
 @end
