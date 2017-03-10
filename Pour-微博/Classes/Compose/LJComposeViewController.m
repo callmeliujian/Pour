@@ -9,6 +9,8 @@
 #import "LJComposeViewController.h"
 #import "LJTextView.h"
 #import "LJNetworkTools.h"
+#import "LJKeyboardEmoticonViewController.h"
+
 #import "SVProgressHUD.h"
 
 @interface LJComposeViewController () <UITextViewDelegate>
@@ -30,6 +32,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomCons;
 - (IBAction)emoticonBtnClick:(id)sender;
 
+@property (nonatomic, strong) LJKeyboardEmoticonViewController *keyboardEmoticonVC;
+
 @end
 
 @implementation LJComposeViewController
@@ -40,6 +44,9 @@
     
     // 发送键盘更改通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    
+    [self addChildViewController:self.keyboardEmoticonVC];
+    
     
 }
 
@@ -89,7 +96,11 @@
     CGFloat offsetY = height - rect.origin.y;
     // 4.修改底部工具条约束
     self.toolbarBottomCons.constant = offsetY;
+    
+    //notice.userInfo[UIKeyboardAnimationCurveUserInfoKey];
+    
     [UIView animateWithDuration:0.25 animations:^{
+        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
         [self.view layoutIfNeeded];
     }];
     
@@ -138,7 +149,7 @@
         self.customTextView.inputView = nil;
     } else {
         //  切换为自定义键盘
-        self.customTextView.inputView = [[UISwitch alloc] init];
+        self.customTextView.inputView = self.keyboardEmoticonVC.view;
     }
     
     // 重新打开键盘
@@ -153,5 +164,13 @@
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     // 滑动 customTextView 取消键盘显示
     [self.customTextView resignFirstResponder];
+}
+
+#pragma mark - Lazy
+- (LJKeyboardEmoticonViewController *)keyboardEmoticonVC {
+    if (_keyboardEmoticonVC == nil) {
+        _keyboardEmoticonVC = [[LJKeyboardEmoticonViewController alloc] init];
+    }
+    return _keyboardEmoticonVC;
 }
 @end
