@@ -116,13 +116,13 @@
     
     // 6.处理转发正文
     if (self.status.retweeted_status.text) {
-//        if (self.status.retweeted_status.user) {
-//            NSString *str = [@"@" stringByAppendingString:self.status.retweeted_status.user.screen_name];
-//            self.forwardText = [str stringByAppendingString:self.status.retweeted_status.text];
-//        }
-        //self.forwardText = @"抱歉，此微博已被作者删除。";
-        NSString *str = [@"@" stringByAppendingString:self.status.retweeted_status.user.screen_name];
-        self.forwardText = [str stringByAppendingString:self.status.retweeted_status.text];
+        if (self.status.retweeted_status.user.screen_name) {
+            NSString *str = [@"@" stringByAppendingString:self.status.retweeted_status.user.screen_name];
+            self.forwardText = [str stringByAppendingString:self.status.retweeted_status.text];
+        } else {
+            NSString *str = @"微博已被删除";
+            self.forwardText = [str stringByAppendingString:self.status.retweeted_status.text];
+        }
     }
 
     return self;

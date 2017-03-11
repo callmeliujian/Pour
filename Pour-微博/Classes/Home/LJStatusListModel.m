@@ -89,7 +89,8 @@
                 dispatch_group_enter(group);
                 
                 [[SDWebImageManager sharedManager] downloadImageWithURL:url options:SDWebImageRetryFailed progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-                    NSLog(@"success");
+#warning 图片下载成功
+                    //NSLog(@"success");
                     dispatch_group_leave(group);
                 }];
                 
@@ -97,8 +98,7 @@
         }
         
         dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-            NSLog(@"all");
-            
+#warning 全部图片下载完毕
             finishedBlock(viewModels,nil);
             
         });

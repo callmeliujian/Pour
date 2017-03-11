@@ -27,7 +27,7 @@
 
 #define iOS10 ([[UIDevice currentDevice].systemVersion intValue]>=10?YES:NO)
 
-@interface LJHomeTableViewController ()
+@interface LJHomeTableViewController () <UIViewControllerAnimatedTransitioning>
 
 /**
  标题按钮
@@ -132,6 +132,7 @@
         // 1.安全校验
         if (error != nil) {
             [SVProgressHUD showErrorWithStatus:@"获取微博数据失败"];
+#warning nslog
             NSLog(@"------------------------获取微博数据失败-error-----------------");
             NSLog(@"%@",error);
             NSLog(@"--------------------------------end-------------------------");
@@ -193,9 +194,6 @@
             self.tipLabel.hidden = YES;
         }];
     }];
-
-
-
 }
 /**
  初始化导航控制器
@@ -242,7 +240,8 @@
 }
 
 - (void)leftBarButtonItemClicked {
-    NSLog(@"1");
+#warning nslog
+    NSLog(@"leftBarButtonItemClicked");
 }
 
 - (void)rightBarButtonItemClicked {
@@ -266,11 +265,6 @@
 
 /**
  返回负责专场动画的对象
- 
- @param presented <#presented description#>
- @param presenting <#presenting description#>
- @param source <#source description#>
- @return <#return value description#>
  */
 - (UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(UIViewController *)presenting sourceViewController:(UIViewController *)source
 {
@@ -279,11 +273,6 @@
 
 /**
  转场动画如何出现
- 
- @param presented <#presented description#>
- @param presenting <#presenting description#>
- @param source <#source description#>
- @return <#return value description#>
  */
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
 {
@@ -293,9 +282,6 @@
 
 /**
  专场动画如何消失
- 
- @param dismissed <#dismissed description#>
- @return <#return value description#>
  */
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
 {
@@ -303,10 +289,9 @@
     return self;
 }
 
-#pragma mark - Delegate
+#pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.statusListModel.statuses.count;
-    //return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -330,26 +315,19 @@
         ((LJHomeForwardTableViewCell*)cell).viewModel = viewModel;
     }
 
-    
     if (indexPath.row == self.statusListModel.statuses.count - 1) {
+#warning nslog
         NSLog(@"---viewModel.status.user.screen_name---%@",viewModel.status.user.screen_name);
         self.lastStatus = YES;
         [self loadData];
     }
-    
-    NSLog(@"%ld",(long)indexPath.row);
-    
     return cell;
-    
 }
 
 #pragma mark - UIViewControllerAnimatedTransitioning代理方法
 
 /**
  告诉系统展示和消失动画的时长
- 
- @param transitionContext <#transitionContext description#>
- @return <#return value description#>
  */
 - (NSTimeInterval)transitionDuration:(nullable id <UIViewControllerContextTransitioning>)transitionContext
 {
@@ -385,6 +363,7 @@
     
 }
 
+#pragma mark - Lazy
 - (UILabel *)tipLabel {
     if (_tipLabel == nil) {
         _tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
