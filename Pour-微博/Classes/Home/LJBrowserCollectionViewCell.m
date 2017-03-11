@@ -13,8 +13,6 @@
 @interface LJBrowserCollectionViewCell () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
-
-
 /**
  图片下载提示视图
  */
@@ -33,7 +31,7 @@
     return self;
 }
 
-#pragma mark - 内部控制方法
+#pragma mark - PrivateMethod
 - (void)setupUI {
     // 1.添加子控件
     [self.contentView addSubview:self.scrollView];
@@ -46,7 +44,6 @@
     self.indicatorView.center = self.contentView.center;
     
 }
-
 /**
  重新设置scrollView的属性
  */
@@ -89,7 +86,7 @@
     
     offsetY = (offsetY < 0) ? 0 : offsetY;
     offsetX = (offsetX < 0) ? 0 : offsetX;
-#warning 因为cell是复用的所以加载新图片的时候要重新设置scrollView 这里调用resetView函数
+    // 因为cell是复用的所以加载新图片的时候要重新设置scrollView 这里调用resetView函数
     self.scrollView.contentInset = UIEdgeInsetsMake(offsetY, offsetX, offsetY, offsetX);
     
 }

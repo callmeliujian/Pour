@@ -15,32 +15,22 @@
 
 /**
  用于创建一个和点击图片一模一样的UIImageView
-
- @param browserPresenationController <#browserPresenationController description#>
- @param indexPath <#indexPath description#>
- @return <#return value description#>
  */
 - (UIImageView *)browserPresentationWillShowImageView:(LJBrowserPresentationController *)browserPresenationController withIndexPath:(NSIndexPath *)indexPath;
 
 /**
  用于获取点击图片相对于window的frame
-
- @param indexpath <#indexpath description#>
- @return <#return value description#>
  */
 - (CGRect)browserPresentationWillFromFrame:(LJBrowserPresentationController *)browserPresenationController withIndexPath:(NSIndexPath *)indexpath;
 
 /**
  用于获取点击图片最终的frame
-
- @param indexpath <#indexpath description#>
- @return <#return value description#>
  */
 - (CGRect)browserPresentationWillToFrame:(LJBrowserPresentationController *)browserPresenationController withIndexPath:(NSIndexPath *)indexpath;
 
 @end
 
-@interface LJBrowserPresentationController : UIPresentationController
+@interface LJBrowserPresentationController : UIPresentationController <UIViewControllerTransitioningDelegate>
 
 /**
  代理对象

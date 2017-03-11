@@ -14,7 +14,6 @@
 #import "SVProgressHUD.h"
 
 @interface LJBrowserViewController () <UICollectionViewDataSource>
-
 /**
  所有配图
  */
@@ -23,7 +22,6 @@
  当前点击索引
  */
 @property (nonatomic, strong) NSIndexPath *indexPath;
-
 
 @property (nonatomic, strong) UICollectionView *collectView;
 /**
@@ -41,7 +39,6 @@
 
 #pragma mark - Life Cycle
 - (instancetype)initWithArray:(NSArray *)bmiddle_pic withIndexPath:(NSIndexPath *)indexPath {
-    
     self = [super init];
     
     self.bmiddle_pic = bmiddle_pic;
@@ -50,7 +47,6 @@
     [self setupUI];
     
     return self;
-    
 }
 
 - (void)viewDidLoad {
@@ -64,8 +60,7 @@
     [self.collectView scrollToItemAtIndexPath:self.indexPath atScrollPosition:UICollectionViewScrollPositionLeft animated:false];
 }
 
-#pragma mark - 内部控制方法
-
+#pragma mark - PrivateMethod
 /**
  初始化UI
  */
@@ -88,7 +83,6 @@
         make.right.mas_equalTo(self.view).mas_offset(-20);
         make.bottom.mas_equalTo(self.view).mas_equalTo(-20);
     }];
-    
 }
 
 - (void)closeBtnClicked {
@@ -99,12 +93,11 @@
     // 1.获取当前显示图片的索引
     NSIndexPath *indexPath = [[self.collectView indexPathsForVisibleItems] lastObject];
     // 2.获取当前显示的cell
-    LJBrowserCollectionViewCell *cell = [self.collectView cellForItemAtIndexPath:indexPath];
+    LJBrowserCollectionViewCell *cell = [self.collectView dequeueReusableCellWithReuseIdentifier:@"browserCell" forIndexPath:indexPath];
     // 3.获取当前显示的图片
     UIImage *image = cell.imageView.image;
     // 4.保存图片
     UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-    
 }
 
 /**
@@ -115,6 +108,7 @@
  @param contextInfo <#contextInfo description#>
  */
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    [SVProgressHUD setMaximumDismissTimeInterval:0.8];
     if (error != nil) {
         [SVProgressHUD showErrorWithStatus:@"保存图片失败"];
         return;
@@ -154,7 +148,7 @@
     if (_collectView == nil) {
         _collectView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:[[LJBrowserLayout alloc] init]];
         _collectView.dataSource = self;
-        [_collectView registerClass:[LJBrowserCollectionViewCell class] forCellWithReuseIdentifier:@"browserCell"];
+        [_collectView registerClass:LJBrowserCollectionViewCell.self forCellWithReuseIdentifier:@"browserCell"];
     }
     return _collectView;
 }
@@ -174,9 +168,8 @@
         _saveBtn = [[UIButton alloc] init];
         [_saveBtn setTitle:@"保存" forState:UIControlStateNormal];
         _saveBtn.backgroundColor = [UIColor colorWithWhite:0.8 alpha:0.5];
-        [_closeBtn addTarget:self action:@selector(saveBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+        [_saveBtn addTarget:self action:@selector(saveBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     }
     return _saveBtn;
 }
-
 @end

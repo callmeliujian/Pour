@@ -52,14 +52,11 @@
     imageView.clipsToBounds = true;
     
     // 2.设置UIImageView的图片为点击图片
-    LJHomePictureCollectionViewCell *cell = [self cellForItemAtIndexPath:indexPath];
-    imageView.image = cell.customIconImageView.image;
-#warning todo
-//    NSString *key = [self.viewModel.bmiddle_pic[indexPath.item] absoluteString];
-//    UIImage *image = [[[SDWebImageManager sharedManager] imageCache] imageFromDiskCacheForKey:key];
-//    imageView.image = image;
-    
+    NSString *key = self.viewModel.bmiddle_pic[indexPath.item];
+    UIImage *image = [[[SDWebImageManager sharedManager] imageCache] imageFromDiskCacheForKey:key];
+    imageView.image = image;
     [imageView sizeToFit];
+    
     // 3.返回图片
     return imageView;
 }
@@ -73,7 +70,7 @@
  */
 - (CGRect)browserPresentationWillFromFrame:(LJBrowserPresentationController *)browserPresenationController withIndexPath:(NSIndexPath *)indexpath {
     // 1.拿到被点击的cell
-    LJHomePictureCollectionViewCell *cell = [self cellForItemAtIndexPath:indexpath];
+    LJHomePictureCollectionViewCell *cell = [self dequeueReusableCellWithReuseIdentifier:@"pictureCell" forIndexPath:indexpath];
     // 2.将被点击的cell的坐标系从collectionview转换到keywindow
     CGRect frame = [self convertRect:cell.frame toCoordinateSpace:[UIApplication sharedApplication].keyWindow];
     return frame;
@@ -89,10 +86,10 @@
 - (CGRect)browserPresentationWillToFrame:(LJBrowserPresentationController *)browserPresenationController withIndexPath:(NSIndexPath *)indexpath {
     
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    CGFloat height = [UIScreen mainScreen].bounds.size.width;
+    CGFloat height = [UIScreen mainScreen].bounds.size.height;
     
     // 1.拿到被点击的cell
-    LJHomePictureCollectionViewCell *cell = [self cellForItemAtIndexPath:indexpath];
+    LJHomePictureCollectionViewCell *cell = (LJHomePictureCollectionViewCell *)[self cellForItemAtIndexPath:indexpath];
     // 2.拿到被点击的图片
     UIImage *image = cell.customIconImageView.image;
     // 3.计算图片宽高比

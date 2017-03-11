@@ -26,9 +26,6 @@
 
 /**
  设置默认数据
-
- @param index <#index description#>
- @param browserDelegate <#browserDelegate description#>
  */
 - (void)setDefaultInfo:(NSIndexPath*)index withDelegate:(id <LJBrowserPresentationDelegate>)browserDelegate {
     self.index = index;
@@ -44,9 +41,6 @@
 
 /**
  返回一个负责转场如何出现的对象
-
- @param dismissed <#dismissed description#>
- @return <#return value description#>
  */
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
     self.isPresent = true;
@@ -55,9 +49,6 @@
 
 /**
  用于返回一个负责转场如何消失的对象
-
- @param dismissed <#dismissed description#>
- @return <#return value description#>
  */
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
     self.isPresent = false;
@@ -68,12 +59,9 @@
 /**
  告诉系统展现和消失的动画时长
  暂时不用
-
- @param transitionContext <#transitionContext description#>
- @return <#return value description#>
  */
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
-    return 3.0;
+    return 0.5;
 }
 
 /**
@@ -113,8 +101,8 @@
     // 2.3获取点击图片最终显示的尺寸
     
     CGRect toFrame = [self.browserDelegate browserPresentationWillToFrame:self withIndexPath:self.index];
-    // 3.执行动画
-    [UIView animateWithDuration:3.0 animations:^{
+    // 3.执行动画(展现图片浏览器动画)
+    [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
         imageView.frame = toFrame;
     } completion:^(BOOL finished) {
         // 移除自己添加的UIImageView
