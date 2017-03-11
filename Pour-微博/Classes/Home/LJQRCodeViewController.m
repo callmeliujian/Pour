@@ -10,7 +10,7 @@
 
 #import <AVFoundation/AVFoundation.h>
 
-@interface LJQRCodeViewController () <UITabBarDelegate, AVCaptureMetadataOutputObjectsDelegate, UIImagePickerControllerDelegate>
+@interface LJQRCodeViewController () <UITabBarDelegate, AVCaptureMetadataOutputObjectsDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 // 扫描二维码页面底部的tabbar
 @property (weak, nonatomic) IBOutlet UITabBar *customTabbar;
 

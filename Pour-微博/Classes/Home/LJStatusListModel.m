@@ -24,8 +24,6 @@
 
 @interface LJStatusListModel ()
 
-
-
 @end
 
 @implementation LJStatusListModel
@@ -34,64 +32,41 @@
  调用LJNetworkTools的loadStatuses获取主页微博数据
  */
 - (void)loadData:(BOOL)lastStatus finished:(void(^)(NSMutableArray*,NSError*))finishedBlock {
-    
-    LJStatusViewModel *statusViewModel = [self.statuses firstObject];
-    NSString *since_id = statusViewModel.status.idstr;
-    if (since_id == nil) {
-        since_id = @"0";
-    }
+    NSString *since_id = [self.statuses firstObject].status.idstr ? : @"0";
     NSString *max_id = @"0";
     if (lastStatus) {
         since_id = @"0";
-        LJStatusViewModel *max_id_statusViewModel = [self.statuses lastObject];
-        if (max_id_statusViewModel.status.idstr) {
-            max_id = max_id_statusViewModel.status.idstr;
-        }
+        max_id = [self.statuses lastObject].status.idstr ? : @"0";
     }
-    
-    
     
     [[LJNetworkTools shareInstance] loadStatuses:since_id withMax_id:max_id withBlock:^(NSString *since_id, NSArray *array, NSError *error) {
         // 1.安全校验
         if (error != nil) {
-//            [SVProgressHUD showErrorWithStatus:@"获取微博数据失败"];
-//            NSLog(@"----%@",error);
             finishedBlock(nil,error);
             return;
         }
         
         // 2.字典数组转化为模型数组
-        NSMutableArray *mutableArray = [[NSMutableArray alloc] init];
-        self.statuses = [[NSMutableArray alloc] init];
+        NSMutableArray *models = [[NSMutableArray alloc] init];
         for (id dic in array) {
-            LJStatus *model = [[LJStatus alloc] init];
-            id status = [model initWithDic:dic];
+            LJStatus *status = [[LJStatus alloc] initWithDic:dic];
             LJStatusViewModel *viewModel = [[LJStatusViewModel alloc] initWithStatus:status];
-            [mutableArray addObject:viewModel];
+            [models addObject:viewModel];
         }
         
         // 3.处理微博数据
         if (![since_id isEqualToString:@"0"]) {
-            NSArray *array = [NSArray arrayWithArray:mutableArray];
-            self.statuses = [mutableArray arrayByAddingObjectsFromArray:array];
-            
+            [models addObjectsFromArray:self.statuses];
+            self.statuses = models;
         }else if (![max_id isEqualToString:@"0"]){
-            NSArray *array = [NSArray arrayWithArray:mutableArray];
-            self.statuses = [array arrayByAddingObjectsFromArray:mutableArray];
+            [self.statuses addObjectsFromArray:models];
         }
         else {
-            self.statuses = mutableArray;
+            self.statuses = models;
         }
         
-        
         // 4.缓存微博所有配图
-        [self cachesImages:mutableArray finished:finishedBlock];
-        
-//        // 5.关闭菊花
-//        
-//        
-//        // 6.显示刷新提醒
-//        
+        [self cachesImages:models finished:finishedBlock];
         
     }];
 }
@@ -101,7 +76,7 @@
  
  @param viewModels <#viewModels description#>
  */
-- (void)cachesImages:(NSArray *)viewModels finished:(void(^)(NSMutableArray*,NSError*))finishedBlock{
+- (void)cachesImages:(NSMutableArray *)viewModels finished:(void(^)(NSMutableArray*,NSError*))finishedBlock{
     // 0.创建一个组
     dispatch_group_t group = dispatch_group_create();
     for (LJStatusViewModel *viewModel in viewModels) {

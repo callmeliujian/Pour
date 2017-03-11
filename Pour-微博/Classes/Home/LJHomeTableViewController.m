@@ -115,8 +115,6 @@
         return;
     }
     
-#warning todo
-    
     // 弹出图片浏览器，将所有图片和当前点击的索引传递给浏览器
     LJBrowserViewController *browserVC = [[LJBrowserViewController alloc] initWithArray:notice.userInfo[@"bmiddle_pic"] withIndexPath:notice.userInfo[@"indexPath"]];
     // 设置转场动画代理
@@ -131,11 +129,12 @@
 - (void)loadData {
 
     [self.statusListModel loadData:self.lastStatus finished:^(NSMutableArray *models, NSError *error) {
-        
         // 1.安全校验
         if (error != nil) {
             [SVProgressHUD showErrorWithStatus:@"获取微博数据失败"];
-            NSLog(@"----%@",error);
+            NSLog(@"------------------------获取微博数据失败-error-----------------");
+            NSLog(@"%@",error);
+            NSLog(@"--------------------------------end-------------------------");
             return;
         }
         
@@ -198,9 +197,6 @@
 
 
 }
-
-
-
 /**
  初始化导航控制器
  */
@@ -336,7 +332,7 @@
 
     
     if (indexPath.row == self.statusListModel.statuses.count - 1) {
-        NSLog(@"刷新数据");
+        NSLog(@"---viewModel.status.user.screen_name---%@",viewModel.status.user.screen_name);
         self.lastStatus = YES;
         [self loadData];
     }

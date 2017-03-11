@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface LJPresentationManager : NSObject
+@interface LJPresentationManager : NSObject <UIViewControllerTransitioningDelegate>
 
 @end

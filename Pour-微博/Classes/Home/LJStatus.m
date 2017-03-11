@@ -12,9 +12,8 @@
 @implementation LJStatus
 
 - (instancetype)initWithDic:(NSDictionary *)dic {
-    
+    self = [super init];
     [self setValuesForKeysWithDictionary:dic];
-    
     return self;
     
 }

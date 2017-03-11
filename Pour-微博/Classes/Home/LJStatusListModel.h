@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+#include "LJStatusViewModel.h"
+
 @interface LJStatusListModel : NSObject
 
 /**
  保存所有的微博数据
  */
-@property (nonatomic, strong)NSMutableArray *statuses;
+@property (nonatomic, strong)NSMutableArray <LJStatusViewModel *>*statuses;
 
 /**
  调用LJNetworkTools的loadStatuses获取主页微博数据

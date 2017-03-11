@@ -112,7 +112,7 @@
     // 1.获取当前点击图片的url
     NSURL *url = self.viewModel.bmiddle_pic[indexPath.item];
     // 2.取出被点击的cell
-    LJHomePictureCollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+    LJHomePictureCollectionViewCell *cell = (LJHomePictureCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
     // 3.下载图片 设置进度
     [[SDWebImageManager sharedManager] downloadImageWithURL:url options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize) {
         cell.customIconImageView.progress = (CGFloat)receivedSize / (CGFloat)expectedSize;
