@@ -162,9 +162,15 @@
 
 // 扫描到结果就会调用
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
-    
     // 在扫描二维码显示视图底部标签显示结果
-  //  self.customLaber.text = [metadataObjects.lastObject stringValue] ;
+    if (metadataObjects != nil && [metadataObjects count] > 0) {
+        AVMetadataMachineReadableCodeObject *metadataObj = [metadataObjects objectAtIndex:0];
+        if ([[metadataObj type] isEqualToString:AVMetadataObjectTypeQRCode]) {
+            self.customLaber.text = metadataObj.stringValue;
+        } else {
+            NSLog(@"不是二维码");
+        }
+    }
     
     [self clearLayers];
     
