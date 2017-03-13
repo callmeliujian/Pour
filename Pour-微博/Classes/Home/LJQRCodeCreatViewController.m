@@ -25,16 +25,41 @@
     [QRCodeFilter setDefaults];
     // 3.设置需要生成二维码的数据到滤镜中
     NSString *string = @"123456";
-    NSString *stringUTF8 = [string stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    NSString *stringUTF8 = [string stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
     
     
-    [QRCodeFilter setValue:stringUTF8 forKeyPath:@"InPutMessage"];
+    [QRCodeFilter setValue:data forKeyPath:@"inputMessage"];
     
     CIImage *ciImage = [QRCodeFilter outputImage];
     
-    self.costomImageView.image = [UIImage imageWithCGImage:(__bridge CGImageRef _Nonnull)(ciImage)];
+    self.costomImageView.image = [self createNonInterpolatedUIImageFormCIImage:ciImage withSize:500];
     
     
+}
+
+- (UIImage *)createNonInterpolatedUIImageFormCIImage:(CIImage*)image withSize:(CGFloat)size {
+    CGRect extent = CGRectIntegral(image.extent);
+    CGFloat scale = MIN(size / CGRectGetWidth(extent), size / CGRectGetHeight(extent));
+    
+    // 1.创建bitmap
+    CGFloat width = CGRectGetWidth(extent) * scale;
+    CGFloat height = CGRectGetHeight(extent) * scale;
+    CGColorSpaceRef cs = CGColorSpaceCreateDeviceGray();
+    CGContextRef bitmapRef = CGBitmapContextCreate(nil, width, height, 8, 0, cs, 0);
+    
+    CIContext *context = [CIContext contextWithOptions:nil];
+    CGImageRef bitmapImage = [context createCGImage:image fromRect:extent];
+    
+    CGContextSetInterpolationQuality(bitmapRef, CGContextGetInterpolationQuality(nil));
+    CGContextScaleCTM(bitmapRef, scale, scale);
+    CGContextDrawImage(bitmapRef, extent, bitmapImage);
+    
+    // 2.保存bitmap到图片
+    CGImageRef scaledImage = CGBitmapContextCreateImage(bitmapRef);
+    
+    return [UIImage imageWithCGImage:scaledImage];
 }
 
 @end
