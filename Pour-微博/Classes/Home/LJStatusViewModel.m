@@ -51,6 +51,18 @@
             break;
     }
     
+    // 处理来源
+    NSString *sourceStr = self.status.source;
+    if (sourceStr && ![sourceStr isEqualToString:@""]) {
+        // 从什么地方开始截取
+        NSUInteger startIndex = [sourceStr rangeOfString:@">"].location + 1;
+        // 截取的长度
+        NSUInteger length = [sourceStr rangeOfString:@"<" options:NSBackwardsSearch].location - startIndex;
+        // 截取字符串
+        NSString *rest = [sourceStr substringWithRange:NSMakeRange(startIndex, length)];
+        self.source_Text = [@"来自" stringByAppendingString:rest];
+    }
+    
     // 4.处理时间
     // Tue Mar 14 10:18:49 +0800 2017
     NSString *timeStr = self.status.created_at;
