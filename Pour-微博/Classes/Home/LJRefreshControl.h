@@ -10,6 +10,4 @@
 
 @interface LJRefreshControl : UIRefreshControl
 
-
-
 @end

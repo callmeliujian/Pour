@@ -8,12 +8,12 @@
 
 #import "LJRefreshControl.h"
 #import "LJRefreshView.h"
+
 #import "Masonry.h"
 
 @interface LJRefreshControl ()
 
 @property (nonatomic, strong) LJRefreshView *refreshView;
-
 
 @end
 
@@ -32,7 +32,12 @@
     return self;
 }
 
-#pragma mark - 内部控制方法
+- (void)endRefreshing {
+    [super endRefreshing];
+    [self.refreshView stopLoadingView];
+}
+
+#pragma mark - PrivateMethod
 - (void)builRefreshView {
     [self.refreshView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(150, 50));
@@ -44,6 +49,11 @@ bool rotationFlag = false;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
     if (self.frame.origin.y == 0 || self.frame.origin.y == -64) {
+        return;
+    }
+    
+    if (self.refreshing) {
+        [self.refreshView startLoadingImageView];
         return;
     }
     

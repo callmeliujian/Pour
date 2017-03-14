@@ -25,4 +25,8 @@
 
 - (void)rotationArrow:(BOOL)flag;
 
+- (void)startLoadingImageView;
+
+- (void)stopLoadingView;
+
 @end

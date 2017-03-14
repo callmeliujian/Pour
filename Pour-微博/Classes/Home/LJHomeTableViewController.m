@@ -316,7 +316,6 @@
     }
 
     if (indexPath.row == self.statusListModel.statuses.count - 1) {
-#warning nslog
         NSLog(@"---viewModel.status.user.screen_name---%@",viewModel.status.user.screen_name);
         self.lastStatus = YES;
         [self loadData];
