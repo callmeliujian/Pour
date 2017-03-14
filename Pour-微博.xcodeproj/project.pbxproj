@@ -18,6 +18,7 @@
 		1D25F4341E47643D00656E43 /* LJUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D25F4331E47643D00656E43 /* LJUser.m */; };
 		1D25F4371E4867D900656E43 /* LJHomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D25F4361E4867D900656E43 /* LJHomeTableViewCell.m */; };
 		1D25F43B1E4A067200656E43 /* LJStatusViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D25F43A1E4A067200656E43 /* LJStatusViewModel.m */; };
+		1D476F351E778C1B00061568 /* NSDate+LJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D476F341E778C1B00061568 /* NSDate+LJExtension.m */; };
 		1D5038A81E643E770064EB1B /* LJBrowserPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5038A71E643E770064EB1B /* LJBrowserPresentationController.m */; };
 		1D66EC141E5FDCDA009F4F10 /* LJProgressImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D66EC111E5FDCDA009F4F10 /* LJProgressImageView.m */; };
 		1D66EC151E5FDCDA009F4F10 /* LJProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D66EC131E5FDCDA009F4F10 /* LJProgressView.m */; };
@@ -102,6 +103,8 @@
 		1D25F4361E4867D900656E43 /* LJHomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJHomeTableViewCell.m; sourceTree = "<group>"; };
 		1D25F4391E4A067200656E43 /* LJStatusViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJStatusViewModel.h; sourceTree = "<group>"; };
 		1D25F43A1E4A067200656E43 /* LJStatusViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJStatusViewModel.m; sourceTree = "<group>"; };
+		1D476F331E778C1B00061568 /* NSDate+LJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+LJExtension.h"; sourceTree = "<group>"; };
+		1D476F341E778C1B00061568 /* NSDate+LJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+LJExtension.m"; sourceTree = "<group>"; };
 		1D5038A61E643E770064EB1B /* LJBrowserPresentationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJBrowserPresentationController.h; sourceTree = "<group>"; };
 		1D5038A71E643E770064EB1B /* LJBrowserPresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJBrowserPresentationController.m; sourceTree = "<group>"; };
 		1D66EC101E5FDCDA009F4F10 /* LJProgressImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJProgressImageView.h; sourceTree = "<group>"; };
@@ -430,6 +433,8 @@
 				525662271DF165E100B4C25B /* LJButton.m */,
 				1D74D35D1E437B9A00F808AB /* LJNetworkTools.h */,
 				1D74D35E1E437B9A00F808AB /* LJNetworkTools.m */,
+				1D476F331E778C1B00061568 /* NSDate+LJExtension.h */,
+				1D476F341E778C1B00061568 /* NSDate+LJExtension.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -790,6 +795,7 @@
 				521509341DED5C64000C71E7 /* LJMainViewController.m in Sources */,
 				1D66EC151E5FDCDA009F4F10 /* LJProgressView.m in Sources */,
 				1DE1FAAB1E557EA700F3397F /* LJRefreshControl.m in Sources */,
+				1D476F351E778C1B00061568 /* NSDate+LJExtension.m in Sources */,
 				525662251DF15AB000B4C25B /* UIBarButtonItem+LJ.m in Sources */,
 				525EAEE41DEEA756002BDD5D /* LJVisitorView.m in Sources */,
 				1D25F4311E47591D00656E43 /* LJStatus.m in Sources */,

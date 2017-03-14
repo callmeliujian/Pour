@@ -14,9 +14,9 @@
 
 
 #import "LJStatusViewModel.h"
+#import "NSDate+LJExtension.h"
 
 @interface LJStatusViewModel()
-
 
 @end
 
@@ -24,7 +24,6 @@
 
 - (instancetype)initWithStatus:(LJStatus *)status {
     self.status = status;
-    
     // 1.处理头像
     self.icon_URL = [NSURL URLWithString:self.status.user.profile_image_url];
     
@@ -52,60 +51,25 @@
             break;
     }
     
-//    // 4.处理来源
-//    if (self.status.created_at != nil) {
-//        // 1.将服务器返回的时间转换为NSDate
-//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//        formatter.dateFormat = @"EE MM dd HH:mm:ss Z yyyy";
-//        // 不指定以下代码在真机中可能无法转换
-//        formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en"];
-//        NSDate *createDate = [formatter dateFromString:_status.created_at];
-//        
-//        // 创建一个日历类
-//        NSCalendar *calendar = [NSCalendar currentCalendar];
-//        NSString *result = @"";
-//        NSString *formatterStr = @"HH:mm";
-//        if ([calendar isDateInToday:createDate]) {
-//            //今天
-//            // 3.比较两个时间之间的差值
-//            NSTimeInterval interval = [createDate timeIntervalSinceNow];
-//            if ((-interval) < 60 ) {
-//                result = @"刚刚";
-//            }else if((-interval) < 60 *60){
-//                NSString *stringInterbal = [NSString stringWithFormat:@"%d",(int)(-interval) / 60 ];
-//                result = [stringInterbal stringByAppendingString:@"分钟前"];
-//            }else if ([calendar isDateInYesterday:createDate]){
-//                formatterStr = [@"昨天" stringByAppendingString:formatterStr];
-//                formatter.dateFormat = formatterStr;
-//                result = [formatter stringFromDate:createDate];
-//            }else{
-//                NSDateComponents *comps = [calendar components:NSCalendarUnitYear fromDate:createDate toDate:[NSDate init] options:NSCalendarWrapComponents];
-//                if (comps.year >= 1) {
-//                    formatterStr = [@"yyyy-MM-dd" stringByAppendingString:formatterStr];
-//                }else{
-//                    formatterStr = [@"MM-dd" stringByAppendingString:formatterStr];
-//                }
-//                formatter.dateFormat = formatterStr;
-//                result = [formatter stringFromDate:createDate];
-//            }
-//            self.created_Time = result;
-//        }
-//    }
-    
-    self.created_Time = @"123";
+    // 4.处理时间
+    // Tue Mar 14 10:18:49 +0800 2017
+    NSString *timeStr = self.status.created_at;
+    if (timeStr) {
+        // 1.将服务器返回的时间格式化NSDate
+        NSDate *creatDate = [NSDate creatDate:timeStr withFormatterStr:@"EE MM dd HH:mm:ss Z yyyy"];
+        self.created_Time = [creatDate descriptionStr];
+    }
+
     
     // 5.处理配图URL
-    //if (self.status.pic_urls.count!= 0) {
     if (self.status.retweeted_status.pic_urls.count != 0) {
-        
         for (id dict in self.status.retweeted_status.pic_urls) {
             NSString *urlStr = dict[@"thumbnail_pic"];
             NSURL *url = [NSURL URLWithString:urlStr];
             [self.thumbnail_pic addObject:url];
             [self.bmiddle_pic addObject:[urlStr stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"]];
         }
-        
-    }else{
+    } else {
         for (id dict in self.status.pic_urls) {
             NSString *urlStr = dict[@"thumbnail_pic"];
             NSURL *url = [NSURL URLWithString:urlStr];
@@ -124,7 +88,6 @@
             self.forwardText = [str stringByAppendingString:self.status.retweeted_status.text];
         }
     }
-
     return self;
 }
 
