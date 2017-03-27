@@ -9,7 +9,6 @@
 #import "LJKeyboardEmoticonViewController.h"
 #import "LJKeyboardFlowLayout.h"
 #import "LJKeyboardEmoticonCollectionViewCell.h"
-#import "LJKeyboardpackage.h"
 
 @interface LJKeyboardEmoticonViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -24,6 +23,15 @@
 @implementation LJKeyboardEmoticonViewController
 
 #pragma mark - LifeCycle
+
+- (instancetype)initWithEmoticonBlock:(void (^)(LJKeyboardEmoticon *emoticon))block {
+    self = [super init];
+    
+    self.emoticonBlock = block;
+    
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -31,7 +39,6 @@
     [self.view addSubview:self.toolbar];
     
     [self setupUI];
-    
 }
 
 #pragma mark - PrivateMethod
@@ -72,6 +79,7 @@
     if (!emoticon.isRemoveBtn) {
         [self.package[0] addFavourtEmoticon:emoticon];
     }
+    self.emoticonBlock(emoticon);
 }
 
 #pragma mark - UICollectionViewDataSource

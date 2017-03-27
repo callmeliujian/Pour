@@ -18,6 +18,10 @@
 		1D25F4341E47643D00656E43 /* LJUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D25F4331E47643D00656E43 /* LJUser.m */; };
 		1D25F4371E4867D900656E43 /* LJHomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D25F4361E4867D900656E43 /* LJHomeTableViewCell.m */; };
 		1D25F43B1E4A067200656E43 /* LJStatusViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D25F43A1E4A067200656E43 /* LJStatusViewModel.m */; };
+		1D3C91D51E798B4C00B787F2 /* UITableView+FDIndexPathHeightCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3C91CE1E798B4C00B787F2 /* UITableView+FDIndexPathHeightCache.m */; };
+		1D3C91D61E798B4C00B787F2 /* UITableView+FDKeyedHeightCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3C91D01E798B4C00B787F2 /* UITableView+FDKeyedHeightCache.m */; };
+		1D3C91D71E798B4C00B787F2 /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3C91D21E798B4C00B787F2 /* UITableView+FDTemplateLayoutCell.m */; };
+		1D3C91D81E798B4C00B787F2 /* UITableView+FDTemplateLayoutCellDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3C91D41E798B4C00B787F2 /* UITableView+FDTemplateLayoutCellDebug.m */; };
 		1D476F351E778C1B00061568 /* NSDate+LJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D476F341E778C1B00061568 /* NSDate+LJExtension.m */; };
 		1D5038A81E643E770064EB1B /* LJBrowserPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5038A71E643E770064EB1B /* LJBrowserPresentationController.m */; };
 		1D66EC141E5FDCDA009F4F10 /* LJProgressImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D66EC111E5FDCDA009F4F10 /* LJProgressImageView.m */; };
@@ -28,11 +32,13 @@
 		1D74D3621E448ED600F808AB /* LJUserAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D74D3611E448ED600F808AB /* LJUserAccount.m */; };
 		1D89A8031E5D8F9A0054F538 /* LJBrowserLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D89A8021E5D8F9A0054F538 /* LJBrowserLayout.m */; };
 		1D89A8061E5D9F210054F538 /* LJBrowserCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D89A8051E5D9F210054F538 /* LJBrowserCollectionViewCell.m */; };
-		1DAA409D1E7279B600944124 /* Emoticons.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1DAA40941E7279B600944124 /* Emoticons.bundle */; };
-		1DAA409E1E7279B600944124 /* LJKeyboardEmoticonCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DAA40961E7279B600944124 /* LJKeyboardEmoticonCollectionViewCell.m */; };
-		1DAA409F1E7279B600944124 /* LJKeyboardEmoticonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DAA40981E7279B600944124 /* LJKeyboardEmoticonViewController.m */; };
-		1DAA40A01E7279B600944124 /* LJKeyboardFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DAA409A1E7279B600944124 /* LJKeyboardFlowLayout.m */; };
-		1DAA40A11E7279B600944124 /* LJKeyboardpackage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DAA409C1E7279B600944124 /* LJKeyboardpackage.m */; };
+		1D8E13081E89072C0005825D /* Emoticons.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1D8E12FB1E89072B0005825D /* Emoticons.bundle */; };
+		1D8E13091E89072C0005825D /* LJKeyboardAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8E12FD1E89072C0005825D /* LJKeyboardAttachment.m */; };
+		1D8E130A1E89072C0005825D /* LJKeyboardEmoticonCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8E12FF1E89072C0005825D /* LJKeyboardEmoticonCollectionViewCell.m */; };
+		1D8E130B1E89072C0005825D /* LJKeyboardEmoticonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8E13011E89072C0005825D /* LJKeyboardEmoticonViewController.m */; };
+		1D8E130C1E89072C0005825D /* LJKeyboardFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8E13031E89072C0005825D /* LJKeyboardFlowLayout.m */; };
+		1D8E130D1E89072C0005825D /* LJKeyboardpackage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8E13051E89072C0005825D /* LJKeyboardpackage.m */; };
+		1D8E130E1E89072C0005825D /* LJKeyboardTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8E13071E89072C0005825D /* LJKeyboardTextView.m */; };
 		1DE1FAA41E54075900F3397F /* LJHomeForwardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE1FAA31E54075900F3397F /* LJHomeForwardTableViewCell.m */; };
 		1DE1FAA81E557E5300F3397F /* LJRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE1FAA71E557E5300F3397F /* LJRefreshView.m */; };
 		1DE1FAAB1E557EA700F3397F /* LJRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE1FAAA1E557EA700F3397F /* LJRefreshControl.m */; };
@@ -103,6 +109,14 @@
 		1D25F4361E4867D900656E43 /* LJHomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJHomeTableViewCell.m; sourceTree = "<group>"; };
 		1D25F4391E4A067200656E43 /* LJStatusViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJStatusViewModel.h; sourceTree = "<group>"; };
 		1D25F43A1E4A067200656E43 /* LJStatusViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJStatusViewModel.m; sourceTree = "<group>"; };
+		1D3C91CD1E798B4C00B787F2 /* UITableView+FDIndexPathHeightCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDIndexPathHeightCache.h"; sourceTree = "<group>"; };
+		1D3C91CE1E798B4C00B787F2 /* UITableView+FDIndexPathHeightCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDIndexPathHeightCache.m"; sourceTree = "<group>"; };
+		1D3C91CF1E798B4C00B787F2 /* UITableView+FDKeyedHeightCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDKeyedHeightCache.h"; sourceTree = "<group>"; };
+		1D3C91D01E798B4C00B787F2 /* UITableView+FDKeyedHeightCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDKeyedHeightCache.m"; sourceTree = "<group>"; };
+		1D3C91D11E798B4C00B787F2 /* UITableView+FDTemplateLayoutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCell.h"; sourceTree = "<group>"; };
+		1D3C91D21E798B4C00B787F2 /* UITableView+FDTemplateLayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCell.m"; sourceTree = "<group>"; };
+		1D3C91D31E798B4C00B787F2 /* UITableView+FDTemplateLayoutCellDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCellDebug.h"; sourceTree = "<group>"; };
+		1D3C91D41E798B4C00B787F2 /* UITableView+FDTemplateLayoutCellDebug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCellDebug.m"; sourceTree = "<group>"; };
 		1D476F331E778C1B00061568 /* NSDate+LJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+LJExtension.h"; sourceTree = "<group>"; };
 		1D476F341E778C1B00061568 /* NSDate+LJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+LJExtension.m"; sourceTree = "<group>"; };
 		1D5038A61E643E770064EB1B /* LJBrowserPresentationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJBrowserPresentationController.h; sourceTree = "<group>"; };
@@ -122,15 +136,19 @@
 		1D89A8021E5D8F9A0054F538 /* LJBrowserLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJBrowserLayout.m; sourceTree = "<group>"; };
 		1D89A8041E5D9F210054F538 /* LJBrowserCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJBrowserCollectionViewCell.h; sourceTree = "<group>"; };
 		1D89A8051E5D9F210054F538 /* LJBrowserCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJBrowserCollectionViewCell.m; sourceTree = "<group>"; };
-		1DAA40941E7279B600944124 /* Emoticons.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Emoticons.bundle; sourceTree = "<group>"; };
-		1DAA40951E7279B600944124 /* LJKeyboardEmoticonCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJKeyboardEmoticonCollectionViewCell.h; sourceTree = "<group>"; };
-		1DAA40961E7279B600944124 /* LJKeyboardEmoticonCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJKeyboardEmoticonCollectionViewCell.m; sourceTree = "<group>"; };
-		1DAA40971E7279B600944124 /* LJKeyboardEmoticonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJKeyboardEmoticonViewController.h; sourceTree = "<group>"; };
-		1DAA40981E7279B600944124 /* LJKeyboardEmoticonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJKeyboardEmoticonViewController.m; sourceTree = "<group>"; };
-		1DAA40991E7279B600944124 /* LJKeyboardFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJKeyboardFlowLayout.h; sourceTree = "<group>"; };
-		1DAA409A1E7279B600944124 /* LJKeyboardFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJKeyboardFlowLayout.m; sourceTree = "<group>"; };
-		1DAA409B1E7279B600944124 /* LJKeyboardpackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJKeyboardpackage.h; sourceTree = "<group>"; };
-		1DAA409C1E7279B600944124 /* LJKeyboardpackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJKeyboardpackage.m; sourceTree = "<group>"; };
+		1D8E12FB1E89072B0005825D /* Emoticons.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Emoticons.bundle; path = KeyboardEmoticon/Emoticons.bundle; sourceTree = "<group>"; };
+		1D8E12FC1E89072C0005825D /* LJKeyboardAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LJKeyboardAttachment.h; path = KeyboardEmoticon/LJKeyboardAttachment.h; sourceTree = "<group>"; };
+		1D8E12FD1E89072C0005825D /* LJKeyboardAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LJKeyboardAttachment.m; path = KeyboardEmoticon/LJKeyboardAttachment.m; sourceTree = "<group>"; };
+		1D8E12FE1E89072C0005825D /* LJKeyboardEmoticonCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LJKeyboardEmoticonCollectionViewCell.h; path = KeyboardEmoticon/LJKeyboardEmoticonCollectionViewCell.h; sourceTree = "<group>"; };
+		1D8E12FF1E89072C0005825D /* LJKeyboardEmoticonCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LJKeyboardEmoticonCollectionViewCell.m; path = KeyboardEmoticon/LJKeyboardEmoticonCollectionViewCell.m; sourceTree = "<group>"; };
+		1D8E13001E89072C0005825D /* LJKeyboardEmoticonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LJKeyboardEmoticonViewController.h; path = KeyboardEmoticon/LJKeyboardEmoticonViewController.h; sourceTree = "<group>"; };
+		1D8E13011E89072C0005825D /* LJKeyboardEmoticonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LJKeyboardEmoticonViewController.m; path = KeyboardEmoticon/LJKeyboardEmoticonViewController.m; sourceTree = "<group>"; };
+		1D8E13021E89072C0005825D /* LJKeyboardFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LJKeyboardFlowLayout.h; path = KeyboardEmoticon/LJKeyboardFlowLayout.h; sourceTree = "<group>"; };
+		1D8E13031E89072C0005825D /* LJKeyboardFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LJKeyboardFlowLayout.m; path = KeyboardEmoticon/LJKeyboardFlowLayout.m; sourceTree = "<group>"; };
+		1D8E13041E89072C0005825D /* LJKeyboardpackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LJKeyboardpackage.h; path = KeyboardEmoticon/LJKeyboardpackage.h; sourceTree = "<group>"; };
+		1D8E13051E89072C0005825D /* LJKeyboardpackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LJKeyboardpackage.m; path = KeyboardEmoticon/LJKeyboardpackage.m; sourceTree = "<group>"; };
+		1D8E13061E89072C0005825D /* LJKeyboardTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LJKeyboardTextView.h; path = KeyboardEmoticon/LJKeyboardTextView.h; sourceTree = "<group>"; };
+		1D8E13071E89072C0005825D /* LJKeyboardTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LJKeyboardTextView.m; path = KeyboardEmoticon/LJKeyboardTextView.m; sourceTree = "<group>"; };
 		1DE1FAA21E54075900F3397F /* LJHomeForwardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJHomeForwardTableViewCell.h; sourceTree = "<group>"; };
 		1DE1FAA31E54075900F3397F /* LJHomeForwardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJHomeForwardTableViewCell.m; sourceTree = "<group>"; };
 		1DE1FAA61E557E5300F3397F /* LJRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJRefreshView.h; sourceTree = "<group>"; };
@@ -269,6 +287,21 @@
 			name = view;
 			sourceTree = "<group>";
 		};
+		1D3C91CC1E798B3300B787F2 /* UITableView-FDTemplateLayoutCell */ = {
+			isa = PBXGroup;
+			children = (
+				1D3C91CD1E798B4C00B787F2 /* UITableView+FDIndexPathHeightCache.h */,
+				1D3C91CE1E798B4C00B787F2 /* UITableView+FDIndexPathHeightCache.m */,
+				1D3C91CF1E798B4C00B787F2 /* UITableView+FDKeyedHeightCache.h */,
+				1D3C91D01E798B4C00B787F2 /* UITableView+FDKeyedHeightCache.m */,
+				1D3C91D11E798B4C00B787F2 /* UITableView+FDTemplateLayoutCell.h */,
+				1D3C91D21E798B4C00B787F2 /* UITableView+FDTemplateLayoutCell.m */,
+				1D3C91D31E798B4C00B787F2 /* UITableView+FDTemplateLayoutCellDebug.h */,
+				1D3C91D41E798B4C00B787F2 /* UITableView+FDTemplateLayoutCellDebug.m */,
+			);
+			name = "UITableView-FDTemplateLayoutCell";
+			sourceTree = "<group>";
+		};
 		1D66EC0F1E5FDCAC009F4F10 /* ProgressView */ = {
 			isa = PBXGroup;
 			children = (
@@ -303,20 +336,24 @@
 			path = OAuth;
 			sourceTree = "<group>";
 		};
-		1DAA40931E7279B600944124 /* KeyboardEmoticon */ = {
+		1D8E12FA1E89071F0005825D /* KeyboardEmoticon */ = {
 			isa = PBXGroup;
 			children = (
-				1DAA40941E7279B600944124 /* Emoticons.bundle */,
-				1DAA40951E7279B600944124 /* LJKeyboardEmoticonCollectionViewCell.h */,
-				1DAA40961E7279B600944124 /* LJKeyboardEmoticonCollectionViewCell.m */,
-				1DAA40971E7279B600944124 /* LJKeyboardEmoticonViewController.h */,
-				1DAA40981E7279B600944124 /* LJKeyboardEmoticonViewController.m */,
-				1DAA40991E7279B600944124 /* LJKeyboardFlowLayout.h */,
-				1DAA409A1E7279B600944124 /* LJKeyboardFlowLayout.m */,
-				1DAA409B1E7279B600944124 /* LJKeyboardpackage.h */,
-				1DAA409C1E7279B600944124 /* LJKeyboardpackage.m */,
+				1D8E12FB1E89072B0005825D /* Emoticons.bundle */,
+				1D8E12FC1E89072C0005825D /* LJKeyboardAttachment.h */,
+				1D8E12FD1E89072C0005825D /* LJKeyboardAttachment.m */,
+				1D8E12FE1E89072C0005825D /* LJKeyboardEmoticonCollectionViewCell.h */,
+				1D8E12FF1E89072C0005825D /* LJKeyboardEmoticonCollectionViewCell.m */,
+				1D8E13001E89072C0005825D /* LJKeyboardEmoticonViewController.h */,
+				1D8E13011E89072C0005825D /* LJKeyboardEmoticonViewController.m */,
+				1D8E13021E89072C0005825D /* LJKeyboardFlowLayout.h */,
+				1D8E13031E89072C0005825D /* LJKeyboardFlowLayout.m */,
+				1D8E13041E89072C0005825D /* LJKeyboardpackage.h */,
+				1D8E13051E89072C0005825D /* LJKeyboardpackage.m */,
+				1D8E13061E89072C0005825D /* LJKeyboardTextView.h */,
+				1D8E13071E89072C0005825D /* LJKeyboardTextView.m */,
 			);
-			path = KeyboardEmoticon;
+			name = KeyboardEmoticon;
 			sourceTree = "<group>";
 		};
 		1DE1FAA51E557E2600F3397F /* Refresh */ = {
@@ -425,7 +462,8 @@
 		521509311DED5ABB000C71E7 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				1DAA40931E7279B600944124 /* KeyboardEmoticon */,
+				1D8E12FA1E89071F0005825D /* KeyboardEmoticon */,
+				1D3C91CC1E798B3300B787F2 /* UITableView-FDTemplateLayoutCell */,
 				1D66EC0F1E5FDCAC009F4F10 /* ProgressView */,
 				525662231DF15AB000B4C25B /* UIBarButtonItem+LJ.h */,
 				525662241DF15AB000B4C25B /* UIBarButtonItem+LJ.m */,
@@ -694,7 +732,7 @@
 				1D25F4221E45AAB100656E43 /* LJWelcomeViewController.storyboard in Resources */,
 				1D25F4271E45B7A400656E43 /* LJNewFeatureViewController.storyboard in Resources */,
 				1D74D35C1E436D3C00F808AB /* LJOAuthViewController.storyboard in Resources */,
-				1DAA409D1E7279B600944124 /* Emoticons.bundle in Resources */,
+				1D8E13081E89072C0005825D /* Emoticons.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -767,14 +805,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D8E13091E89072C0005825D /* LJKeyboardAttachment.m in Sources */,
 				1DE1FAA41E54075900F3397F /* LJHomeForwardTableViewCell.m in Sources */,
 				1D2378921E4B126800ED45F6 /* LJSize.m in Sources */,
 				1D5038A81E643E770064EB1B /* LJBrowserPresentationController.m in Sources */,
 				1DF14D7F1E5C5259006E3108 /* LJBrowserViewController.m in Sources */,
 				1D25F4371E4867D900656E43 /* LJHomeTableViewCell.m in Sources */,
-				1DAA409F1E7279B600944124 /* LJKeyboardEmoticonViewController.m in Sources */,
 				1D89A8031E5D8F9A0054F538 /* LJBrowserLayout.m in Sources */,
 				5288B6291DED75250096AC58 /* LJDiscoverTableViewController.m in Sources */,
+				1D3C91D51E798B4C00B787F2 /* UITableView+FDIndexPathHeightCache.m in Sources */,
 				525EAEDF1DEEA391002BDD5D /* LJBaseTableViewController.m in Sources */,
 				5288B6231DED624C0096AC58 /* LJHomeTableViewController.m in Sources */,
 				1DF431B31E6C0BA70054D50F /* LJComposeViewController.m in Sources */,
@@ -783,14 +822,16 @@
 				52BF378C1DFE70250031035D /* LJPresentationController.m in Sources */,
 				52EFF02D1DFE53EB00474BAB /* LJMenuViewController.m in Sources */,
 				5288B6261DED6D9C0096AC58 /* LJMessageTableViewController.m in Sources */,
-				1DAA40A01E7279B600944124 /* LJKeyboardFlowLayout.m in Sources */,
 				5281FA061E37841C00710DA1 /* LJQRCodeViewController.m in Sources */,
+				1D8E130C1E89072C0005825D /* LJKeyboardFlowLayout.m in Sources */,
 				5288B62C1DED75F40096AC58 /* LJProfileTableViewController.m in Sources */,
 				1D25F43B1E4A067200656E43 /* LJStatusViewModel.m in Sources */,
+				1D8E130B1E89072C0005825D /* LJKeyboardEmoticonViewController.m in Sources */,
 				1DE656901E4E13A1002EE9DC /* LJHomePictureCollectionViewCell.m in Sources */,
 				1D74D3621E448ED600F808AB /* LJUserAccount.m in Sources */,
+				1D8E130D1E89072C0005825D /* LJKeyboardpackage.m in Sources */,
 				1D25F4251E45B79800656E43 /* LJNewFeatureViewController.m in Sources */,
-				1DAA40A11E7279B600944124 /* LJKeyboardpackage.m in Sources */,
+				1D8E130A1E89072C0005825D /* LJKeyboardEmoticonCollectionViewCell.m in Sources */,
 				5273254B1DED591400E6D755 /* AppDelegate.m in Sources */,
 				521509341DED5C64000C71E7 /* LJMainViewController.m in Sources */,
 				1D66EC151E5FDCDA009F4F10 /* LJProgressView.m in Sources */,
@@ -799,8 +840,10 @@
 				525662251DF15AB000B4C25B /* UIBarButtonItem+LJ.m in Sources */,
 				525EAEE41DEEA756002BDD5D /* LJVisitorView.m in Sources */,
 				1D25F4311E47591D00656E43 /* LJStatus.m in Sources */,
+				1D3C91D81E798B4C00B787F2 /* UITableView+FDTemplateLayoutCellDebug.m in Sources */,
+				1D3C91D71E798B4C00B787F2 /* UITableView+FDTemplateLayoutCell.m in Sources */,
 				5288B62F1DEDB50C0096AC58 /* LJNullTableViewController.m in Sources */,
-				1DAA409E1E7279B600944124 /* LJKeyboardEmoticonCollectionViewCell.m in Sources */,
+				1D3C91D61E798B4C00B787F2 /* UITableView+FDKeyedHeightCache.m in Sources */,
 				1DF431B91E6C1C4E0054D50F /* LJTextView.m in Sources */,
 				1D25F42A1E45CC2D00656E43 /* LJNewfeatuereCell.m in Sources */,
 				1DF14D781E5C2464006E3108 /* LJStatusListModel.m in Sources */,
@@ -812,6 +855,7 @@
 				1D74D35A1E436D2D00F808AB /* LJOAuthViewController.m in Sources */,
 				5281FA361E40CC2B00710DA1 /* LJQRCodeCreatViewController.m in Sources */,
 				1D66EC141E5FDCDA009F4F10 /* LJProgressImageView.m in Sources */,
+				1D8E130E1E89072C0005825D /* LJKeyboardTextView.m in Sources */,
 				1DF431B61E6C13620054D50F /* LJTitleView.m in Sources */,
 				525662281DF165E100B4C25B /* LJButton.m in Sources */,
 				527325481DED591400E6D755 /* main.m in Sources */,

@@ -137,7 +137,6 @@
  如果不是系统自带的键盘, 那么inputView != nil
  注意点: 要想切换切换, 必须先关闭键盘, 切换之后再打开
 
- @param sender <#sender description#>
  */
 - (IBAction)emoticonBtnClick:(id)sender {
     // 关闭键盘
@@ -157,8 +156,10 @@
 }
 
 #pragma mark - UITextViewDelegate
+
 - (void)textViewDidChange:(UITextView *)textView {
     self.sendItem.enabled = textView.hasText;
+    self.customTextView.placeholder.hidden = textView.hasText;
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
@@ -167,10 +168,18 @@
 }
 
 #pragma mark - Lazy
+
 - (LJKeyboardEmoticonViewController *)keyboardEmoticonVC {
+    __weak typeof(self) weakSelf = self;
     if (_keyboardEmoticonVC == nil) {
-        _keyboardEmoticonVC = [[LJKeyboardEmoticonViewController alloc] init];
+        _keyboardEmoticonVC = [[LJKeyboardEmoticonViewController alloc] initWithEmoticonBlock:^void (LJKeyboardEmoticon *emoticon) {
+            
+            [weakSelf.customTextView insertEmoticon:emoticon];
+            [weakSelf textViewDidChange:weakSelf.customTextView];
+            
+        }];
     }
     return _keyboardEmoticonVC;
 }
+
 @end

@@ -22,6 +22,7 @@
 #import "LJStatusListModel.h"
 #import "LJBrowserViewController.h"
 #import "LJBrowserPresentationController.h"
+#import "UITableView+FDTemplateLayoutCell.h"
 
 #import "SVProgressHUD.h"
 
@@ -63,6 +64,10 @@
 #pragma mark - Life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //
+    [self.tableView registerClass:LJHomeTableViewCell.self forCellReuseIdentifier:@"homeCell"];
+    [self.tableView registerClass:LJHomeForwardTableViewCell.self forCellReuseIdentifier:@"forwardCell"];
+    
     // 1.判断用户是否登陆
     if (!self.isLogin) {
         [self.visitorView setSubView:@"visitordiscover_feed_image_house" with:@"登录后，最新、最热微博尽在掌握，不再会与实事潮流擦肩而过" withIson:NO];
@@ -74,14 +79,13 @@
     [self loadData];
     
     // 4.设置tableView
-    self.tableView.estimatedRowHeight = 400;
+    //self.tableView.estimatedRowHeight = 400;
     // 5.下拉刷新
     self.refreshControl = [[LJRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(loadData) forControlEvents:UIControlEventValueChanged];
     [self.refreshControl beginRefreshing];
     
     // 6.添加刷新视图
-    
     [self addRefreshView];
     
     self.lastStatus = false;
@@ -132,7 +136,6 @@
         // 1.安全校验
         if (error != nil) {
             [SVProgressHUD showErrorWithStatus:@"获取微博数据失败"];
-#warning nslog
             NSLog(@"------------------------获取微博数据失败-error-----------------");
             NSLog(@"%@",error);
             NSLog(@"--------------------------------end-------------------------");
@@ -178,17 +181,16 @@
     if (count == 0) {
         self.tipLabel.text = @"没有更多数据";
     }else {
-        
         NSString *str = [@"刷新到" stringByAppendingString:[NSString stringWithFormat:@"%ld",(long)count]];
         str = [str stringByAppendingString:@"条数据"];
         self.tipLabel.text = str;
     }
     self.tipLabel.hidden = NO;
     // 2.执行动画
-    [UIView animateWithDuration:1.0 animations:^{
+    [UIView animateWithDuration:3.0 animations:^{
         self.tipLabel.transform = CGAffineTransformMakeTranslation(0, 44);
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:1.0 delay:2.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [UIView animateWithDuration:20.0 delay:2.0 options:UIViewAnimationOptionTransitionNone animations:^{
             self.tipLabel.transform = CGAffineTransformIdentity;
         } completion:^(BOOL finished) {
             self.tipLabel.hidden = YES;
@@ -240,7 +242,6 @@
 }
 
 - (void)leftBarButtonItemClicked {
-#warning nslog
     NSLog(@"leftBarButtonItemClicked");
 }
 
@@ -289,7 +290,18 @@
     return self;
 }
 
+#pragma mark - UITableVIewDeletage
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    LJStatusViewModel *viewModel = self.statusListModel.statuses[indexPath.row];
+    NSString *identifier = (viewModel.status.retweeted_status != nil) ? @"forwardCell" : @"homeCell";
+    return [tableView fd_heightForCellWithIdentifier:identifier cacheByIndexPath:indexPath configuration:^(LJHomeTableViewCell *cell) {
+        cell.viewModel = viewModel;
+    }];
+}
+
 #pragma mark - UITableViewDataSource
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.statusListModel.statuses.count;
 }
@@ -301,6 +313,7 @@
     UITableViewCell *cell;
     
     if ([cellID isEqualToString:@"homeCell"]) {
+        
         cell = [tableView dequeueReusableCellWithIdentifier:cellID];
         if (!cell) {
             cell = [[LJHomeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
@@ -308,6 +321,7 @@
         ((LJHomeTableViewCell*)cell).viewModel = viewModel;
         
     }else {
+        
         cell = [tableView dequeueReusableCellWithIdentifier:cellID];
         if (!cell) {
             cell = [[LJHomeForwardTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];

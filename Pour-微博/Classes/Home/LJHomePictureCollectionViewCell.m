@@ -11,6 +11,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation LJHomePictureCollectionViewCell
+
 #pragma mark - LifeCycle
 - (void)layoutSubviews {
     [self.contentView addSubview:self.customIconImageView];
@@ -29,7 +30,7 @@
     
 }
 
-#pragma Lazy
+#pragma mark - Lazy
 - (UIImageView *)customIconImageView {
     if (_customIconImageView == nil) {
         _customIconImageView = [[LJProgressImageView alloc] init];

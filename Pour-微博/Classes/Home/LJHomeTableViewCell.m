@@ -37,6 +37,7 @@
 
 @implementation LJHomeTableViewCell
 
+#pragma mark - LifeCycle
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -45,15 +46,14 @@
     return self;
 }
 
-#pragma mark - 外部控制方法
-
+#pragma mark - PublicMehtod
 - (CGFloat)calculateRowHeight:(LJStatusViewModel *)viewModel {
     self.viewModel = viewModel;
     [self layoutIfNeeded];
     return CGRectGetMaxY(self.containerView.frame);
 }
 
-#pragma mark - 内部控制方法
+#pragma mark - PrivateMethod
 /**
  构建展示每条微博内容cell
  */
@@ -110,7 +110,6 @@
 
 - (void)buildtimeLabel {
     [self.timeLabel sizeToFit];
-    self.timeLabel.backgroundColor = [UIColor purpleColor];
     self.timeLabel.textColor = [UIColor orangeColor];
     [self.contentView addSubview:self.timeLabel];
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -120,10 +119,8 @@
 }
 
 - (void)buildsourceLabel {
-    
     [self.sourceLabel sizeToFit];
-    self.sourceLabel.backgroundColor = [UIColor greenColor];
-    self.sourceLabel.textColor = [UIColor blackColor];
+    self.sourceLabel.textColor = [UIColor grayColor];
     [self.contentView addSubview:self.sourceLabel];
     [self.sourceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.timeLabel.mas_right).mas_offset(10);
@@ -132,10 +129,8 @@
 }
 
 - (void)buildcontentLabel {
-    
     self.contentLabel.numberOfLines = 0;
     [self.contentLabel sizeToFit];
-    self.contentLabel.backgroundColor = [UIColor grayColor];
     self.contentLabel.textColor = [UIColor blackColor];
     self.contentLabel.preferredMaxLayoutWidth = [UIScreen mainScreen].bounds.size.width - 2 * 10;
     [self.contentView addSubview:self.contentLabel];
@@ -180,7 +175,6 @@
 - (void)buildpictureCollectionnView {
     [self.contentView addSubview:self.pictureCollectionnView];
     [self.pictureCollectionnView registerClass:[LJHomePictureCollectionViewCell class] forCellWithReuseIdentifier:@"pictureCell"];
-    //self.pictureCollectionnView.dataSource = self;
     [self.pictureCollectionnView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(290, 90));
         make.left.mas_equalTo(self.contentLabel);
@@ -188,10 +182,7 @@
     }];
 }
 
-
-
 #pragma mark - lazy
-
 - (LJPictureCollectionView *)pictureCollectionnView {
     if (_pictureCollectionnView == nil) {
         _pictureCollectionnView = [[LJPictureCollectionView alloc] init];
@@ -235,7 +226,6 @@
 - (UIView *)containerView {
     if (_containerView == nil) {
         _containerView = [[UIView alloc] init];
-        _containerView.backgroundColor = [UIColor blueColor];
     }
     return _containerView;
 }
@@ -243,7 +233,6 @@
 - (UIImageView *)iconImageView {
     if (_iconImageView == nil) {
         _iconImageView = [[UIImageView alloc] init];
-        _iconImageView.backgroundColor = [UIColor blackColor];
     }
     return _iconImageView;
 }
@@ -290,6 +279,7 @@
     return _contentLabel;
 }
 
+#pragma mark - set
 - (void)setViewModel:(LJStatusViewModel *)viewModel {
     if (_viewModel != viewModel) {
         _viewModel = viewModel;
@@ -313,140 +303,9 @@
     self.sourceLabel.text = _viewModel.source_Text;
     // 7.设置正文
     self.contentLabel.text = _viewModel.status.text;
-    
     // 8.更新配图
     //[self.pictureCollectionnView reloadData];
     self.pictureCollectionnView.viewModel = self.viewModel;
-    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//- (void)setStatus:(LJStatus *)status {
-//    if (_status == nil) {
-//        _status = [[LJStatus alloc] init];
-//        _status = status;
-//    }
-////    // 1.设置头像
-////    NSURL *url = [NSURL URLWithString:self.status.user.profile_image_url];
-////    [_iconImageView sd_setImageWithURL:url];
-//    // 2.设置认证图标
-////    int type = _status.user.verified_type;
-////    NSString *name = @"";
-////    switch (type) {
-////        case 0:
-////            name = @"avatar_vip";
-////            break;
-////        case 2:
-////        case 3:
-////        case 5:
-////            name = @"avatar_enterprise_vip";
-////            break;
-////        case 220:
-////            name = @"avatar_grassroot";
-////        default:
-////            break;
-////    }
-////    _verifiedImageView.image = [UIImage imageNamed:name];
-//    // 3.设置昵称
-//    _nameLabel.text = _status.user.screen_name;
-//    
-//    
-//    // 4.设置会员图标
-//    if (_status.user.mbrank >=1 && _status.user.mbrank <=6) {
-//        NSString *string = @"common_icon_membership_level";
-//        NSString *stringInt = [NSString stringWithFormat:@"%d",_status.user.mbrank];
-//        NSString *string2 = [string stringByAppendingString:stringInt];
-//        _vipImageView.image = [UIImage imageNamed:string2];
-//        _nameLabel.textColor = [UIColor orangeColor];
-//    }else {
-//        // cell会重用，需要恢复到原来的文字颜色
-//        _nameLabel.textColor = [UIColor blackColor];
-//    }
-//    
-//    // 5.设置时间
-//    /**
-//     刚刚(一分钟内)
-//     X分钟前(一小时内)
-//     X小时前(当天)
-//     
-//     昨天 HH:mm(昨天)
-//     
-//     MM-dd HH:mm(一年内)
-//     yyyy-MM-dd HH:mm(更早期)
-//     */
-//    // "Sun Dec 06 11:10:41 +0800 2015"
-//    _timeLabel.text = @"刚刚";
-////    if (_status.created_at != nil) {
-////        // 1.将服务器返回的时间转换为NSDate
-////        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-////        formatter.dateFormat = @"EE MM dd HH:mm:ss Z yyyy";
-////        // 不指定以下代码在真机中可能无法转换
-////        formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en"];
-////        NSDate *createDate = [formatter dateFromString:_status.created_at];
-////        
-////        // 创建一个日历类
-////        NSCalendar *calendar = [NSCalendar currentCalendar];
-////        NSString *result = @"";
-////        NSString *formatterStr = @"HH:mm";
-////        if ([calendar isDateInToday:createDate]) {
-////            //今天
-////            // 3.比较两个时间之间的差值
-////            NSTimeInterval interval = [createDate timeIntervalSinceNow];
-////            if ((-interval) < 60 ) {
-////                result = @"刚刚";
-////            }else if((-interval) < 60 *60){
-////                NSString *stringInterbal = [NSString stringWithFormat:@"%d",(int)(-interval) / 60 ];
-////                result = [stringInterbal stringByAppendingString:@"分钟前"];
-////            }else if ([calendar isDateInYesterday:createDate]){
-////                formatterStr = [@"昨天" stringByAppendingString:formatterStr];
-////                formatter.dateFormat = formatterStr;
-////                result = [formatter stringFromDate:createDate];
-////            }else{
-////                NSDateComponents *comps = [calendar components:NSCalendarUnitYear fromDate:createDate toDate:[NSDate init] options:NSCalendarWrapComponents];
-////                if (comps.year >= 1) {
-////                    formatterStr = [@"yyyy-MM-dd" stringByAppendingString:formatterStr];
-////                }else{
-////                    formatterStr = [@"MM-dd" stringByAppendingString:formatterStr];
-////                }
-////                formatter.dateFormat = formatterStr;
-////                result = [formatter stringFromDate:createDate];
-////            }
-////            
-////
-//             _timeLabel.text = result;
-//            
-//            
-//            
-//            
-//            
-//        }
-//    }
-//
-//    // 6.设置来源
-//    if (![_status.source isEqualToString:@""] || _status.source != nil) {
-//        NSString *sourceStr = _status.source;
-//        NSUInteger startIndex = [sourceStr rangeOfString:@">"].location + 1;
-//        NSUInteger length = [sourceStr rangeOfString:@"<" options:NSBackwardsSearch].location - startIndex;
-//        NSString *string3 = @"来自: ";
-//        _sourceLabel.text = [string3 stringByAppendingString:[sourceStr substringWithRange:NSMakeRange(startIndex, length)]];
-//    }
-//
-//    // 7.设置正文
-//    _contentLabel.text = _status.text;
-//    
-//}
 
 @end

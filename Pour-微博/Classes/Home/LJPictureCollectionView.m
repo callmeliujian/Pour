@@ -25,6 +25,7 @@
 
 @implementation LJPictureCollectionView
 
+#pragma mark - Lazy
 - (instancetype)init {
     
     self = [self initWithFrame:CGRectZero collectionViewLayout:self.layout];
@@ -39,6 +40,8 @@
     self.dataSource = self;
     
     self.delegate = self;
+    
+    self.backgroundColor = [UIColor whiteColor];
     
     return self;
     
@@ -103,12 +106,10 @@
         offsetY = (height - imageHeight) * 0.5;
     
     return CGRectMake(0, offsetY, width, imageHeight);
-    
 }
 
 #pragma mark - delegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
     // 1.获取当前点击图片的url
     NSURL *url = self.viewModel.bmiddle_pic[indexPath.item];
     // 2.取出被点击的cell
@@ -122,13 +123,10 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"LJShowPhotoBrowserController" object:self userInfo:@{@"bmiddle_pic":self.viewModel.bmiddle_pic, @"indexPath":indexPath}];
         
     }];
-    
-    
 }
 
-#pragma mark - dataSource
+#pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    
     if (self.viewModel.thumbnail_pic.count) {
         return self.viewModel.thumbnail_pic.count;
     }
@@ -136,7 +134,6 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
     self.cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"pictureCell" forIndexPath:indexPath];
     self.cell.url = self.viewModel.thumbnail_pic[indexPath.item];
     return self.cell;
@@ -146,7 +143,6 @@
     if (_viewModel != viewModel) {
         _viewModel = viewModel;
     }
-    
     // 8.更新配图
     [self reloadData];
     

@@ -56,8 +56,8 @@
         
         // 3.处理微博数据
         if (![since_id isEqualToString:@"0"]) {
+            
             [models addObjectsFromArray:self.statuses];
-            self.statuses = models;
         }else if (![max_id isEqualToString:@"0"]){
             [self.statuses addObjectsFromArray:models];
         }
@@ -77,6 +77,11 @@
  @param viewModels <#viewModels description#>
  */
 - (void)cachesImages:(NSMutableArray *)viewModels finished:(void(^)(NSMutableArray*,NSError*))finishedBlock{
+    
+    if (viewModels.count == 0) {
+        return;
+    }
+    
     // 0.创建一个组
     dispatch_group_t group = dispatch_group_create();
     for (LJStatusViewModel *viewModel in viewModels) {
@@ -89,7 +94,6 @@
                 dispatch_group_enter(group);
                 
                 [[SDWebImageManager sharedManager] downloadImageWithURL:url options:SDWebImageRetryFailed progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-#warning 图片下载成功
                     //NSLog(@"success");
                     dispatch_group_leave(group);
                 }];
@@ -98,7 +102,6 @@
         }
         
         dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-#warning 全部图片下载完毕
             finishedBlock(viewModels,nil);
             
         });

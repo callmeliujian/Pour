@@ -53,6 +53,7 @@
 
 @implementation LJHomeForwardTableViewCell
 
+#pragma maerk - LefeCycle
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -61,15 +62,14 @@
     return self;
 }
 
-#pragma mark - 外部控制方法
-
+#pragma mark - PubliceMehtod
 - (CGFloat)calculateRowHeight:(LJStatusViewModel *)viewModel {
     self.viewModel = viewModel;
     [self layoutIfNeeded];
     return CGRectGetMaxY(self.footerView.frame);
 }
 
-#pragma mark - 内部控制方法
+#pragma mark - PrivateMehod
 /**
  构建展示每条微博内容cell
  */
@@ -128,7 +128,6 @@
 
 - (void)buildtimeLabel {
     [self.timeLabel sizeToFit];
-    self.timeLabel.backgroundColor = [UIColor purpleColor];
     self.timeLabel.textColor = [UIColor orangeColor];
     [self.contentView addSubview:self.timeLabel];
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -138,9 +137,7 @@
 }
 
 - (void)buildsourceLabel {
-    
     [self.sourceLabel sizeToFit];
-    self.sourceLabel.backgroundColor = [UIColor greenColor];
     self.sourceLabel.textColor = [UIColor blackColor];
     [self.contentView addSubview:self.sourceLabel];
     [self.sourceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -150,10 +147,8 @@
 }
 
 - (void)buildcontentLabel {
-    
     self.contentLabel.numberOfLines = 0;
     [self.contentLabel sizeToFit];
-    self.contentLabel.backgroundColor = [UIColor grayColor];
     self.contentLabel.textColor = [UIColor blackColor];
     self.contentLabel.preferredMaxLayoutWidth = [UIScreen mainScreen].bounds.size.width - 2 * 10;
     [self.contentView addSubview:self.contentLabel];
@@ -187,11 +182,7 @@
     [self.pictureCollectionnView registerClass:[LJHomePictureCollectionViewCell class] forCellWithReuseIdentifier:@"pictureCell"];
     [self.pictureCollectionnView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(290, 90));
-        //make.left.mas_equalTo(self.contentLabel);
         make.left.mas_equalTo(self.fowardAndPictureContentView.mas_left).mas_equalTo(10);
-        //make.top.mas_equalTo(self.forwardLabel.mas_bottom).mas_equalTo(100);
-        //make.top.mas_equalTo(self.forwardLabel.mas_bottom).mas_equalTo(500);
-        
         make.bottom.mas_equalTo(self.fowardAndPictureContentView.mas_bottom).mas_offset(-10);
     }];
 }
@@ -202,7 +193,6 @@
         make.size.mas_equalTo(CGSizeMake([UIScreen mainScreen].bounds.size.width, 50));
         make.left.right.mas_equalTo(self.contentView);
         make.bottom.mas_equalTo(self.contentView);
-        //make.top.mas_equalTo(self.pictureCollectionnView.mas_bottom).mas_offset(10);
         make.top.mas_equalTo(self.fowardAndPictureContentView.mas_bottom);
     }];
     [self buildForardBtnAndCriticismBtnAndFabulousBtn];
@@ -228,7 +218,7 @@
     
 }
 
-#pragma mark - lazy
+#pragma mark - Lazy
 
 - (UICollectionViewFlowLayout *)layout {
     if (_layout == nil) {
@@ -280,7 +270,6 @@
 - (UIView *)footerView {
     if (_footerView == nil) {
         _footerView = [[UIView alloc] init];
-        _footerView.backgroundColor = [UIColor blueColor];
     }
     return _footerView;
 }
@@ -288,7 +277,6 @@
 - (UIImageView *)iconImageView {
     if (_iconImageView == nil) {
         _iconImageView = [[UIImageView alloc] init];
-        _iconImageView.backgroundColor = [UIColor blackColor];
     }
     return _iconImageView;
 }
@@ -335,6 +323,24 @@
     return _contentLabel;
 }
 
+- (UIView *)fowardAndPictureContentView {
+    if (_fowardAndPictureContentView == nil) {
+        _fowardAndPictureContentView = [[UIView alloc] init];
+    }
+    return _fowardAndPictureContentView;
+}
+
+- (UILabel *)forwardLabel {
+    if (_forwardLabel == nil) {
+        _forwardLabel = [[UILabel alloc] init];
+        _forwardLabel.text = @"我是刘健";
+        _forwardLabel.textColor = [UIColor blackColor];
+        _forwardLabel.numberOfLines = 0;
+    }
+    return _forwardLabel;
+}
+
+#pragma mark - Set
 - (void)setViewModel:(LJStatusViewModel *)viewModel {
     if (_viewModel != viewModel) {
         _viewModel = viewModel;
@@ -358,41 +364,13 @@
     self.sourceLabel.text = _viewModel.source_Text;
     // 7.设置正文
     self.contentLabel.text = _viewModel.status.text;
-    
-//    if (self.viewModel.thumbnail_pic.count <= 9 && self.viewModel.thumbnail_pic.count > 0) {
-//        NSLog(@"cou--%lu",(unsigned long)self.viewModel.thumbnail_pic.count);
-//        NSLog(@"hei--%f",[self calculateSize].collectionviewSize.height);
-//        NSLog(@"wid--%f",[self calculateSize].collectionviewSize.width);
-//    }
-    
     // 8.更新配图
     self.pictureCollectionnView.viewModel = self.viewModel;
-    
-    
     // 10.转发微博
     if (self.viewModel.forwardText) {
         self.forwardLabel.text = self.viewModel.forwardText;
         self.forwardLabel.preferredMaxLayoutWidth = [UIScreen mainScreen].bounds.size.width - 2* 10;
     }
-}
-
-- (UIView *)fowardAndPictureContentView {
-    if (_fowardAndPictureContentView == nil) {
-        _fowardAndPictureContentView = [[UIView alloc] init];
-    }
-    return _fowardAndPictureContentView;
-}
-
-- (UILabel *)forwardLabel {
-    if (_forwardLabel == nil) {
-        _forwardLabel = [[UILabel alloc] init];
-        _forwardLabel.text = @"我是刘健";
-        _forwardLabel.textColor = [UIColor blackColor];
-        _forwardLabel.backgroundColor = [UIColor redColor];
-        //[_forwardLabel sizeToFit];
-        _forwardLabel.numberOfLines = 0;
-    }
-    return _forwardLabel;
 }
 
 @end

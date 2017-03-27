@@ -12,13 +12,12 @@
 
 @interface LJTextView ()
 
-@property (nonatomic, strong) UILabel *placeholder;
-
 @end
 
 @implementation LJTextView
 
 #pragma mark - LifeCycle
+
 - (instancetype)initWithFrame:(CGRect)frame textContainer:(NSTextContainer *)textContainer {
     self = [super initWithFrame:frame textContainer:textContainer];
     
@@ -35,9 +34,9 @@
     return self;
 }
 
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
+//- (void)dealloc {
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//}
 
 #pragma mark - PrivateMethod
 - (void)setupUI {
@@ -49,7 +48,7 @@
     }];
     
     // 监听文本是否有改变
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange) name:UITextViewTextDidChangeNotification object:self];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange) name:UITextViewTextDidChangeNotification object:self];
 }
 
 - (void)textDidChange {
@@ -57,6 +56,7 @@
 }
 
 #pragma maek - Lazy
+
 - (UILabel *)placeholder {
     if (_placeholder == nil) {
         _placeholder = [[UILabel alloc] init];

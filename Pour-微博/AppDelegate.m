@@ -29,8 +29,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen]bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
-    //self.window.rootViewController = [self defaultViewController];
-    self.window.rootViewController = [[LJMainViewController alloc] init];
+    self.window.rootViewController = [self defaultViewController];
+    //self.window.rootViewController = [[LJMainViewController alloc] init];
     //设置全局UINavigationBar／UITabBar为黄色
     UINavigationBar *item = [UINavigationBar appearance];
     item.tintColor = [UIColor orangeColor];

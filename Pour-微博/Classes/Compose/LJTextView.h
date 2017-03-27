@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LJKeyboardTextView.h"
 
-@interface LJTextView : UITextView
+@interface LJTextView : LJKeyboardTextView
+
+@property (nonatomic, strong) UILabel *placeholder;
 
 @end

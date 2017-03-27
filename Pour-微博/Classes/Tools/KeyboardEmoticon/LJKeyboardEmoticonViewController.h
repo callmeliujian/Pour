@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LJKeyboardpackage.h"
 
 @interface LJKeyboardEmoticonViewController : UIViewController
+
+@property (nonatomic, copy) void(^emoticonBlock)(LJKeyboardEmoticon *emoticon);
+
+- (instancetype)initWithEmoticonBlock:(void (^)(LJKeyboardEmoticon *emoticon))block;
 
 @end
