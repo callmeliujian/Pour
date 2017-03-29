@@ -13,12 +13,12 @@
 
 #import "SVProgressHUD.h"
 
+#define MAXWORDCOUNT 5
+
 @interface LJComposeViewController () <UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *closeItem;
-
 - (IBAction)closeBtnClicked:(id)sender;
-
 - (IBAction)sendBtnClicked:(id)sender;
 /**
  文本输入框
@@ -28,26 +28,32 @@
  发送按钮
  */
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sendItem;
-
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomCons;
 - (IBAction)emoticonBtnClick:(id)sender;
-
+/**
+ 提示剩余文字个数
+ */
 @property (nonatomic, strong) LJKeyboardEmoticonViewController *keyboardEmoticonVC;
+@property (weak, nonatomic) IBOutlet UILabel *tipLabel;
+/**
+ 容器视图高度约束
+ */
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *containerViewHeightCons;
+- (IBAction)pictureBtnClick:(id)sender;
 
 @end
 
 @implementation LJComposeViewController
 
 #pragma mark - LifeCycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     // 发送键盘更改通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
-    
     [self addChildViewController:self.keyboardEmoticonVC];
-    
-    
+    self.containerViewHeightCons.constant = 0.0;
 }
 
 //- (void)viewWillAppear:(BOOL)animated {
@@ -59,7 +65,10 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     // 弹出键盘
-    [self.customTextView becomeFirstResponder];
+    if (self.containerViewHeightCons.constant == 0) {
+        [self.customTextView becomeFirstResponder];
+    }
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -85,7 +94,6 @@
   667 - 409 = 258
   667 - 667 = 0
 
- @param notice <#notice description#>
  */
 - (void)keyboardWillChange:(NSNotification *)notice {
     // 1.获取键盘frame
@@ -128,6 +136,7 @@
         [SVProgressHUD showSuccessWithStatus:@"微博发送成功"];
         [self closeBtnClicked:self.closeItem];
     }];
+    [self.customTextView emoticonStr];
 }
 
 /**
@@ -155,11 +164,26 @@
     [self.customTextView becomeFirstResponder];
 }
 
+- (IBAction)pictureBtnClick:(id)sender {
+    self.containerViewHeightCons.constant = [UIScreen mainScreen].bounds.size.height * 0.7;
+    [UIView animateWithDuration:0.4 animations:^{
+        [self.view layoutIfNeeded];
+    }];
+    [self.customTextView resignFirstResponder];
+}
+
 #pragma mark - UITextViewDelegate
 
 - (void)textViewDidChange:(UITextView *)textView {
     self.sendItem.enabled = textView.hasText;
     self.customTextView.placeholder.hidden = textView.hasText;
+    
+    //计算剩余可发送的文字个数
+    NSInteger currentCount = [self.customTextView emoticonStr].length;
+    NSInteger leftCount = MAXWORDCOUNT - currentCount;
+    self.tipLabel.text = [NSString stringWithFormat:@"%ld",(long)leftCount];
+    self.sendItem.enabled = leftCount >= 0;
+    self.tipLabel.textColor = leftCount >=0 ? [UIColor lightGrayColor] : [UIColor redColor];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {

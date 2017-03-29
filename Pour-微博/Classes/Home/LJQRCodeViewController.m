@@ -33,7 +33,6 @@
 @property (nonatomic, strong) AVCaptureMetadataOutput *outPut;
 
 // 预览图层
-
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *previewLayer;
 
 // 结果文本
@@ -183,24 +182,6 @@
     
     
  UIImage *image = info[UIImagePickerControllerOriginalImage];
-//    
-//    UIImage* picture = [info objectForKey:UIImagePickerControllerOriginalImage];
-//    
-//    picture.imageOrientation
-//    
-//    CIImage *ciimage = [CIImage imageWithCGImage:[picture CGImage]];
-//    
-//    // 创建一个探测器
-//    CIDetector *QRDetector = [CIDetector detectorOfType:CIDetectorTypeQRCode context:nil options:@{CIDetectorAccuracy:CIDetectorAccuracyLow}];
-//    // 利用探测器的到数据
-//   // CIImage *ciImage = [CIImage imageWithCGImage:[image CGImage]];
-//    NSArray *results = [QRDetector featuresInImage:ciimage];
-//    
-//    for (id result in results) {
-//        NSLog(@"%@",result);
-//    }
-    
-    
     int exifOrientation;
     switch (image.imageOrientation) {
         case UIImageOrientationUp:

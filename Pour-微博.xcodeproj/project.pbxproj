@@ -30,6 +30,9 @@
 		1D74D35C1E436D3C00F808AB /* LJOAuthViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D74D35B1E436D3C00F808AB /* LJOAuthViewController.storyboard */; };
 		1D74D35F1E437B9A00F808AB /* LJNetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D74D35E1E437B9A00F808AB /* LJNetworkTools.m */; };
 		1D74D3621E448ED600F808AB /* LJUserAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D74D3611E448ED600F808AB /* LJUserAccount.m */; };
+		1D7A49CE1E8A446200BD50DD /* LJPicturePickerCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7A49CD1E8A446200BD50DD /* LJPicturePickerCollectionViewController.m */; };
+		1D7A49D11E8A45E100BD50DD /* LJPicturePickerCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7A49D01E8A45E100BD50DD /* LJPicturePickerCollectionViewLayout.m */; };
+		1D7A49D41E8A487C00BD50DD /* LJPicturePickerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D7A49D31E8A487C00BD50DD /* LJPicturePickerCollectionViewCell.m */; };
 		1D89A8031E5D8F9A0054F538 /* LJBrowserLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D89A8021E5D8F9A0054F538 /* LJBrowserLayout.m */; };
 		1D89A8061E5D9F210054F538 /* LJBrowserCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D89A8051E5D9F210054F538 /* LJBrowserCollectionViewCell.m */; };
 		1D8E13081E89072C0005825D /* Emoticons.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1D8E12FB1E89072B0005825D /* Emoticons.bundle */; };
@@ -132,6 +135,12 @@
 		1D74D35E1E437B9A00F808AB /* LJNetworkTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJNetworkTools.m; sourceTree = "<group>"; };
 		1D74D3601E448ED600F808AB /* LJUserAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJUserAccount.h; sourceTree = "<group>"; };
 		1D74D3611E448ED600F808AB /* LJUserAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJUserAccount.m; sourceTree = "<group>"; };
+		1D7A49CC1E8A446200BD50DD /* LJPicturePickerCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJPicturePickerCollectionViewController.h; sourceTree = "<group>"; };
+		1D7A49CD1E8A446200BD50DD /* LJPicturePickerCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJPicturePickerCollectionViewController.m; sourceTree = "<group>"; };
+		1D7A49CF1E8A45E100BD50DD /* LJPicturePickerCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJPicturePickerCollectionViewLayout.h; sourceTree = "<group>"; };
+		1D7A49D01E8A45E100BD50DD /* LJPicturePickerCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJPicturePickerCollectionViewLayout.m; sourceTree = "<group>"; };
+		1D7A49D21E8A487C00BD50DD /* LJPicturePickerCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJPicturePickerCollectionViewCell.h; sourceTree = "<group>"; };
+		1D7A49D31E8A487C00BD50DD /* LJPicturePickerCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJPicturePickerCollectionViewCell.m; sourceTree = "<group>"; };
 		1D89A8011E5D8F9A0054F538 /* LJBrowserLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJBrowserLayout.h; sourceTree = "<group>"; };
 		1D89A8021E5D8F9A0054F538 /* LJBrowserLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJBrowserLayout.m; sourceTree = "<group>"; };
 		1D89A8041E5D9F210054F538 /* LJBrowserCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJBrowserCollectionViewCell.h; sourceTree = "<group>"; };
@@ -404,6 +413,12 @@
 				1DF431AF1E6C09E00054D50F /* Compose.storyboard */,
 				1DF431B11E6C0BA70054D50F /* LJComposeViewController.h */,
 				1DF431B21E6C0BA70054D50F /* LJComposeViewController.m */,
+				1D7A49CC1E8A446200BD50DD /* LJPicturePickerCollectionViewController.h */,
+				1D7A49CD1E8A446200BD50DD /* LJPicturePickerCollectionViewController.m */,
+				1D7A49CF1E8A45E100BD50DD /* LJPicturePickerCollectionViewLayout.h */,
+				1D7A49D01E8A45E100BD50DD /* LJPicturePickerCollectionViewLayout.m */,
+				1D7A49D21E8A487C00BD50DD /* LJPicturePickerCollectionViewCell.h */,
+				1D7A49D31E8A487C00BD50DD /* LJPicturePickerCollectionViewCell.m */,
 				1DF431B41E6C13620054D50F /* LJTitleView.h */,
 				1DF431B51E6C13620054D50F /* LJTitleView.m */,
 				1DF431B71E6C1C4E0054D50F /* LJTextView.h */,
@@ -810,6 +825,7 @@
 				1D2378921E4B126800ED45F6 /* LJSize.m in Sources */,
 				1D5038A81E643E770064EB1B /* LJBrowserPresentationController.m in Sources */,
 				1DF14D7F1E5C5259006E3108 /* LJBrowserViewController.m in Sources */,
+				1D7A49D11E8A45E100BD50DD /* LJPicturePickerCollectionViewLayout.m in Sources */,
 				1D25F4371E4867D900656E43 /* LJHomeTableViewCell.m in Sources */,
 				1D89A8031E5D8F9A0054F538 /* LJBrowserLayout.m in Sources */,
 				5288B6291DED75250096AC58 /* LJDiscoverTableViewController.m in Sources */,
@@ -828,10 +844,12 @@
 				1D25F43B1E4A067200656E43 /* LJStatusViewModel.m in Sources */,
 				1D8E130B1E89072C0005825D /* LJKeyboardEmoticonViewController.m in Sources */,
 				1DE656901E4E13A1002EE9DC /* LJHomePictureCollectionViewCell.m in Sources */,
+				1D7A49D41E8A487C00BD50DD /* LJPicturePickerCollectionViewCell.m in Sources */,
 				1D74D3621E448ED600F808AB /* LJUserAccount.m in Sources */,
 				1D8E130D1E89072C0005825D /* LJKeyboardpackage.m in Sources */,
 				1D25F4251E45B79800656E43 /* LJNewFeatureViewController.m in Sources */,
 				1D8E130A1E89072C0005825D /* LJKeyboardEmoticonCollectionViewCell.m in Sources */,
+				1D7A49CE1E8A446200BD50DD /* LJPicturePickerCollectionViewController.m in Sources */,
 				5273254B1DED591400E6D755 /* AppDelegate.m in Sources */,
 				521509341DED5C64000C71E7 /* LJMainViewController.m in Sources */,
 				1D66EC151E5FDCDA009F4F10 /* LJProgressView.m in Sources */,

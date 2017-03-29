@@ -46,6 +46,15 @@
                                     <outlet property="delegate" destination="qkJ-fh-Mtk" id="uq7-V4-r7k"/>
                                 </connections>
                             </textView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V9o-u3-me5">
+                                <rect key="frame" x="0.0" y="539" width="375" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="4JR-x7-p5Y"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="g8i-UW-4Yg" kind="embed" id="Tef-qi-nrZ"/>
+                                </connections>
+                            </containerView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RBM-KL-QjW">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <constraints>
@@ -53,7 +62,11 @@
                                 </constraints>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Hsk-Fi-XPk"/>
-                                    <barButtonItem image="compose_toolbar_picture" id="Dbh-3b-QQM"/>
+                                    <barButtonItem image="compose_toolbar_picture" id="Dbh-3b-QQM">
+                                        <connections>
+                                            <action selector="pictureBtnClick:" destination="qkJ-fh-Mtk" id="kJw-YA-sJx"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="oN7-15-Nh8"/>
                                     <barButtonItem image="compose_mentionbutton_background" id="yn9-wh-hoS"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="wru-Dk-ToE"/>
@@ -70,16 +83,27 @@
                                 </items>
                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </toolbar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="140" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yys-Nf-odW">
+                                <rect key="frame" x="326" y="582" width="29" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="CfE-0k-eaN" firstAttribute="top" secondItem="RBM-KL-QjW" secondAttribute="bottom" id="2mK-uP-FE1"/>
                             <constraint firstItem="Wkn-YQ-Rd3" firstAttribute="top" secondItem="7vP-RZ-crw" secondAttribute="bottom" id="5ZX-Z8-rxB"/>
+                            <constraint firstItem="RBM-KL-QjW" firstAttribute="top" secondItem="yys-Nf-odW" secondAttribute="bottom" constant="20" id="7fY-Gp-F1j"/>
                             <constraint firstAttribute="trailing" secondItem="Wkn-YQ-Rd3" secondAttribute="trailing" id="Cbw-8E-BCE"/>
+                            <constraint firstAttribute="bottom" secondItem="V9o-u3-me5" secondAttribute="bottom" id="Dv1-Xc-CRB"/>
+                            <constraint firstItem="V9o-u3-me5" firstAttribute="leading" secondItem="ELn-C1-iuq" secondAttribute="leading" id="JVP-bR-4Bn"/>
                             <constraint firstItem="RBM-KL-QjW" firstAttribute="leading" secondItem="ELn-C1-iuq" secondAttribute="leading" id="OnP-3v-muf"/>
                             <constraint firstAttribute="trailing" secondItem="RBM-KL-QjW" secondAttribute="trailing" id="U9s-P4-CHO"/>
+                            <constraint firstAttribute="trailing" secondItem="V9o-u3-me5" secondAttribute="trailing" id="jqy-IT-8U9"/>
                             <constraint firstItem="CfE-0k-eaN" firstAttribute="top" secondItem="Wkn-YQ-Rd3" secondAttribute="bottom" id="oU4-pi-gtr"/>
                             <constraint firstItem="Wkn-YQ-Rd3" firstAttribute="leading" secondItem="ELn-C1-iuq" secondAttribute="leading" id="oZ6-rW-hvd"/>
+                            <constraint firstAttribute="trailing" secondItem="yys-Nf-odW" secondAttribute="trailing" constant="20" id="yhQ-VS-4QV"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="5lF-cg-DA6">
@@ -102,8 +126,10 @@
                     </navigationItem>
                     <connections>
                         <outlet property="closeItem" destination="XSu-vD-Sc5" id="3kf-bn-Mfc"/>
+                        <outlet property="containerViewHeightCons" destination="4JR-x7-p5Y" id="E5z-fM-vBS"/>
                         <outlet property="customTextView" destination="Wkn-YQ-Rd3" id="CIs-nL-FIL"/>
                         <outlet property="sendItem" destination="NWv-Of-zdh" id="b4p-Og-z9n"/>
+                        <outlet property="tipLabel" destination="yys-Nf-odW" id="h7Q-Vd-p6n"/>
                         <outlet property="toolbarBottomCons" destination="2mK-uP-FE1" id="QDD-n9-fuO"/>
                     </connections>
                 </viewController>
@@ -111,11 +137,72 @@
             </objects>
             <point key="canvasLocation" x="-649" y="-143"/>
         </scene>
+        <!--Picture Picker Collection View Controller-->
+        <scene sceneID="fvF-e9-FR5">
+            <objects>
+                <collectionViewController id="g8i-UW-4Yg" customClass="LJPicturePickerCollectionViewController" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="8id-nh-wr5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="0.53334809891468193" blue="0.84167850631963237" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <collectionViewLayout key="collectionViewLayout" id="OfS-1j-sk7" customClass="LJPicturePickerCollectionViewLayout"/>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="ZvM-NE-Cvs" customClass="LJPicturePickerCollectionViewCell">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ON-gL-mMz">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <state key="normal" backgroundImage="compose_pic_add"/>
+                                            <state key="highlighted" backgroundImage="compose_pic_add_highlighted"/>
+                                            <connections>
+                                                <action selector="addPhotoBtnClick" destination="ZvM-NE-Cvs" eventType="touchUpInside" id="XBT-uN-KZR"/>
+                                            </connections>
+                                        </button>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ht4-jR-D7j">
+                                            <rect key="frame" x="26" y="0.0" width="24" height="24"/>
+                                            <state key="normal" image="compose_photo_close"/>
+                                            <connections>
+                                                <action selector="removePhotoBtnClick:" destination="ZvM-NE-Cvs" eventType="touchUpInside" id="DbJ-nc-nXy"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="ht4-jR-D7j" firstAttribute="top" secondItem="ZvM-NE-Cvs" secondAttribute="top" id="4St-zt-bG9"/>
+                                    <constraint firstItem="7ON-gL-mMz" firstAttribute="top" secondItem="ZvM-NE-Cvs" secondAttribute="top" id="cCg-ho-n1t"/>
+                                    <constraint firstAttribute="bottom" secondItem="7ON-gL-mMz" secondAttribute="bottom" id="hKL-7k-36w"/>
+                                    <constraint firstAttribute="trailing" secondItem="7ON-gL-mMz" secondAttribute="trailing" id="oG7-Yk-Hho"/>
+                                    <constraint firstAttribute="trailing" secondItem="ht4-jR-D7j" secondAttribute="trailing" id="xTL-yS-zln"/>
+                                    <constraint firstItem="7ON-gL-mMz" firstAttribute="leading" secondItem="ZvM-NE-Cvs" secondAttribute="leading" id="yof-1S-N91"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="addPhotoBtn" destination="7ON-gL-mMz" id="nCJ-RR-Mfb"/>
+                                    <outlet property="removePhotoBtn" destination="ht4-jR-D7j" id="bnP-Ma-asH"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="g8i-UW-4Yg" id="2r1-i2-DqJ"/>
+                            <outlet property="delegate" destination="g8i-UW-4Yg" id="bYe-pk-fSQ"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H1a-o0-l4e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-650" y="354"/>
+        </scene>
     </scenes>
     <resources>
         <image name="compose_addbutton_background" width="24" height="24"/>
         <image name="compose_emoticonbutton_background" width="24" height="24"/>
         <image name="compose_mentionbutton_background" width="24" height="24"/>
+        <image name="compose_photo_close" width="24" height="24"/>
+        <image name="compose_pic_add" width="70" height="70"/>
+        <image name="compose_pic_add_highlighted" width="70" height="70"/>
         <image name="compose_toolbar_picture" width="24" height="24"/>
         <image name="compose_trendbutton_background" width="24" height="24"/>
     </resources>
