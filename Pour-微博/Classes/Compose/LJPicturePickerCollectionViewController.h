@@ -10,4 +10,6 @@
 
 @interface LJPicturePickerCollectionViewController : UICollectionViewController
 
+@property (nonatomic, strong) NSMutableArray <UIImage *> *mutableImagesArray;
+
 @end

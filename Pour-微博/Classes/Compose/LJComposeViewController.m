@@ -10,10 +10,11 @@
 #import "LJTextView.h"
 #import "LJNetworkTools.h"
 #import "LJKeyboardEmoticonViewController.h"
+#import "LJPicturePickerCollectionViewController.h"
 
 #import "SVProgressHUD.h"
 
-#define MAXWORDCOUNT 5
+#define MAXWORDCOUNT 140
 
 @interface LJComposeViewController () <UITextViewDelegate>
 
@@ -40,7 +41,7 @@
  */
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *containerViewHeightCons;
 - (IBAction)pictureBtnClick:(id)sender;
-
+@property (nonatomic, strong) LJPicturePickerCollectionViewController *picturePickerVC;
 @end
 
 @implementation LJComposeViewController
@@ -79,6 +80,13 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    NSString *segueIden = @"picPicker";
+    if ([segue.identifier isEqual: segueIden]) {
+        self.picturePickerVC = segue.destinationViewController;
+    }
 }
 
 #pragma mark - PrivateMethod
@@ -121,8 +129,9 @@
 }
 
 - (IBAction)sendBtnClicked:(id)sender {
-    NSString *text = self.customTextView.text;
-    [[LJNetworkTools shareInstance] sendStatuses:text withBlock:^(id responseObject, NSError * error) {
+    NSString *text = [self.customTextView emoticonStr];
+    UIImage *image = [self.picturePickerVC.mutableImagesArray firstObject];
+    [[LJNetworkTools shareInstance] sendStatuses:text withImage:image withBlock:^(id responseObject, NSError * error) {
         // 微博发送失败处理
         if (error != nil) {
             [SVProgressHUD showErrorWithStatus:@"发送微博失败"];
@@ -136,7 +145,7 @@
         [SVProgressHUD showSuccessWithStatus:@"微博发送成功"];
         [self closeBtnClicked:self.closeItem];
     }];
-    [self.customTextView emoticonStr];
+    
 }
 
 /**
@@ -204,6 +213,13 @@
         }];
     }
     return _keyboardEmoticonVC;
+}
+
+- (LJPicturePickerCollectionViewController *)picturePickerVC {
+    if (_picturePickerVC == nil) {
+        _picturePickerVC = [[LJPicturePickerCollectionViewController alloc] init];
+    }
+    return _picturePickerVC;
 }
 
 @end

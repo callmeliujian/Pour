@@ -12,7 +12,7 @@
 
 @interface LJPicturePickerCollectionViewController () <LJPicturePickerCollectionViewCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
-@property (nonatomic, strong) NSMutableArray <UIImage *> *mutableImagesArray;
+
 
 @end
 
@@ -64,8 +64,27 @@ static NSString * const reuseIdentifier = @"Cell";
     NSLog(@"%@",info);
     UIImage *image = info[@"UIImagePickerControllerOriginalImage"];
     [picker dismissViewControllerAnimated:true completion:nil];
-    [self.mutableImagesArray addObject:image];
+    UIImage *newImage = [self drawImage:image Withwidth:400.0];
+    [self.mutableImagesArray addObject:newImage];
     [self.collectionView reloadData];
+}
+
+#pragma mark - PrivateMethod
+
+- (UIImage *)drawImage:(UIImage *)image Withwidth:(CGFloat)width {
+    CGFloat heigth = (image.size.height / image.size.width) * width;
+    CGSize size = CGSizeMake(width, heigth);
+    
+    // 开启图片上下文
+    UIGraphicsBeginImageContext(size);
+    // 将图片画到上下文
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    // 从上下文中获取到图片
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    // 关闭上下文
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 #pragma mark - Lazy
