@@ -73,7 +73,7 @@
  当前组对应的文件夹名称
  */
 @property (nonatomic, strong) NSString *ID;
-@property (nonatomic, strong) NSMutableArray <LJKeyboardEmoticon*>*emoticons;
+@property (nonatomic, strong) NSMutableArray<LJKeyboardEmoticon *> *emoticons;
 
 - (NSMutableArray<LJKeyboardpackage *> *)loadEmotionPackages;
 

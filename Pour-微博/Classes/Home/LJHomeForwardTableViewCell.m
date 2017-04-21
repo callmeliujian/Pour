@@ -12,6 +12,8 @@
 #import "LJSize.h"
 #import "LJHomeTableViewCell.h"
 #import "LJHomePictureCollectionViewCell.h"
+#import "LJKeyboardpackage.h"
+#import "LJKeyboardpackage+LJRegularExpression.h"
 
 @interface LJHomeForwardTableViewCell()
 
@@ -47,7 +49,7 @@
 /**
  显示转发内容
  */
-@property (nonatomic, strong) UILabel *forwardLabel;
+@property (nonatomic, strong) KILabel *forwardLabel;
 
 @end
 
@@ -316,9 +318,9 @@
     return _sourceLabel;
 }
 
-- (UILabel *)contentLabel {
+- (KILabel *)contentLabel {
     if (_contentLabel == nil) {
-        _contentLabel = [[UILabel alloc] init];
+        _contentLabel = [[KILabel alloc] init];
     }
     return _contentLabel;
 }
@@ -330,9 +332,9 @@
     return _fowardAndPictureContentView;
 }
 
-- (UILabel *)forwardLabel {
+- (KILabel *)forwardLabel {
     if (_forwardLabel == nil) {
-        _forwardLabel = [[UILabel alloc] init];
+        _forwardLabel = [[KILabel alloc] init];
         _forwardLabel.text = @"我是刘健";
         _forwardLabel.textColor = [UIColor blackColor];
         _forwardLabel.numberOfLines = 0;
@@ -363,12 +365,14 @@
     // 6.设置来源
     self.sourceLabel.text = _viewModel.source_Text;
     // 7.设置正文
-    self.contentLabel.text = _viewModel.status.text;
+    //self.contentLabel.text = _viewModel.status.text;
+    self.contentLabel.attributedText = [LJKeyboardpackage creatMutableAttrString:_viewModel.status.text withFont:self.contentLabel.font];
     // 8.更新配图
     self.pictureCollectionnView.viewModel = self.viewModel;
     // 10.转发微博
     if (self.viewModel.forwardText) {
-        self.forwardLabel.text = self.viewModel.forwardText;
+        //self.forwardLabel.text = self.viewModel.forwardText;
+        self.forwardLabel.attributedText = [LJKeyboardpackage creatMutableAttrString:_viewModel.forwardText withFont:self.contentLabel.font];
         self.forwardLabel.preferredMaxLayoutWidth = [UIScreen mainScreen].bounds.size.width - 2* 10;
     }
 }

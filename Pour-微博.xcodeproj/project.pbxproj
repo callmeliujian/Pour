@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1A7BC4A33ABB91FFC3D9BDF3 /* libPods-Pour-微博.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB3A1B24E18186E2D2C9C0F /* libPods-Pour-微博.a */; };
+		1D0795141EA7746E00CCC0CE /* LJKeyboardpackage+LJRegularExpression.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D0795131EA7746E00CCC0CE /* LJKeyboardpackage+LJRegularExpression.m */; };
 		1D2378921E4B126800ED45F6 /* LJSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D2378911E4B126800ED45F6 /* LJSize.m */; };
 		1D25F4201E45AAA500656E43 /* LJWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D25F41F1E45AAA500656E43 /* LJWelcomeViewController.m */; };
 		1D25F4221E45AAB100656E43 /* LJWelcomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D25F4211E45AAB100656E43 /* LJWelcomeViewController.storyboard */; };
@@ -94,6 +95,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1D0795121EA7746E00CCC0CE /* LJKeyboardpackage+LJRegularExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LJKeyboardpackage+LJRegularExpression.h"; sourceTree = "<group>"; };
+		1D0795131EA7746E00CCC0CE /* LJKeyboardpackage+LJRegularExpression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LJKeyboardpackage+LJRegularExpression.m"; sourceTree = "<group>"; };
 		1D2378901E4B126800ED45F6 /* LJSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJSize.h; sourceTree = "<group>"; };
 		1D2378911E4B126800ED45F6 /* LJSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJSize.m; sourceTree = "<group>"; };
 		1D25F41E1E45AAA500656E43 /* LJWelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJWelcomeViewController.h; sourceTree = "<group>"; };
@@ -359,6 +362,8 @@
 				1D8E13031E89072C0005825D /* LJKeyboardFlowLayout.m */,
 				1D8E13041E89072C0005825D /* LJKeyboardpackage.h */,
 				1D8E13051E89072C0005825D /* LJKeyboardpackage.m */,
+				1D0795121EA7746E00CCC0CE /* LJKeyboardpackage+LJRegularExpression.h */,
+				1D0795131EA7746E00CCC0CE /* LJKeyboardpackage+LJRegularExpression.m */,
 				1D8E13061E89072C0005825D /* LJKeyboardTextView.h */,
 				1D8E13071E89072C0005825D /* LJKeyboardTextView.m */,
 			);
@@ -850,6 +855,7 @@
 				1D25F4251E45B79800656E43 /* LJNewFeatureViewController.m in Sources */,
 				1D8E130A1E89072C0005825D /* LJKeyboardEmoticonCollectionViewCell.m in Sources */,
 				1D7A49CE1E8A446200BD50DD /* LJPicturePickerCollectionViewController.m in Sources */,
+				1D0795141EA7746E00CCC0CE /* LJKeyboardpackage+LJRegularExpression.m in Sources */,
 				5273254B1DED591400E6D755 /* AppDelegate.m in Sources */,
 				521509341DED5C64000C71E7 /* LJMainViewController.m in Sources */,
 				1D66EC151E5FDCDA009F4F10 /* LJProgressView.m in Sources */,

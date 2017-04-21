@@ -116,7 +116,6 @@
         templateCellsByIdentifiers[identifier] = templateCell;
         [self fd_debugLog:[NSString stringWithFormat:@"layout cell created - %@", identifier]];
     }
-    
     return templateCell;
 }
 

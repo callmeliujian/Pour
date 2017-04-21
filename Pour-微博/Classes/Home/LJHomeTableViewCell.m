@@ -12,6 +12,9 @@
 #import "LJSize.h"
 #import "LJHomeTableViewCell.h"
 #import "LJHomePictureCollectionViewCell.h"
+#import "LJKeyboardpackage.h"
+#import "LJKeyboardpackage+LJRegularExpression.h"
+
 
 
 @interface LJHomeTableViewCell()
@@ -272,9 +275,9 @@
     return _sourceLabel;
 }
 
-- (UILabel *)contentLabel {
+- (KILabel *)contentLabel {
     if (_contentLabel == nil) {
-        _contentLabel = [[UILabel alloc] init];
+        _contentLabel = [[KILabel alloc] init];
     }
     return _contentLabel;
 }
@@ -302,7 +305,8 @@
     // 6.设置来源
     self.sourceLabel.text = _viewModel.source_Text;
     // 7.设置正文
-    self.contentLabel.text = _viewModel.status.text;
+    //self.contentLabel.text = _viewModel.status.text;
+    self.contentLabel.attributedText = [LJKeyboardpackage creatMutableAttrString:_viewModel.status.text withFont:self.contentLabel.font];
     // 8.更新配图
     //[self.pictureCollectionnView reloadData];
     self.pictureCollectionnView.viewModel = self.viewModel;

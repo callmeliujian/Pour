@@ -10,6 +10,7 @@
 #import "LJStatus.h"
 #import "LJStatusViewModel.h"
 #import "LJPictureCollectionView.h"
+#import "KILabel.h"
 
 @interface LJHomeTableViewCell :UITableViewCell
 
@@ -41,7 +42,7 @@
 /**
  正文
  */
-@property (nonatomic, strong) UILabel *contentLabel;
+@property (nonatomic, strong) KILabel *contentLabel;
 /**
  数据模型
  */
