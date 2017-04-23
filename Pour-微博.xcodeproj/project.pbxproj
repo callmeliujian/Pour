@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1A7BC4A33ABB91FFC3D9BDF3 /* libPods-Pour-微博.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB3A1B24E18186E2D2C9C0F /* libPods-Pour-微博.a */; };
 		1D0795141EA7746E00CCC0CE /* LJKeyboardpackage+LJRegularExpression.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D0795131EA7746E00CCC0CE /* LJKeyboardpackage+LJRegularExpression.m */; };
+		1D1A02CE1EAA4B8D0035D462 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D1A02CD1EAA4B8D0035D462 /* libsqlite3.tbd */; };
+		1D1A02D11EAA4BF50035D462 /* LJSQLiteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D1A02D01EAA4BF50035D462 /* LJSQLiteManager.m */; };
 		1D2378921E4B126800ED45F6 /* LJSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D2378911E4B126800ED45F6 /* LJSize.m */; };
 		1D25F4201E45AAA500656E43 /* LJWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D25F41F1E45AAA500656E43 /* LJWelcomeViewController.m */; };
 		1D25F4221E45AAB100656E43 /* LJWelcomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D25F4211E45AAB100656E43 /* LJWelcomeViewController.storyboard */; };
@@ -97,6 +99,9 @@
 /* Begin PBXFileReference section */
 		1D0795121EA7746E00CCC0CE /* LJKeyboardpackage+LJRegularExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LJKeyboardpackage+LJRegularExpression.h"; sourceTree = "<group>"; };
 		1D0795131EA7746E00CCC0CE /* LJKeyboardpackage+LJRegularExpression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LJKeyboardpackage+LJRegularExpression.m"; sourceTree = "<group>"; };
+		1D1A02CD1EAA4B8D0035D462 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		1D1A02CF1EAA4BF50035D462 /* LJSQLiteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJSQLiteManager.h; sourceTree = "<group>"; };
+		1D1A02D01EAA4BF50035D462 /* LJSQLiteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJSQLiteManager.m; sourceTree = "<group>"; };
 		1D2378901E4B126800ED45F6 /* LJSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJSize.h; sourceTree = "<group>"; };
 		1D2378911E4B126800ED45F6 /* LJSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LJSize.m; sourceTree = "<group>"; };
 		1D25F41E1E45AAA500656E43 /* LJWelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LJWelcomeViewController.h; sourceTree = "<group>"; };
@@ -235,6 +240,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D1A02CE1EAA4B8D0035D462 /* libsqlite3.tbd in Frameworks */,
 				1A7BC4A33ABB91FFC3D9BDF3 /* libPods-Pour-微博.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -493,6 +499,8 @@
 				1D74D35E1E437B9A00F808AB /* LJNetworkTools.m */,
 				1D476F331E778C1B00061568 /* NSDate+LJExtension.h */,
 				1D476F341E778C1B00061568 /* NSDate+LJExtension.m */,
+				1D1A02CF1EAA4BF50035D462 /* LJSQLiteManager.h */,
+				1D1A02D01EAA4BF50035D462 /* LJSQLiteManager.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -630,6 +638,7 @@
 		A17770DC3A84D4E3C1CF3B2E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1D1A02CD1EAA4B8D0035D462 /* libsqlite3.tbd */,
 				7EB3A1B24E18186E2D2C9C0F /* libPods-Pour-微博.a */,
 			);
 			name = Frameworks;
@@ -827,6 +836,7 @@
 			files = (
 				1D8E13091E89072C0005825D /* LJKeyboardAttachment.m in Sources */,
 				1DE1FAA41E54075900F3397F /* LJHomeForwardTableViewCell.m in Sources */,
+				1D1A02D11EAA4BF50035D462 /* LJSQLiteManager.m in Sources */,
 				1D2378921E4B126800ED45F6 /* LJSize.m in Sources */,
 				1D5038A81E643E770064EB1B /* LJBrowserPresentationController.m in Sources */,
 				1DF14D7F1E5C5259006E3108 /* LJBrowserViewController.m in Sources */,

@@ -19,6 +19,9 @@
 #import "LJStatusListModel.h"
 #import "LJStatusViewModel.h"
 #import "LJNetworkTools.h"
+#import "LJUserAccount.h"
+#import "LJSQLiteManager.h"
+#import "LJStatus.h"
 
 #import <SDWebImage/UIImageView+WebCache.h>
 
@@ -39,7 +42,66 @@
         max_id = [self.statuses lastObject].status.idstr ? : @"0";
     }
     
+    // 获取userID，如果userID为空说明用户未登录所以不用刷新数据
+    NSString *userID = [LJUserAccount loadUserAccout].uid;
+    if (!userID) {
+        NSLog(@"---------userID为空------------");
+        return;
+    }
+    
+    // 拼接select语句
+    NSString *querySQL = [@"select * from t_status where userID = " stringByAppendingString:userID];
+    if (![since_id isEqualToString:@"0"]) {
+        NSString *temp = [@" and statusID > " stringByAppendingString:since_id];
+        querySQL = [querySQL stringByAppendingString:temp];
+    }else if (![max_id isEqualToString:@"0"]){
+        NSString *temp = [@" and statusID < " stringByAppendingString:max_id];
+        querySQL = [querySQL stringByAppendingString:temp];
+    }
+    querySQL = [querySQL stringByAppendingString:@" order by statusID desc limit 20;"];
+    
+    // 从数据库中查询数据
+    [[LJSQLiteManager shareInstance].dbQueue inDatabase:^(FMDatabase *db) {
+        FMResultSet *result = [db executeQuery:querySQL withArgumentsInArray:nil];
+        NSMutableArray<LJStatusViewModel *> *models = [NSMutableArray array];
+        while (result.next) {
+            NSString *statusText = [result stringForColumn:@"statusText"];
+            NSData *data = [statusText dataUsingEncoding:NSUTF8StringEncoding];
+            if (!data) continue;
+            NSError *error = nil;
+            NSMutableDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+            if (error) {
+                NSLog(@"读取本地数据出错：%@", error);
+                continue;
+            }
+            LJStatus *status = [[LJStatus alloc] initWithDic:dict];
+            [models addObject:[[LJStatusViewModel alloc] initWithStatus:status]];
+        }
+        if (models.count > 0) {
+            // 从本地加载数据
+            NSLog(@"-----从本地获取到数据-------");
+            if (![since_id isEqualToString:@"0"]) {
+                [models addObjectsFromArray:self.statuses];
+            }else if (![max_id isEqualToString:@"0"]){
+                [self.statuses addObjectsFromArray:models];
+            }
+            else {
+                self.statuses = models;
+            }
+            finishedBlock(models, nil);
+            return ;
+        }
+        // 本地没有数据从网络加载数据
+        [self loadDataFromNetWorkWithSice_id:since_id withMax_id:max_id finished:finishedBlock];
+    }];
+}
+
+/**
+ 从网络获取数据
+ */
+- (void)loadDataFromNetWorkWithSice_id:since_id withMax_id:max_id finished:(void(^)(NSMutableArray*,NSError*))finishedBlock {
     [[LJNetworkTools shareInstance] loadStatuses:since_id withMax_id:max_id withBlock:^(NSString *since_id, NSArray *array, NSError *error) {
+        NSLog(@"-------从网络获取数据-------");
         // 1.安全校验
         if (error != nil) {
             finishedBlock(nil,error);
@@ -68,7 +130,53 @@
         // 4.缓存微博所有配图
         [self cachesImages:models finished:finishedBlock];
         
+        // 5.缓存微博数据到数据库
+        [self cacheData:array];
+        
     }];
+}
+
+/**
+ 缓存微博内容到数据库
+ 数据库的主键为statusID既微博id
+ statusText为微博数据，强json所有的字段合为一个字符串存到此处
+ userid存贮当前登陆的用户id
+ @param list 模型数组
+ */
+- (void)cacheData:(NSArray<NSDictionary *> *)list {
+    // 判断userID是否为空
+    NSString *userID = [LJUserAccount loadUserAccout].uid;
+    if (!userID) {
+        NSLog(@"----------userID为空-------------");
+        return;
+    }
+    for (NSDictionary *dict in list) {
+        // 判断statusID是否为空
+        NSString *statusID = dict[@"idstr"];
+        if (!statusID) {
+            NSLog(@"-------------statusid（微博id）为空");
+            return;
+        }
+        
+        // 将微博数据转化为字符串
+        NSError *error = nil;
+        NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
+        if (error) {
+            NSLog(@"---转化为字符串失败---error：%@----",error);
+            continue;
+        }
+        NSString *statusText = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        if (!statusText) {
+            NSLog(@"-----没有数据-------");
+            continue;
+        }
+        
+        // 插入到数据库
+        NSString *insertSQL = @"insert into t_status (statusID, statusText, userID) values (?, ?, ?)";
+        [[LJSQLiteManager shareInstance].dbQueue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:insertSQL withArgumentsInArray:@[statusID, statusText, userID]];
+        }];
+    }
 }
 
 /**
@@ -106,6 +214,26 @@
             
         });
     }
+}
+
+/**
+ 清楚缓存数据 默认清除3天前的
+ */
++ (void)cleanCacheDate {
+    NSDate *threeDatesAgo = [NSDate dateWithTimeIntervalSinceNow: -3 * 24 * 60 * 60];
+    // 删除20s前数据
+    NSDate *temp = [NSDate dateWithTimeIntervalSinceNow: -30];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    // 2017-04-23 11:49:16
+    dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    NSString *dateString = [dateFormatter stringFromDate:threeDatesAgo];
+    
+    NSString *deleteSQL = [@"delete from t_status where createTime < '" stringByAppendingString: dateString];
+    deleteSQL = [deleteSQL stringByAppendingString:@"'"];
+    deleteSQL = [deleteSQL stringByAppendingString:@";"];
+    [[LJSQLiteManager shareInstance].dbQueue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:deleteSQL withVAList:nil];
+    }];
 }
 
 #pragma mark - lazy

@@ -22,4 +22,9 @@
  */
 - (void)loadData:(BOOL)lastStatus finished:(void(^)(NSMutableArray*,NSError*))finishedBlock;
 
+/**
+ 清楚缓存数据 默认清除3天前的
+ */
++ (void)cleanCacheDate;
+
 @end

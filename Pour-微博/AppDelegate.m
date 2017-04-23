@@ -9,9 +9,10 @@
 #import "AppDelegate.h"
 #import "LJMainViewController.h"
 #import "LJUserAccount.h"
-
 #import "LJWelcomeViewController.h"
 #import "LJNewFeatureViewController.h"
+#import "LJSQLiteManager.h"
+#import "LJStatusListModel.h"
 
 @interface AppDelegate ()
 
@@ -23,8 +24,6 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen]bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -42,6 +41,12 @@
     NSLog(@"%@", [LJUserAccount loadUserAccout]);
     
     [self isNewVersion];
+    
+    //链接并打开数据库
+    [[LJSQLiteManager shareInstance] opendbWithdbName:@"status.sqlite"];
+    
+    // 删除3天前的数据库数据
+    [LJStatusListModel cleanCacheDate];
     
     return YES;
 }
